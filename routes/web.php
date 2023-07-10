@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MarzakanController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,10 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
+        Route::get('/', 'index')->name('marzakan');
+
+    });
+
 });

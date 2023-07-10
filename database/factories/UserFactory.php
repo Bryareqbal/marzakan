@@ -24,7 +24,8 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'address'=>fake()->address(),
             'gender'=>fake()->boolean(),
-            'phone_no'=>fake()->phoneNumber()
+            'phone_no'=>fake()->phoneNumber(),
+            'rule_id'=>1,
         ];
     }
 

@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Marzakan;
+use App\Models\Rule;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,9 +18,18 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        \App\Models\User::factory()->create([
+        $rules = ['superadmin', 'admin', 'user'];
+        foreach($rules as $rule) {
+            Rule::factory()->create([
+                'rule' =>$rule,
+            ]);
+        }
+
+        User::factory()->create([
             'name' => 'superadmin',
             'username' => 'admin',
         ]);
+
+        Marzakan::factory(12)->create();
     }
 }

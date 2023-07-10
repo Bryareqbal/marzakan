@@ -1,1 +1,2 @@
-<input type="text" class="px-3 py-2 rounded-md ring-1 ring-gray-300" />
+<input type="text"
+    {{ $attributes->merge(['class' => 'w-full border border-slate-200 pr-2 focus:outline-none rounded-lg shadow-md py-1']) }} />
