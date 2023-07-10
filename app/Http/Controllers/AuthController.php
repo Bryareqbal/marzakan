@@ -39,8 +39,10 @@ class AuthController extends Controller
                 if(!$user || !Hash::check($request->password, $user->password)) {
                     return redirect()->back()->withErrors($validated->errors())->with('message', ' زانیارێکان دروست نین')->withInput($request->all());
                 }
-                Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
-                return redirect()->route('dashboard');
+                if(Auth::attempt(['username' => $request->username, 'password' => $request->password], true)) {
+                    $request->session()->regenerate();
+                    return redirect()->route('dashboard');
+                }
             });
         } catch(\Exception $e) {
             return 'بەکارهێنەر نەدۆزرایەوە';
