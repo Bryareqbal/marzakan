@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MarzakanController;
+use App\Http\Controllers\SarparshtyarController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +35,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('marzakan');
     });
 
-    Route::get('/sarparshtyar', function () {
-    })->name('sarparshtyar');
+    Route::controller(SarparshtyarController::class)->prefix('/sarparshtyarakan')->group(function () {
+        Route::get('/', 'index')->name('sarparshtyarakan');
+        Route::post('/addSarparshtyar', 'addSarparshtyar')->name('add-sarparshtyar');
+    });
+
 
     Route::get('/karmand', function () {
     })->name('karmand');
