@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -29,16 +30,20 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validated->errors())->with('message', 'دڵنیابەرەوە لە زانیارێکان')->withInput($request->all());
         }
 
-
-        $user = User::where('username', $request->username)->first();
-
-        if(!$user || !Hash::check($request->password, $user->password)) {
-            return redirect()->back()->withErrors($validated->errors())->with('message', ' زانیارێکان دروست نین')->withInput($request->all());
-        }
-
-        if(Auth::attempt(['username' => $user->username, 'password' => $request->password], true)) {
-            $request->session()->regenerate();
-            return Auth::user();
+        try {
+            DB::transaction(function () use ($request, $validated) {
+                $user = User::where('username', $request->username)->first();
+                if(!$user) {
+                    return throw new \Exception('بەکارهێنەر نەدۆزرایەوە');
+                }
+                if(!$user || !Hash::check($request->password, $user->password)) {
+                    return redirect()->back()->withErrors($validated->errors())->with('message', ' زانیارێکان دروست نین')->withInput($request->all());
+                }
+                Auth::attempt(['username' => $request->username, 'password' => $request->password], true);
+                return redirect()->route('dashboard');
+            });
+        } catch(\Exception $e) {
+            return 'بەکارهێنەر نەدۆزرایەوە';
         }
 
     }
