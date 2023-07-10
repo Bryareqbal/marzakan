@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::redirect('/', 'login');
+// Route::redirect('/', 'login');
 Route::middleware(['guest'])->prefix('/login')->group(function () {
     Route::controller(AuthController::class)->group(function () {
         Route::get('/', 'index')->name('index');
@@ -28,4 +28,16 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
+
+    Route::get('/marzakan', function () {
+    })->name('marzakan');
+
+    Route::get('/sarparshtyar', function () {
+    })->name('sarparshtyar');
+
+    Route::get('/karmand', function () {
+    })->name('karmand');
+
+    Route::get('/sardanikar', function () {
+    })->name('sardanikar');
 });
