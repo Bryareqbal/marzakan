@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,4 @@ Route::get('/', function () {
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'loginPage');
 });
+Route::get('/dashboard', DashboardController::class)->name('dashboard');

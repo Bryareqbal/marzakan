@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/js/app.js'])
 </head>
 
 <body>
-
-    <main class="flex items-center justify-center min-h-screen">
+    <nav class="shadow py-3">
+        <ul class="mx-auto container">
+            <a href="{{ route('dashboard') }}">سەرەکی</a>
+        </ul>
+    </nav>
+    <main>
         @yield('content')
     </main>
 </body>
