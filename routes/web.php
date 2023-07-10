@@ -23,8 +23,3 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
         Route::post('/', 'login')->name('login');
     });
 });
-
-
-Route::get('/test', function () {
-    return "success";
-})->name('test');
