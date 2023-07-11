@@ -131,7 +131,6 @@
                             </tbody>
                         </table>
                     </div>
-                @else
                 @endif
             </section>
         </section>
