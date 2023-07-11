@@ -165,7 +165,7 @@
             @if ($users->isNotEmpty())
                 <table class="mt-6 w-full">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
-                        <tr class="divide-x-2 divide-x-reverse divide-white">
+                        <tr class="">
 
                             <th class="py-3 px-6 text-right font-medium">#</th>
                             <th class="py-3 px-6 text-right font-medium">ناوی بەکارهێنەر</th>
@@ -193,7 +193,7 @@
                                 </td>
 
                                 <td class="py-3 px-6 text-center">
-                                    {{ $user->rules->rule }}
+                                    {{ $user->rule->rule }}
                                 </td>
                                 <td class="py-3 px-6 text-center">
                                     @unless ($user->gender)
