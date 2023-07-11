@@ -2,15 +2,7 @@
 
 @section('title', 'Dashboard')
 @section('content')
-    <div class="container mx-auto mt-10">
-        {{-- <div class="grid grid-cols-6 gap-5">
-            <x-card label="مەرزەکان" route="marzakan" />
-            <x-card label="سەرپەرشتیار" route="sarparshtyarakan" />
-            <x-card label="کارمەند" route="karmandakan" />
-            <x-card label="سەردانیکەر" route="sardanikar" />
-            <x-card label="بەکارهێنەر" route="users" />
-        </div> --}}
-
+    <div class="container mx-auto mt-10 px-1">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4">
             <x-card route="users" label="بەکارهێنەر" model="App\Models\User">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

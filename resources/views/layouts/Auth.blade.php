@@ -10,11 +10,9 @@
 </head>
 
 <body>
-    <nav class="shadow py-5">
-        <ul class="mx-auto container">
-            <a href="{{ route('dashboard') }}">سەرەکی</a>
-        </ul>
-    </nav>
+
+    @include('header.nav')
+
     <main>
         @yield('content')
         <x-Notification />
