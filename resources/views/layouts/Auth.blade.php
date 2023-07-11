@@ -19,6 +19,8 @@
         @yield('content')
         <x-Notification />
     </main>
+
+    @stack('scripts')
 </body>
 
 </html>

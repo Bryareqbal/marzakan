@@ -49,13 +49,8 @@ Route::middleware('auth')->group(function () {
     });
 
 
-<<<<<<< HEAD
     Route::middleware('hasRole:superadmin,admin')->controller(KarmandController::class)->prefix('/karmand')->group(function () {
         Route::get('/', 'index')->name('karmand');
-=======
-    Route::controller(KarmandController::class)->prefix('/karmand')->group(function () {
-        Route::get('/', 'index')->name('karmandakan');
->>>>>>> origin/hoshmand-kamal
         Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
         Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
         Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
@@ -72,5 +67,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
         Route::get('/', 'index')->name('sardanikar');
+        Route::get('/add', 'addSardanikar')->name('add-sardanikar');
     });
 });
