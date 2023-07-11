@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
 use App\Http\Controllers\SarparshtyarController;
 use Illuminate\Support\Facades\Auth;
@@ -45,8 +46,15 @@ Route::middleware('auth')->group(function () {
     });
 
 
-    Route::get('/karmand', function () {
-    })->name('karmand');
+    Route::controller(KarmandController::class)->prefix('/karmand')->group(function () {
+        Route::get('/', 'index')->name('karmand');
+        Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
+        Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
+        Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
+
+    });
+
+
 
     Route::get('/sardanikar', function () {
     })->name('sardanikar');
