@@ -116,25 +116,20 @@
                         <tr>
                             <th class="px-3 py-2 text-right font-medium">#</th>
                             <th class="px-3 py-2 text-center font-medium">ناوی کارمەند</th>
-                            <th class="px-3 py-2 text-left font-medium">ژمارە تەلەفون</th>
-                            <th class="px-3 py-2 text-left font-medium">سەرپەرشتیار</th>
+                            <th class="px-3 py-2 text-center font-medium">ژمارە تەلەفون</th>
+                            <th class="px-3 py-2 text-center font-medium">سەرپەرشتیار</th>
                             <th class="px-3 py-2 text-center font-medium">چالاکی</th>
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($karmandakan as $key => $karmand)
                             <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-right font-medium">
-                                    {{ $key + 1 }}</td>
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium">
-                                    {{ $karmand->name }}</td>
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-left font-medium uppercase">
-                                    {{ $karmand->phone }}</td>
-                                <td <td class="border-r-2 border-green-600 px-3 py-2 text-left font-medium uppercase">
+                                <td class="px-3 py-2 text-right font-medium">{{ $karmandakan->firstItem() + $key }}</td>
+                                <td class="px-3 py-2 text-center font-medium">{{ $karmand->name }}</td>
+                                <td class="px-3 py-2 text-center font-medium uppercase">{{ $karmand->phone }}</td>
+                                <td <td class=" px-3 py-2 text-center font-medium uppercase">
                                     {{ $karmand->sarparshtyar->name }}</td>
-                                <td
-                                    class="border-r-2 text-left flex justify-center    border-green-600 px-3 py-2  font-medium uppercase">
+                                <td class="border-green-600 px-3 py-2 flex justify-center  font-medium uppercase">
                                     <a href="{{ route('editKarmand', $karmand->id) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

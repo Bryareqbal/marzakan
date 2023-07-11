@@ -193,13 +193,8 @@
                                     <h1 class="capitalize">{{ $user->name }}</h1>
                                     <span class="font-sans">({{ $user->username }})</span>
                                 </td>
-                                <td class="py-3 px-6 text-center">
-                                    {{ $user->address }}
-                                </td>
-
-                                <td class="py-3 px-6 text-center">
-                                    {{ $user->rule->rule }}
-                                </td>
+                                <td class="py-3 px-6 text-center">{{ $user->address }}</td>
+                                <td class="py-3 px-6 text-center">{{ $user->rule->rule }}</td>
                                 <td class="py-3 px-6 text-center">
                                     @unless ($user->gender)
                                         مێ
@@ -207,14 +202,9 @@
                                         نێر
                                     @endunless
                                 </td>
-                                <td class="py-3 px-6 text-center font-sans">
-                                    {{ $user->phone_no }}
-                                </td>
-
+                                <td class="py-3 px-6 text-center font-sans">{{ $user->phone_no }}</td>
                                 <td class="py-3 px-6 text-center font-sans md:truncate">
-                                    {{ $user->created_at->format('Y-m-d H:i:s A') }}
-                                </td>
-
+                                    {{ $user->created_at->format('Y-m-d H:i:s A') }}</td>
                                 <td class="relative py-3 px-6 text-center">
                                     <div class="item-center flex justify-center space-x-3 space-x-reverse">
                                         <a href="{{ route('editUser', $user->id) }}"

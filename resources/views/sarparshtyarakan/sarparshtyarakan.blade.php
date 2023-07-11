@@ -100,7 +100,7 @@
             <div class="overflow-auto">
                 <table class="mt-6 w-full min-w-max">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
-                        <tr class="divide-x-2 divide-x-reverse divide-white">
+                        <tr>
                             <th class="px-3 py-2 text-right font-medium">#</th>
                             <th class="px-3 py-2 text-center font-medium">ناو</th>
                             <th class="px-3 py-2 text-center font-medium">ژ.مۆبایل</th>
@@ -111,16 +111,15 @@
                     <tbody>
                         @foreach ($sarparshtyarakan as $key => $sarparshtyar)
                             <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-right font-medium">
+                                <td class="px-3 py-2 text-right font-medium">
                                     {{ $sarparshtyarakan->firstItem() + $key }}</td>
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium">
+                                <td class="px-3 py-2 text-center font-medium">
                                     {{ $sarparshtyar->name }}</td>
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium uppercase">
+                                <td class="px-3 py-2 text-center font-medium uppercase">
                                     {{ $sarparshtyar->phone }}</td>
-                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium uppercase">
+                                <td class="px-3 py-2 text-center font-medium uppercase">
                                     {{ $sarparshtyar->marz->name }}</td>
-                                <td
-                                    class="border-r-2 text-left flex justify-center  border-green-600 px-3 py-2  font-medium uppercase">
+                                <td class="text-left flex justify-center   px-3 py-2  font-medium uppercase">
                                     <a href="{{ route('edit-sarparshtyar', $sarparshtyar->id) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
