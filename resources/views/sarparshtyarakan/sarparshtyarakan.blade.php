@@ -1,7 +1,7 @@
 @extends('layouts.Auth')
 
 @section('content')
-    <div class="container mx-auto pt-10 ">
+    <div class="container mx-auto pt-10 px-5">
         <section class="flex justify-center  flex-col">
             <h1 class="text-xl bg-white flex justify-center items-center px-3 py-2 rounded-md space-x-3 space-x-reverse">
                 <span
@@ -36,7 +36,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی سەرپەرشتیار </legend>
                             <x-input name="name" id="name" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2" />
+                                class="w-full rounded-lg border border-slate-300 pr-3 py-2" value="{{ old('name') }}" />
                             <x-error message="name" />
                         </fieldset>
 
@@ -45,13 +45,14 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژ.مۆبایل</legend>
                             <x-input name="phone" id="phone" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2" value="{{ old('phone') }}" />
+                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full" maxlength="11"
+                                value="{{ old('phone') }}" />
                             <x-error message="phone" />
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ژ.مۆبایل</legend>
+                            <legend class="px-2">مەرز</legend>
                             <x-select name="marz" id="marz">
                                 <option value="">مەرز</option>
                                 @foreach ($marzakan as $marz)
@@ -82,5 +83,46 @@
                 <hr class="mt-4 max-w-4xl border border-dashed border-slate-500">
             </form>
         </section>
+
+        @if ($sarparshtyarakan->isNotEmpty())
+            <div class="overflow-auto">
+                <table class="mt-6 w-full min-w-max">
+                    <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
+                        <tr class="divide-x-2 divide-x-reverse divide-white">
+                            <th class="px-3 py-2 text-right font-medium">#</th>
+                            <th class="px-3 py-2 text-center font-medium">ناو</th>
+                            <th class="px-3 py-2 text-center font-medium">ژ.مۆبایل</th>
+                            <th class="px-3 py-2 text-center font-medium">ناوی مەرز</th>
+                            <th class="px-3 py-2 text-center font-medium">چالاکی</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($sarparshtyarakan as $key => $sarparshtyar)
+                            <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
+                                <td class="border-r-2 border-green-600 px-3 py-2 text-right font-medium">
+                                    {{ $sarparshtyarakan->firstItem() + $key }}</td>
+                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium">
+                                    {{ $sarparshtyar->name }}</td>
+                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium uppercase">
+                                    {{ $sarparshtyar->phone }}</td>
+                                <td class="border-r-2 border-green-600 px-3 py-2 text-center font-medium uppercase">
+                                    {{ $sarparshtyar->marz->name }}</td>
+                                <td
+                                    class="border-r-2 text-left flex justify-center  border-green-600 px-3 py-2  font-medium uppercase">
+                                    {{-- <a href="{{ route('editMarzakan', $marz->id) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                                        </svg>
+                                    </a> --}}
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 @endsection
