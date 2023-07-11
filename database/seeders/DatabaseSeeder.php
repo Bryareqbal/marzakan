@@ -31,12 +31,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'superadmin',
             'username' => 'admin',
         ]);
+        User::factory(20)->create();
 
-        Marzakan::factory(24)->create();
+        Marzakan::factory(5000)->create();
 
-        Sarparshtyar::factory(10)->create();
+        Sarparshtyar::factory(100)->create();
 
-        Karmand::factory(10)->create();
+        Karmand::factory(200)->create();
 
 
     }
