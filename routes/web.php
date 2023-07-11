@@ -33,7 +33,7 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-
+    Route::post('/logout', [AuthController::class,'logout'])->name('logout');
     Route::middleware('hasRole:superadmin')->controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
         Route::get('/', 'index')->name('marzakan');
         Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
@@ -62,8 +62,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/{id}/saveUser', 'saveUser')->name('saveUser');
         Route::get('/{id}/editPassword', 'editPassword')->name('editPassword');
         Route::post('/{id}/savePassword', 'savePassword')->name('savePassword');
-
-
     });
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {

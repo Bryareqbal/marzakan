@@ -120,7 +120,7 @@
                     </span>
                     <div class="flex sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="#" class="rounded-md px-3 py-2 text-sm font-medium"
+                            <a href="{{ route('dashboard') }}" class="rounded-md px-3 py-2 text-sm font-medium"
                                 aria-current="page">سەرەکی</a>
                             <h1 href="#" class="rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
                                 @if (Auth::user()->rule->rule === 'superadmin')
