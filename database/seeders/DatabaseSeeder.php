@@ -30,6 +30,6 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
         ]);
 
-        Marzakan::factory(12)->create();
+        Marzakan::factory(24)->create();
     }
 }
