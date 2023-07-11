@@ -2,14 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer base {
     @font-face {
-        font-family: 'rudaw';
-        src: url('../fonts/rudaw.ttf');
+        font-family: "rudaw";
+        src: url("../fonts/rudaw.ttf");
     }
 
     * {
-        @apply font-rudaw
+        @apply font-rudaw focus:outline-none;
     }
 }

@@ -37,12 +37,13 @@ Route::middleware('auth')->group(function () {
         Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
         Route::get('/{id}/edit', 'editMarzakan')->name('editMarzakan')->whereNumber('id');
         Route::post('/{id}', 'saveMarzakan')->name('saveMarzakan');
-
     });
 
     Route::controller(SarparshtyarController::class)->prefix('/sarparshtyarakan')->group(function () {
         Route::get('/', 'index')->name('sarparshtyarakan');
-        Route::post('/addSarparshtyar', 'addSarparshtyar')->name('add-sarparshtyar');
+        Route::post('/add', 'addSarparshtyar')->name('add-sarparshtyar');
+        Route::get('{id}/edit', 'editSarparshtyar')->name('edit-sarparshtyar');
+        Route::patch('{id}/update', 'updateSarparshtyar')->name('update-sarparshtyar');
     });
 
 
@@ -51,7 +52,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
         Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
         Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
-
     });
 
 

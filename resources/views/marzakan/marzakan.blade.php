@@ -40,7 +40,8 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی مەرز </legend>
-                            <x-input name="name" id="name" type="text" value="{{ old('name') }}" />
+                            <x-input name="name" id="name" type="text" class="w-full"
+                                value="{{ old('name') }}" />
                             <x-error message="name" />
                         </fieldset>
 
@@ -48,7 +49,8 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناونیشان</legend>
-                            <x-input name="address" id="address" type="text" value="{{ old('address') }}" />
+                            <x-input name="address" id="address" type="text" class="w-full"
+                                value="{{ old('address') }}" />
                             <x-error message="address" />
                         </fieldset>
                     </div>

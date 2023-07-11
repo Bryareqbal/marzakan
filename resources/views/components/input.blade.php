@@ -1,4 +1,4 @@
-<input type="text" {{ $attributes }} @class([
-    'border border-slate-200 pr-2 focus:outline-none rounded-lg shadow py-1',
+<input type="text" @class([
+    'border border-slate-200 px-3 focus:outline-none rounded-lg shadow py-2 focus:ring-2 ring-green-500',
     $attributes['class'],
-]) />
+]) {{ $attributes }} />
