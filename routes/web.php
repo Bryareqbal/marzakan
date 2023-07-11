@@ -68,5 +68,6 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
         Route::get('/', 'index')->name('sardanikar');
+        Route::get('/add', 'addSardanikar')->name('add-sardanikar');
     });
 });

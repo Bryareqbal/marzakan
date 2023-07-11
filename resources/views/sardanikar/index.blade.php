@@ -10,83 +10,174 @@
             @csrf
             <div class="flex divide-x-2 divide-x-reverse items-center space-x-reverse w-full">
 
-                <div class="basis-full grid grid-cols-1 gap-4 md:grid-cols-2 px-5">
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">جۆری تۆمارکردنی زانیاری</legend>
-                            <x-error message="name" />
-                        </fieldset>
+                <div class="flex flex-col basis-full space-y-5">
+                    <div class="flex justify-center">
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-4 space-x-5 space-x-re">
+                                <legend class="px-2">جۆری تۆمارکردنی زانیاری</legend>
+                                <label for="type_entering">
+                                    <input type="radio"
+                                        class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                        id="type_entering" onchange="toggle()" value="manual" name="type_entering" />
+                                    دەستی
+                                </label>
+                                <label for="type_entering2">
+                                    <input type="radio"
+                                        class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                        id="type_entering2" onchange="toggle()" value="auto" name="type_entering" />
+                                    ئۆتۆماتیکی
+                                </label>
+                                <x-error message="name" />
+                            </fieldset>
+                        </div>
                     </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ناوی چواری</legend>
-                            <x-input name="name" id="name" type="text" class="w-full"
-                                value="{{ old('name') }}" />
-                            <x-error message="name" />
-                        </fieldset>
+                    <div id="manual_div" class=" grid grid-cols-1 gap-4 md:grid-cols-2 px-5">
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ناوی چواری</legend>
+                                <x-input name="name" id="name" type="text" class="w-full"
+                                    value="{{ old('name') }}" />
+                                <x-error message="name" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">نازناو</legend>
+                                <x-input name="nickname" id="nickname" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('nickname') }}" />
+                                <x-error message="nickname" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ژمارەی پاسپۆرت</legend>
+                                <x-input name="password_number" id="password_number" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('password_number') }}" />
+                                <x-error message="password_number" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">بەرواری لەدایکبوون</legend>
+                                <x-input name="password_number" id="password_number" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('password_number') }}" />
+                                <x-error message="password_number" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ڕەگەز</legend>
+                                <x-select name="gender" id="gender">
+                                    <option value="{{ 1 }}" @selected(old('gender') === true)>نێر</option>
+                                    <option value="{{ 0 }}" @selected(old('gender') === false)>مێ</option>
+                                </x-select>
+                                <x-error message="gender" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">نەتەوە</legend>
+                                <x-input name="nation" id="nation" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('nation') }}" />
+                                <x-error message="nation" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">بەرواری بەسەرچوونی پاسپۆرت</legend>
+                                <x-input name="passport_expire_date" id="passport_expire_date" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('passport_expire_date') }}" />
+                                <x-error message="passport_expire_date" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">دەسەڵاتی دەرکردن</legend>
+                                <x-input name="issuing_authority" id="issuing_authority" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('issuing_authority') }}" />
+                                <x-error message="issuing_authority" />
+                            </fieldset>
+                        </div>
                     </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">نازناو</legend>
-                            <x-input name="nickname" id="nickname" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
-                                value="{{ old('nickname') }}" />
-                            <x-error message="nickname" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ژمارەی پاسپۆرت</legend>
-                            <x-input name="password_number" id="password_number" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
-                                value="{{ old('password_number') }}" />
-                            <x-error message="password_number" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">بەرواری لەدایکبوون</legend>
-                            <x-input name="password_number" id="password_number" type="date"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
-                                value="{{ old('password_number') }}" />
-                            <x-error message="password_number" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ڕەگەز</legend>
-                            <x-select name="gender" id="gender">
-                                <option value="male" @selected(old('gender') === 'male')>نێر</option>
-                                <option value="female" @selected(old('gender') === 'female')>مێ</option>
-                            </x-select>
-                            <x-error message="gender" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">نەتەوە</legend>
-                            <x-input name="nation" id="nation" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full " value="{{ old('nation') }}" />
-                            <x-error message="nation" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">بەرواری بەسەرچوونی پاسپۆرت</legend>
-                            <x-input name="passport_expire_date" id="passport_expire_date" type="date"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
-                                value="{{ old('passport_expire_date') }}" />
-                            <x-error message="passport_expire_date" />
-                        </fieldset>
-                    </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">دەسەڵاتی دەرکردن</legend>
-                            <x-input name="issuing_authority" id="issuing_authority" type="date"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
-                                value="{{ old('issuing_authority') }}" />
-                            <x-error message="issuing_authority" />
-                        </fieldset>
+                    <div id="auto_div" class="hidden grid-cols-1 gap-4 md:grid-cols-2 px-5">
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ناوی چواری</legend>
+                                <x-input disabled name="name" id="name" type="text" class="w-full"
+                                    value="{{ old('name') }}" />
+                                <x-error message="name" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">نازناو</legend>
+                                <x-input disabled name="nickname" id="nickname" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('nickname') }}" />
+                                <x-error message="nickname" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ژمارەی پاسپۆرت</legend>
+                                <x-input disabled name="password_number" id="password_number" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('password_number') }}" />
+                                <x-error message="password_number" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">بەرواری لەدایکبوون</legend>
+                                <x-input disabled name="password_number" id="password_number" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('password_number') }}" />
+                                <x-error message="password_number" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ڕەگەز</legend>
+                                <x-select disabled name="gender" id="gender">
+                                    <option value="{{ 1 }}" @selected(old('gender') === true)>نێر</option>
+                                    <option value="{{ 0 }}" @selected(old('gender') === true)>مێ</option>
+                                </x-select>
+                                <x-error message="gender" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">نەتەوە</legend>
+                                <x-input disabled name="nation" id="nation" type="text"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('nation') }}" />
+                                <x-error message="nation" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">بەرواری بەسەرچوونی پاسپۆرت</legend>
+                                <x-input disabled name="passport_expire_date" id="passport_expire_date" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('passport_expire_date') }}" />
+                                <x-error message="passport_expire_date" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">دەسەڵاتی دەرکردن</legend>
+                                <x-input disabled name="issuing_authority" id="issuing_authority" type="date"
+                                    class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                    value="{{ old('issuing_authority') }}" />
+                                <x-error message="issuing_authority" />
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
 
@@ -95,7 +186,8 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژ.پەیوەندی</legend>
                             <x-input name="phone" id="phone" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full " value="{{ old('phone') }}" />
+                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full "
+                                value="{{ old('phone') }}" />
                             <x-error message="phone" />
                         </fieldset>
                     </div>
@@ -169,4 +261,9 @@
             <hr class="mt-4  border border-dashed border-slate-500">
         </form>
     </div>
+
+
+    @push('scripts')
+        <script src="{{ asset('js/sardanikar.js') }}"></script>
+    @endpush
 @endsection
