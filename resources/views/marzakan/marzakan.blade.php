@@ -71,7 +71,7 @@
                 <hr class="mt-4 max-w-4xl border border-dashed border-slate-500">
             </form>
 
-            <section class="mt-6 max-w-6xl">
+            <div class="mt-6 max-w-6xl">
                 <form action="{{ route('marzakan') }}" method="GET" class="flex items-center">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -132,7 +132,10 @@
                         </table>
                     </div>
                 @endif
-            </section>
+            </div>
+            <div class="mt-2 flex justify-center">
+                {{ $marzakan->links() }}
+            </div>
         </section>
     </div>
 @endsection

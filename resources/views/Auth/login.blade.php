@@ -43,7 +43,7 @@
                 </div>
                 <div class="mt-10 mb-6 flex justify-center">
                     <button type="submit"
-                        class="w-2/3 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 py-2 text-white shadow-sm focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">چوونەژوورەوە</button>
+                        class="w-2/3 rounded-xl focus:outline-none bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 py-2 text-white shadow-sm focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">چوونەژوورەوە</button>
                 </div>
             </form>
         </div>

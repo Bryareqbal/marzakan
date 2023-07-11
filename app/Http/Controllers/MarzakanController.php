@@ -17,7 +17,7 @@ class MarzakanController extends Controller
             $query->where('name', 'like', "%{$request->name}%");
         })->when($request->address, function (Builder $query) use ($request) {
             $query->where('address', 'like', "%{$request->address}%");
-        })->latest()->get();
+        })->latest()->simplePaginate(12);
 
         return view('marzakan.marzakan', ['marzakan'=>$marzakan]);
     }
