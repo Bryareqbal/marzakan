@@ -17,6 +17,7 @@
     </nav>
     <main>
         @yield('content')
+        <x-Notification />
     </main>
 </body>
 

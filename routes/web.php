@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
         Route::get('/', 'index')->name('marzakan');
+        Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
+        Route::get('/{id}/edit', 'editMarzakan')->name('editMarzakan')->whereNumber('id');
+        Route::post('/{id}', 'saveMarzakan')->name('saveMarzakan');
 
     });
 
