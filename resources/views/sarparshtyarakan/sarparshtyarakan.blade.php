@@ -1,5 +1,6 @@
 @extends('layouts.Auth')
 
+@section('title', 'سەردانیکەر')
 @section('content')
     <div class="container mx-auto pt-10 px-5">
         <section class="flex justify-center  flex-col">
