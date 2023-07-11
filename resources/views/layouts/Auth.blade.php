@@ -11,12 +11,13 @@
 
 <body>
 
-    @include('header.nav')
-
-    <main>
-        @yield('content')
-        <x-Notification />
-    </main>
+    <div class="container mx-auto">
+        @include('header.nav')
+        <main>
+            @yield('content')
+            <x-Notification />
+        </main>
+    </div>
 
     @stack('scripts')
 </body>
