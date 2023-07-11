@@ -13,8 +13,11 @@ class SarparshtyarController extends Controller
     {
 
         $marzakan = Marzakan::all();
+
+        $sarparshtyarakan = Sarparshtyar::with(['marz'])->paginate(25);
         return view('sarparshtyarakan.sarparshtyarakan', [
-            'marzakan' => $marzakan
+            'marzakan' => $marzakan,
+            'sarparshtyarakan' => $sarparshtyarakan,
         ]);
     }
 

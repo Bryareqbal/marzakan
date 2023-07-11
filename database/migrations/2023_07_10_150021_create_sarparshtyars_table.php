@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('sarparshtyars', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('phone')->unique();
+            $table->string('name');
+            $table->string('phone');
             $table->foreignId('marz_id')->constrained('marzakans');
+            $table->unique(['phone', 'marz_id']);
             $table->timestamps();
         });
     }

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sarparshtyar extends Model
 {
     use HasFactory;
+
+    public function marz()
+    {
+        return $this->belongsTo(Marzakan::class, 'marz_id');
+    }
 }
