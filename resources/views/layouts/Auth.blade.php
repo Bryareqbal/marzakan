@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <nav class="shadow py-3">
+    <nav class="shadow py-5">
         <ul class="mx-auto container">
             <a href="{{ route('dashboard') }}">سەرەکی</a>
         </ul>
