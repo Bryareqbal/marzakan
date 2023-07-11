@@ -98,7 +98,7 @@
                     <div class="max-h-[40rem] overflow-y-scroll">
                         <table class="mt-6 w-full">
                             <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
-                                <tr class="divide-x-2 divide-x-reverse divide-white">
+                                <tr>
                                     <th class="px-3 py-2 text-right font-medium">#</th>
                                     <th class="px-3 py-2 text-center font-medium">ناوی مەرز</th>
                                     <th class="px-3 py-2 text-left font-medium">ناونیشان</th>
@@ -106,7 +106,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-
                                 @foreach ($marzakan as $key => $marz)
                                     <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
                                         <td class="border-r-2 border-green-600 px-3 py-2 text-right font-medium">
@@ -126,7 +125,6 @@
                                                 </svg>
 
                                             </a>
-
                                         </td>
                                     </tr>
                                 @endforeach

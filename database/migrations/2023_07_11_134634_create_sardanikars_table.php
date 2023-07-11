@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -26,7 +25,7 @@ return new class extends Migration
             $table->enum('status', ['coming', 'leaving']);
             $table->enum('mount_of_money', ['free', '5000', '1000']);
             $table->string('targeted_person');
-            $table->number('no_of_visitors');
+            $table->integer('no_of_visitors');
             $table->date('passport_expire_date');
             $table->string('issuing_authority');
             $table->foreignId('user_id')->constrained('users');

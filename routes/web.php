@@ -49,13 +49,8 @@ Route::middleware('auth')->group(function () {
     });
 
 
-<<<<<<< HEAD
     Route::middleware('hasRole:superadmin,admin')->controller(KarmandController::class)->prefix('/karmand')->group(function () {
-        Route::get('/', 'index')->name('karmand');
-=======
-    Route::controller(KarmandController::class)->prefix('/karmand')->group(function () {
         Route::get('/', 'index')->name('karmandakan');
->>>>>>> origin/hoshmand-kamal
         Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
         Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
         Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
@@ -64,8 +59,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/', 'index')->name('users');
         Route::post('/add', 'userAdd')->name('userAdd');
         Route::get('/{id}/editUser', 'editUser')->name('editUser');
+        Route::post('/{id}/saveUser', 'saveUser')->name('saveUser');
         Route::get('/{id}/editPassword', 'editPassword')->name('editPassword');
-        // Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
+        Route::post('/{id}/savePassword', 'savePassword')->name('savePassword');
 
 
     });

@@ -113,7 +113,7 @@
             @if ($karmandakan->isNotEmpty())
                 <table class="mt-6 w-full">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
-                        <tr class="divide-x-2 divide-x-reverse divide-white">
+                        <tr>
                             <th class="px-3 py-2 text-right font-medium">#</th>
                             <th class="px-3 py-2 text-center font-medium">ناوی کارمەند</th>
                             <th class="px-3 py-2 text-left font-medium">ژمارە تەلەفون</th>

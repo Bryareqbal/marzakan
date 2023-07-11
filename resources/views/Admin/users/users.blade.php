@@ -41,28 +41,31 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناو </legend>
-                            <x-input name="name" id="name" type="text" value="{{ old('name') }}" />
+                            <x-input class="w-full" name="name" id="name" type="text"
+                                value="{{ old('name') }}" />
                             <x-error message="name" />
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی بەکارهێنەر</legend>
-                            <x-input name="username" id="username" type="text" value="{{ old('username') }}" />
+                            <x-input class="w-full" name="username" id="username" type="text"
+                                value="{{ old('username') }}" />
                             <x-error message="username" />
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2"> وشەی نهێنی</legend>
-                            <x-input type="password" name="password" id="password" value="{{ old('password') }}" />
+                            <x-input class="w-full" type="password" name="password" id="password"
+                                value="{{ old('password') }}" />
                             <x-error message="password" />
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2"> دڵنیاکردنەوەی وشەی نهێنی</legend>
-                            <x-input name="password_confirmation" id="password_confirmation" type="password"
+                            <x-input class="w-full" name="password_confirmation" type="password"
                                 value="{{ old('password_confirmation') }}" />
                             <x-error message="password_confirmation" />
                         </fieldset>
@@ -93,14 +96,15 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناونیشان</legend>
-                            <x-input name="address" id="address" type="text" value="{{ old('address') }}" />
+                            <x-input class="w-full" name="address" id="address" type="text"
+                                value="{{ old('address') }}" />
                             <x-error message="address" />
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژمارە تەلەفون</legend>
-                            <x-input name="phone_no" id="phone_no" maxLength="11" type="text"
+                            <x-input class="w-full" name="phone_no" id="phone_no" maxLength="11" type="text"
                                 value="{{ old('phone_no') }}" />
                             <x-error message="phone_no" />
                         </fieldset>
@@ -111,7 +115,8 @@
                             <x-select name="role_id">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($Roles as $key => $role)
-                                    <option value="{{ $role->id }}">{{ $role->rule }}</option>
+                                    <option @selected(old('rule_id') == $role->id) value="{{ $role->id }}">{{ $role->rule }}
+                                    </option>
                                 @endforeach
                             </x-select>
                             <x-error message="role_id" />
@@ -138,7 +143,7 @@
 
         </section>
         <div class="mt-6 max-w-6xl">
-            <form action="{{ route('karmandakan') }}" method="GET" class="flex items-center">
+            <form action="{{ route('users') }}" method="GET" class="flex items-center">
                 <button type="submit" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
@@ -146,7 +151,7 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input name="name" value="{{ old('name') }}" type="search" class="w-3/12 pr-3"
+                <x-input class="w-full" name="name" value="{{ old('name') }}" type="search" class="w-3/12 pr-3"
                     placeholder="ناو" />
                 <button type="submit" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -156,8 +161,8 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input name="phone" type="search" value="{{ old('phone') }}" class="w-3/12  pr-3"
-                    placeholder="ژمارە تەلەفون" />
+                <x-input class="w-full" name="phone_no" type="search" value="{{ old('phone_no') }}"
+                    class="w-3/12  pr-3" placeholder="ژمارە تەلەفون" />
             </form>
         </div>
 
@@ -213,7 +218,7 @@
                                 <td class="relative py-3 px-6 text-center">
                                     <div class="item-center flex justify-center space-x-3 space-x-reverse">
                                         <a href="{{ route('editUser', $user->id) }}"
-                                            class="flex h-10 w-10 items-center justify-center rounded border border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
+                                            class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-blue-500">
@@ -223,7 +228,7 @@
 
                                         </a>
                                         <a href="{{ route('editPassword', $user->id) }}"
-                                            class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-offset-2">
+                                            class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border-2 border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-offset-2">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-yellow-500">
@@ -235,21 +240,28 @@
 
 
                                         </a>
-
-                                        {{-- <button type="button" wire:click="changeActivityUser('{{ $user->id }}')"
-                                            title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
-                                            class="focus:ring-{{ $user->isActive ? 'green' : 'red' }}-500 flex h-10 w-10 items-center justify-center rounded border border-slate-200 text-xl hover:border-slate-300 focus:ring-1 focus:ring-offset-2">
-                                            @unless ($user->isActive)
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    fill="currentColor" class="h-6 w-6 text-red-500 hover:text-red-600">
-                                                    <path fill-rule="evenodd"
-                                                        d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            @else
-                                                <i class='bx bx-check text-emerald-500 hover:text-emerald-600'></i>
-                                            @endunless
-                                        </button> --}}
+                                        {{-- 
+                                        <form action="{{ route('users') }}">
+                                            <button type="button" wire:click="changeActivityUser('{{ $user->id }}')"
+                                                title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
+                                                class="focus:ring-{{ $user->isActive ? 'green' : 'red' }}-500 flex h-10 w-10 items-center justify-center rounded border border-emerald-200 text-xl hover:border-slate-300 focus:ring-1 focus:ring-offset-2">
+                                                @unless ($user->isActive)
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="h-6 w-6 text-red-500 hover:text-red-600">
+                                                        <path fill-rule="evenodd"
+                                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                @else
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6 text-emerald-500 hover:text-emerald-600">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M4.5 12.75l6 6 9-13.5" />
+                                                    </svg>
+                                                @endunless
+                                            </button>
+                                        </form> --}}
 
                                     </div>
                                 </td>
