@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
 use App\Http\Controllers\SarparshtyarController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -47,10 +48,19 @@ Route::middleware('auth')->group(function () {
 
 
     Route::controller(KarmandController::class)->prefix('/karmand')->group(function () {
-        Route::get('/', 'index')->name('karmand');
+        Route::get('/', 'index')->name('karmandakan');
         Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
         Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
         Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
+
+    });
+    Route::controller(UserController::class)->prefix('/users')->group(function () {
+        Route::get('/', 'index')->name('users');
+        Route::post('/add', 'userAdd')->name('userAdd');
+        Route::get('/{id}/editUser', 'editUser')->name('editUser');
+        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword');
+        // Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
+
 
     });
 

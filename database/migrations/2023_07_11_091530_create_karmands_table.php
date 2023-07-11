@@ -12,9 +12,10 @@ return new class () extends Migration {
     {
         Schema::create('karmands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sarparshtyar_id')->constrained('sarparshtyars')->cascadeOnDelete();
-            $table->string('name')->unique();
+            $table->foreignId('sarparshtyar_id')->constrained('sarparshtyars');
+            $table->string('name');
             $table->string('phone')->unique();
+            $table->unique(['sarparshtyar_id','phone']);
             $table->timestamps();
         });
     }

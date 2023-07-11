@@ -47,19 +47,19 @@ class MarzakanController extends Controller
     }
     public function saveMarzakan(Request $request)
     {
+        $editMarzakan = Marzakan::where('id', $request->id)->firstOrFail();
         Validator::make($request->all(), [
-            'name'=>['required','string','max:255',Rule::unique('marzakans', 'name')->ignore($request->id)],
+            'name'=>['required','string','max:255',Rule::unique('marzakans', 'name')->ignore($editMarzakan->id)],
             'address'=>['required','string','max:255'],
         ], [], [
             'name'=> '( ناوی مەرز )',
             'address'=> '( ناونیشان  )',
             ])->validate();
 
-        $newMarzakan = Marzakan::where('id', $request->id)->firstOrFail();
-        $newMarzakan->name = $request->name;
-        $newMarzakan->address = $request->address;
-        if($newMarzakan->save()) {
-            return redirect()->back()->with('success', 'بەسەرکەتووی گۆردرا .');
+        $editMarzakan->name = $request->name;
+        $editMarzakan->address = $request->address;
+        if($editMarzakan->save()) {
+            return redirect()->route('marzakan')->with('success', 'بەسەرکەتووی گۆردرا .');
         }
 
     }
