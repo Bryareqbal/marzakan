@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Sarparshtyar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,9 @@ class KarmandFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'sarparshtyar_id'=> Sarparshtyar::factory()->create(),
+            'name'=>fake()->unique()->name(),
+            'phone'=>fake()->unique()->phoneNumber(),
         ];
     }
 }

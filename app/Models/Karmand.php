@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Karmand extends Model
 {
     use HasFactory;
+
+    public function sarparshtyar()
+    {
+        return $this->belongsTo(Sarparshtyar::class, 'sarparshtyar_id');
+    }
 }
