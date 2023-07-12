@@ -7,20 +7,13 @@
             <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <span
-                        class="flex h-10 w-10 items-center justify-center rounded-xl border border-white bg-green-600 text-white">
-                        <svg viewBox="0 0 24 24" class="w-8 h-8" fill="#fff" xmlns="http://www.w3.org/2000/svg"
-                            stroke="#22c55e">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <path
-                                    d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
-                                    stroke="#22c55e" stroke-width="1.5"></path>
-                                <path d="M8 12H16" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                                <path d="M8 8H16" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                                <path d="M8 16H13" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                            </g>
+                        class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-8 w-8 text-emerald-500">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                         </svg>
+
                     </span>
                     <h1 class="text-xl">گۆرینی بەکارهێنەر</h1>
                 </div>
@@ -59,7 +52,7 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-3">
                             <legend class="px-2">ڕەگەز</legend>
-                            <div class="flex space-x-reverse space-x-3 p-1">
+                            <div class="flex space-x-3 space-x-reverse p-1">
                                 <label for="gender">
                                     <input type="radio"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
@@ -96,22 +89,51 @@
                             <x-error message="phone_no" />
                         </fieldset>
                     </div>
-                    <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ئەرک </legend>
-                            <x-select name="role_id">
-                                <option value="">هەڵبژێرە</option>
-                                @foreach ($Roles as $key => $rule)
-                                    <option @selected($rule->id == $user->rule_id) value="{{ $rule->id }}">
-                                        {{ $rule->rule }}</option>
-                                @endforeach
-                            </x-select>
-                            <x-error message="role_id" />
-                        </fieldset>
-                    </div>
+
+                    @if ($user->rule_id !== 1 && Auth::user()->rule->rule === 'superadmin')
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ئەرک </legend>
+                                <select
+                                    class="w-full rounded-lg border border-slate-300 bg-white py-2 pr-3 ring-green-500 focus:ring-2 disabled:bg-gray-100"
+                                    name="role_id">
+                                    <option value="">هەڵبژێرە</option>
+                                    @foreach ($Roles as $key => $rule)
+                                        <option @selected($rule->id == $user->rule_id) value="{{ $rule->id }}">
+                                            {{ $rule->rule }}</option>
+                                    @endforeach
+                                </select>
+                                <x-error message="role_id" />
+                            </fieldset>
+                        </div>
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-3">
+                                <legend class="px-2">باری بەکارهێنەر</legend>
+                                <div class="flex space-x-3 space-x-reverse p-1">
+                                    <label for="isActive">
+                                        <input type="radio"
+                                            class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                            id="isActive" value="{{ 1 }}" name="isActive"
+                                            {{ old('isActive', $user->isActive) === 1 ? 'checked' : '' }} />
+                                        چالاک
+                                    </label>
+                                    <label for="isActive2">
+                                        <input type="radio" value="{{ 0 }}"
+                                            class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                            id="isActive2" name="isActive"
+                                            {{ old('isActive', $user->isActive) === 0 ? 'checked' : '' }} />
+                                        ناچالاک
+                                    </label>
+
+                                </div>
+                                <x-error message="gender" />
+                            </fieldset>
+                        </div>
+                    @else
+                    @endif
                 </div>
                 <div class="mt-6 flex justify-end">
-                    <button type="submit" class="flex focus:outline-none items-center space-x-1 space-x-reverse">
+                    <button type="submit" class="flex items-center space-x-1 space-x-reverse focus:outline-none">
                         <span
                             class="flex h-8 w-8 items-center justify-center rounded rounded-br-md rounded-tr-md border shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

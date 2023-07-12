@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Marzakan;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,9 +19,9 @@ class SarparshtyarFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=>fake()->name(),
             'phone'=>fake()->phoneNumber(),
             'marz_id'=>Marzakan::factory()->create(),
+            'user_id'=>User::factory()->create(),
         ];
     }
 }

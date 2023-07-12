@@ -17,7 +17,7 @@ class MarzakanController extends Controller
             $query->where('name', 'like', "%{$request->name}%");
         })->when($request->address, function (Builder $query) use ($request) {
             $query->where('address', 'like', "%{$request->address}%");
-        })->latest()->simplePaginate(12);
+        })->latest()->simplePaginate(25);
 
         return view('marzakan.marzakan', ['marzakan'=>$marzakan]);
     }
@@ -59,7 +59,7 @@ class MarzakanController extends Controller
         $editMarzakan->name = $request->name;
         $editMarzakan->address = $request->address;
         if($editMarzakan->save()) {
-            return redirect()->route('marzakan')->with('success', 'بەسەرکەتووی گۆردرا .');
+            return redirect()->route('marzakan')->with('success', 'بەسەرکەتووی نوێکرایەوە .');
         }
 
     }

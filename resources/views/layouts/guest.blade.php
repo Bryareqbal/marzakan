@@ -12,7 +12,8 @@
 <body>
 
     <main
-        class="min-h-screen fixed bg-gradient-to-br from-emerald-200 to-emerald-300 inset-0 flex items-center justify-center">
+        class="fixed inset-0 flex min-h-screen items-center justify-center bg-gradient-to-br from-emerald-200 to-emerald-300">
+        <x-Notification />
         @yield('content')
     </main>
 </body>

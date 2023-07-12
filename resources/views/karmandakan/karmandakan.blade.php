@@ -8,20 +8,8 @@
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <span
                         class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
-                        <svg class="h-9 w-9 text-emerald-500" fill="#10b981" viewBox="0 0 100 100"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <circle cx="63.3" cy="47.6" r="10.7"></circle>
-                                <path
-                                    d="M63.6,60.3h-.8A16.43,16.43,0,0,0,46.7,74.2c0,.7.2,2.4,2.7,2.4H76.6c2.5,0,2.7-1.5,2.7-2.4A15.65,15.65,0,0,0,63.6,60.3Z">
-                                </path>
-                                <path
-                                    d="M48.6,58.3c.4-.4.1-.7.1-.7h0a17.94,17.94,0,0,1-3.1-10,17.18,17.18,0,0,1,3.2-10.2.1.1,0,0,1,.1-.1,1.76,1.76,0,0,0,.4-1.1V25.4a2.15,2.15,0,0,0-2-2H22.5a2.18,2.18,0,0,0-2,2.1V71.7H40a24.12,24.12,0,0,1,8.6-13.4ZM31.6,66a2.18,2.18,0,0,1-2.1,2.1H27.4A2.18,2.18,0,0,1,25.3,66V63.9a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm0-10.5a2.18,2.18,0,0,1-2.1,2.1H27.4a2.18,2.18,0,0,1-2.1-2.1V53.4a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm0-10.5a2.18,2.18,0,0,1-2.1,2.1H27.4A2.18,2.18,0,0,1,25.3,45V42.9a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm0-10.5a2.18,2.18,0,0,1-2.1,2.1H27.4a2.18,2.18,0,0,1-2.1-2.1V32.4a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm11.9,21a2.18,2.18,0,0,1-2.1,2.1H39.3a2.18,2.18,0,0,1-2.1-2.1V53.4a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm0-10.5a2.18,2.18,0,0,1-2.1,2.1H39.3A2.18,2.18,0,0,1,37.2,45V42.9a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Zm0-10.5a2.18,2.18,0,0,1-2.1,2.1H39.3a2.18,2.18,0,0,1-2.1-2.1V32.4a2.18,2.18,0,0,1,2.1-2.1h2.1a2.18,2.18,0,0,1,2.1,2.1Z">
-                                </path>
-                            </g>
-                        </svg>
+                        <x-karmand class="h-8 w-8" />
+
                     </span>
                     <h1 class="text-xl">کارمەند</h1>
                 </div>
@@ -40,12 +28,13 @@
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ناوی سەرپەشتیار </legend>
+                            <legend class="px-2">ناوی سەرپەرشتیار </legend>
                             <x-select name="sarparshtyar_id">
                                 <option value="">هەڵبژێرە</option>
-                                @foreach ($sarparshtyarakan as $key => $sarparshtyar)
+                                @foreach ($sarparshtyarkan as $key => $sarparshtyar)
                                     <option @selected(old('sarparshtyar_id') == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
-                                        {{ $sarparshtyar->name }}</option>
+                                        {{ $sarparshtyar->user->name }}
+                                    </option>
                                 @endforeach
                             </x-select>
                             <x-error message="sarparshtyar_id" />
@@ -54,14 +43,21 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی کارمەند </legend>
-                            <x-input name="name" id="name" type="text" value="{{ old('name') }}" />
-                            <x-error message="name" />
+                            <x-select name="user_id">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($users as $key => $user)
+                                    <option @selected(old('user_id') == $user->id) value="{{ $user->id }}">{{ $user->name }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="user_id" />
                         </fieldset>
                     </div>
+
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژمارە تەلەفون</legend>
-                            <x-input name="phone" id="phone" maxLength="11" type="text"
+                            <x-input class="w-full" name="phone" id="phone" maxLength="11" type="text"
                                 value="{{ old('phone') }}" />
                             <x-error message="phone" />
                         </fieldset>
@@ -95,8 +91,8 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input name="name" value="{{ old('name') }}" type="search" class="w-3/12 pr-3"
-                    placeholder="ناوی کارمەند" />
+                <x-input name="sarparshtyar_name" value="{{ old('sarparshtyar_name') }}" type="search" class="w-3/12 pr-3"
+                    placeholder="ناوی سەرپەرشتیار" />
                 <button type="submit" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor"
@@ -105,8 +101,8 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input name="phone" type="search" value="{{ old('phone') }}" class="w-3/12 pr-3"
-                    placeholder="ژمارە تەلەفون" />
+                <x-input name="karmand_name" type="search" value="{{ old('karmand_name') }}" class="w-3/12 pr-3"
+                    placeholder="ناوی کارمەند " />
             </form>
         </div>
 
@@ -116,20 +112,21 @@
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                         <tr>
                             <th class="px-3 py-2 text-right font-medium">#</th>
+                            <th class="px-3 py-2 text-center font-medium">ناوی سەرپەرشتیار</th>
                             <th class="px-3 py-2 text-center font-medium">ناوی کارمەند</th>
                             <th class="px-3 py-2 text-center font-medium">ژمارە تەلەفون</th>
-                            <th class="px-3 py-2 text-center font-medium">سەرپەرشتیار</th>
                             <th class="px-3 py-2 text-center font-medium">چالاکی</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($karmandakan as $key => $karmand)
-                            <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
+                            <tr class="even:bg-slate-100 hover:cursor-pointer">
                                 <td class="px-3 py-2 text-right font-medium">{{ $karmandakan->firstItem() + $key }}</td>
-                                <td class="px-3 py-2 text-center font-medium">{{ $karmand->name }}</td>
-                                <td class="px-3 py-2 text-center font-medium uppercase">{{ $karmand->phone }}</td>
+                                <td class="px-3 py-2 text-center font-medium">{{ $karmand->sarparshtyar->user->name }}
                                 <td <td class="px-3 py-2 text-center font-medium uppercase">
-                                    {{ $karmand->sarparshtyar->name }}</td>
+                                    {{ $karmand->user->name }}</td>
+                                </td>
+                                <td class="px-3 py-2 text-center font-medium uppercase">{{ $karmand->phone }}</td>
                                 <td class="flex justify-center border-green-600 px-3 py-2 font-medium uppercase">
                                     <a href="{{ route('editKarmand', $karmand->id) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

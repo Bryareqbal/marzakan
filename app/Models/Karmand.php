@@ -13,4 +13,8 @@ class Karmand extends Model
     {
         return $this->belongsTo(Sarparshtyar::class, 'sarparshtyar_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

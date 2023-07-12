@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,7 @@ class UserFactory extends Factory
             'address'=>fake()->address(),
             'gender'=>fake()->boolean(),
             'phone_no'=>fake()->phoneNumber(),
-            'rule_id'=>1,
+            'rule_id'=>2
         ];
     }
 

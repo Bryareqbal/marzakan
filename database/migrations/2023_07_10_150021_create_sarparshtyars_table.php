@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,10 +12,10 @@ return new class extends Migration
     {
         Schema::create('sarparshtyars', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('phone');
+            $table->foreignId('user_id')->constrained('users');
             $table->foreignId('marz_id')->constrained('marzakans');
-            $table->unique(['phone', 'marz_id']);
+            $table->string('phone')->unique();
+            $table->unique(['marz_id', 'user_id']);
             $table->timestamps();
         });
     }

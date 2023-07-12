@@ -2,22 +2,12 @@
 
 @section('content')
     <div class="container mx-auto mt-10">
-        <section class="flex justify-center  flex-col">
-            <h1 class="text-xl bg-white flex justify-center items-center px-3 py-2 rounded-md space-x-3 space-x-reverse">
+        <section class="flex flex-col justify-center">
+            <h1 class="flex items-center justify-center space-x-3 space-x-reverse rounded-md bg-white px-3 py-2 text-xl">
                 <span
-                    class="flex h-10 w-10 items-center justify-center rounded-xl border border-white bg-green-600 text-white">
-                    <svg viewBox="0 0 24 24" class="w-8 h-8" fill="#fff" xmlns="http://www.w3.org/2000/svg" stroke="#22c55e">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <path
-                                d="M3 10C3 6.22876 3 4.34315 4.17157 3.17157C5.34315 2 7.22876 2 11 2H13C16.7712 2 18.6569 2 19.8284 3.17157C21 4.34315 21 6.22876 21 10V14C21 17.7712 21 19.6569 19.8284 20.8284C18.6569 22 16.7712 22 13 22H11C7.22876 22 5.34315 22 4.17157 20.8284C3 19.6569 3 17.7712 3 14V10Z"
-                                stroke="#22c55e" stroke-width="1.5"></path>
-                            <path d="M8 12H16" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M8 8H16" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                            <path d="M8 16H13" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"></path>
-                        </g>
-                    </svg>
+                    class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
+                    <x-sarparshtyar-logo />
+
                 </span>
                 <span>سەرپەرشتیارەکان</span>
             </h1>
@@ -26,7 +16,7 @@
                 <span class="h-3 w-3 rounded bg-green-600">
                 </span>
                 <h1 class="underline decoration-green-600 decoration-2 underline-offset-8">
-                    زیادکردنی سەرپەرشتیار
+                    گۆرینی سەرپەرشتیار
                 </h1>
             </div>
             <form class="mt-6 max-w-6xl" method="POST"
@@ -37,17 +27,22 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی سەرپەرشتیار </legend>
-                            <x-input name="name" id="name" type="text" class="w-full"
-                                value="{{ $sarparshtyar->name }}" />
-                            <x-error message="name" />
-                        </fieldset>
+                            <x-select name="user_id" id="marz">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($users as $user)
+                                    <option @selected($sarparshtyar->user_id == $user->id) value="{{ $user->id }}">{{ $user->name }}
+                                    </option>
+                                @endforeach
 
+                            </x-select>
+                            <x-error message="user_id" />
+                        </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژ.مۆبایل</legend>
                             <x-input name="phone" id="phone" type="text"
-                                class=" rounded-lg border border-slate-300 pr-3 py-2 w-full " maxlength="11"
+                                class="w-full rounded-lg border border-slate-300 py-2 pr-3" maxlength="11"
                                 value="{{ $sarparshtyar->phone }}" />
                             <x-error message="phone" />
                         </fieldset>
@@ -56,7 +51,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">مەرز</legend>
                             <x-select name="marz" id="marz">
-                                <option value="">مەرز</option>
+                                <option value="">هەڵبژێرە</option>
                                 @foreach ($marzakan as $marz)
                                     <option @selected($sarparshtyar->marz->id == $marz->id) value="{{ $marz->id }}">{{ $marz->name }}
                                     </option>
@@ -66,6 +61,7 @@
                             <x-error message="marz" />
                         </fieldset>
                     </div>
+
                 </div>
                 <div class="mt-6 flex justify-end">
                     <button type="submit" class="flex items-center space-x-1 space-x-reverse">
