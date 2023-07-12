@@ -187,6 +187,7 @@
                                 </td>
                                 <td class="py-3 px-6 text-center">{{ $user->address }}</td>
                                 <td class="py-3 px-6 text-center">{{ $user->rule->rule }}</td>
+
                                 <td class="py-3 px-6 text-center">
                                     @unless ($user->gender)
                                         مێ
@@ -198,8 +199,8 @@
                                 <td class="py-3 px-6 text-center font-sans md:truncate">
                                     {{ $user->created_at->format('Y-m-d H:i:s A') }}</td>
                                 <td class="relative py-3 px-6 text-center">
-                                    <div class="item-center flex justify-center space-x-3 space-x-reverse">
-                                        <a href="{{ route('editUser', $user->id) }}"
+                                    <div class="flex items-end justify-end space-x-3 space-x-reverse">
+                                        <a title="گۆرینی بەکارهێنەر" href="{{ route('editUser', $user->id) }}"
                                             class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -209,7 +210,7 @@
                                             </svg>
 
                                         </a>
-                                        <a href="{{ route('editPassword', $user->id) }}"
+                                        <a title="گۆرینی وشەی نهێنی" href="{{ route('editPassword', $user->id) }}"
                                             class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border-2 border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-yellow-500 focus:ring-offset-2">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -218,6 +219,24 @@
                                                     d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
                                             </svg>
                                         </a>
+                                        <span title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
+                                            class="{{ $user->isActive ? 'border-emerald-200' : 'border-red-200' }} flex h-10 w-10 items-center justify-center rounded border-2">
+
+                                            @unless ($user->isActive)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                </svg>
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor"
+                                                    class="h-6 w-6 text-emerald-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            @endunless
+                                        </span>
                                     </div>
                                 </td>
                             </tr>

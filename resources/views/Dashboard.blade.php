@@ -4,7 +4,7 @@
 @section('content')
 
     <div class="container mx-auto mt-10 px-3">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4">
+        <div class="grid grid-flow-row grid-cols-1 grid-rows-4 gap-4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-4">
             @can('superadmin')
                 <x-card route="users" label="بەکارهێنەر" model="App\Models\User">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -14,7 +14,7 @@
                     </svg>
                 </x-card>
             @endcan
-            <x-card route="profile" label="هەژماری بەکار‌هێنەر">
+            <x-card route="profile" label="هەژماری بەکار‌هێنەر" current_user="{{ Auth::user()->name }}">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="h-6 w-6 text-emerald-500">
                     <path stroke-linecap="round" stroke-linejoin="round"
