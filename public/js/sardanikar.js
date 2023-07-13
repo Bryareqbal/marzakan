@@ -15,3 +15,12 @@ const showManualInput = () => {
     manual_div.classList.remove("hidden");
     manual_div.classList.add("grid");
 };
+
+const uploadImage = (e) => {
+    const file = document.getElementById("img").files[0];
+
+    const url = URL.createObjectURL(file);
+    const img = document.getElementById("image");
+    img.setAttribute("src", url);
+    console.log(img);
+};

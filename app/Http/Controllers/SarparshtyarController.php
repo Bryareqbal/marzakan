@@ -74,6 +74,6 @@ class SarparshtyarController extends Controller
         $sarparshtyar->marz_id = $request->marz;
         $sarparshtyar->save();
 
-        return redirect()->route('sarparshtyarakan')->with('success', 'بەسەرکەوتووی نویکرایەوە.');
+        return redirect()->route('sarparshtyarakan')->with('success', 'بەسەرکەوتووی نوێکرایەوە.');
     }
 }
