@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PrintController;
 use App\Http\Controllers\sardanikarController;
 use App\Http\Controllers\SarparshtyarController;
 use App\Http\Controllers\UserController;
@@ -34,7 +35,7 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
 
 Route::middleware(['auth','isActive'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
-    Route::post('/logout', [AuthController::class,'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::middleware('hasRole:superadmin')->controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
         Route::get('/', 'index')->name('marzakan');
         Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
@@ -73,6 +74,10 @@ Route::middleware(['auth','isActive'])->group(function () {
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
         Route::get('/', 'index')->name('sardanikar');
-        Route::get('/add', 'addSardanikar')->name('add-sardanikar');
+        Route::post('/add', 'addSardanikar')->name('add-sardanikar');
+    });
+
+    Route::controller(PrintController::class)->prefix('/print')->group(function () {
+        Route::get('/invoice/{sardanikar}', 'invoice')->whereNumber('sardanikar');
     });
 });
