@@ -62,13 +62,13 @@ Route::middleware(['auth','isActive'])->group(function () {
         Route::post('/add', 'userAdd')->name('userAdd');
         Route::get('/{id}/editUser', 'editUser')->name('editUser');
         Route::post('/{id}/saveUser', 'saveUser')->name('saveUser');
-        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword');
+        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword1');
         Route::post('/{id}/savePassword', 'savePassword')->name('savePassword');
     });
     Route::controller(ProfileController::class)->prefix('/profile')->group(function () {
         Route::get('/', 'index')->name('profile');
         Route::post('/{id}/editProfile', 'editProfile')->name('editProfile');
-        Route::post('/{id}/editPassword', 'editPassword')->name('editPassword');
+        Route::post('/{id}/profileEditPassword', 'editPassword')->name('editPassword');
 
     });
 

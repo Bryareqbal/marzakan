@@ -210,14 +210,16 @@
                                             </svg>
 
                                         </a>
-                                        <a title="گۆرینی وشەی نهێنی" href="{{ route('editPassword', $user->id) }}"
+                                        <a title="گۆرینی وشەی نهێنی" href="{{ route('editPassword1', $user->id) }}"
                                             class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border-2 border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-yellow-500 focus:ring-offset-2">
+
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                             </svg>
+
                                         </a>
                                         <span title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
                                             class="{{ $user->isActive ? 'border-emerald-200' : 'border-red-200' }} flex h-10 w-10 items-center justify-center rounded border-2">
