@@ -76,6 +76,8 @@ Route::middleware(['auth','isActive'])->group(function () {
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
         Route::get('/', 'index')->name('sardanikar');
         Route::post('/add', 'addSardanikar')->name('add-sardanikar');
+        Route::get('/{id}/edit', 'editSardanikar')->name('edit-sardanikar')->whereNumber('id');
+        Route::patch('/{id}/update', 'updateSardanikar')->name('update-sardanikar')->whereNumber('id');
     });
     Route::controller(ReportController::class)->prefix('/reports')->group(function () {
         Route::get('/', 'index')->name('reports');
