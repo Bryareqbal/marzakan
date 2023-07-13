@@ -14,6 +14,11 @@ class sardanikar extends Model
         'mount_of_money' => 'float'
     ];
 
+    public function karmand()
+    {
+        return $this->belongsTo(karmand::class, 'karmand_id');
+    }
+
     // protected function img(): Attribute
     // {
     //     return Attribute::make(

@@ -1,4 +1,4 @@
-@props(['route' => 'dashboard', 'label' => '', 'model' => null, 'current_user' => null])
+@props(['route' => 'dashboard', 'label' => '', 'model' => null, 'current_user' => null,'count'=>null])
 <a href="{{ route($route) }}"
     class="rounded-xl border border-opacity-10 bg-white p-5 transition-all duration-200 hover:border-opacity-20 hover:drop-shadow-lg">
     <div class="flex items-center justify-between">
@@ -7,9 +7,9 @@
                 {{ $slot }}
             </p>
             <ul class="ms-3 flex flex-col">
-                @if ($model !== null)
+                @if ($count !== null)
                     <li class="block font-medium text-slate-900">
-                        {{ number_format($model::count(), 0, '.', ',') }}
+                        {{ number_format($count, 0, '.', ',') }}
                     </li>
                 @elseif ($current_user !== null)
                     <li class="block break-words font-medium text-slate-900">

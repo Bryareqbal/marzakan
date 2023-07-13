@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\Karmand;
 use App\Models\Marzakan;
 use App\Models\Rule;
+use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -39,6 +40,10 @@ class DatabaseSeeder extends Seeder
         Sarparshtyar::factory(10)->create();
 
         Karmand::factory(10)->create();
+
+        sardanikar::factory(20)->create();
+
+
 
 
     }

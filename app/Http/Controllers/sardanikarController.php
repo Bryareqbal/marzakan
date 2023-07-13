@@ -13,8 +13,8 @@ class sardanikarController extends Controller
 {
     public function index()
     {
-        $totalMoney = sardanikar::where('user_id', Auth::id())->sum('mount_of_money');
-        $counter = sardanikar::where('user_id', Auth::id())->count();
+        $totalMoney = sardanikar::where('karmand_id', Auth::id())->sum('mount_of_money');
+        $counter = sardanikar::where('karmand_id', Auth::id())->count();
         return view('sardanikar.sardanikar', [
             'totalMoney' => $totalMoney,
             'counter' => $counter,
@@ -77,10 +77,10 @@ class sardanikarController extends Controller
         $newSardanikar->passport_expire_date = $request->passport_expire_date;
         $newSardanikar->issuing_authority = $request->issuing_authority;
         $newSardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
-        $newSardanikar->user_id = Auth::id();
+        $newSardanikar->karmand_id = Auth::id();
 
-        $newSardanikar->save();
-
-        return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardanikar->id);
+        if($newSardanikar->save()) {
+            return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardanikar->id);
+        }
     }
 }

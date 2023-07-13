@@ -6,6 +6,7 @@ use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrintController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\sardanikarController;
 use App\Http\Controllers\SarparshtyarController;
 use App\Http\Controllers\UserController;
@@ -76,6 +77,11 @@ Route::middleware(['auth','isActive'])->group(function () {
         Route::get('/', 'index')->name('sardanikar');
         Route::post('/add', 'addSardanikar')->name('add-sardanikar');
     });
+    Route::controller(ReportController::class)->prefix('/reports')->group(function () {
+        Route::get('/', 'index')->name('reports');
+    });
+
+    
 
     Route::controller(PrintController::class)->prefix('/print')->group(function () {
         Route::get('/invoice/{sardanikar}', 'invoice')->whereNumber('sardanikar');
