@@ -30,14 +30,15 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'superadmin',
             'username' => 'admin',
+            'rule_id'=>1,
         ]);
         User::factory(20)->create();
 
-        Marzakan::factory(5000)->create();
+        Marzakan::factory(10)->create();
 
-        Sarparshtyar::factory(100)->create();
+        Sarparshtyar::factory(10)->create();
 
-        Karmand::factory(200)->create();
+        Karmand::factory(10)->create();
 
 
     }

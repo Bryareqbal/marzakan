@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\sardanikarController;
 use App\Http\Controllers\SarparshtyarController;
@@ -32,7 +33,7 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','isActive'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::middleware('hasRole:superadmin')->controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
@@ -61,8 +62,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/add', 'userAdd')->name('userAdd');
         Route::get('/{id}/editUser', 'editUser')->name('editUser');
         Route::post('/{id}/saveUser', 'saveUser')->name('saveUser');
-        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword');
+        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword1');
         Route::post('/{id}/savePassword', 'savePassword')->name('savePassword');
+    });
+    Route::controller(ProfileController::class)->prefix('/profile')->group(function () {
+        Route::get('/', 'index')->name('profile');
+        Route::post('/{id}/editProfile', 'editProfile')->name('editProfile');
+        Route::post('/{id}/profileEditPassword', 'editPassword')->name('editPassword');
+
     });
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {

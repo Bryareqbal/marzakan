@@ -177,7 +177,7 @@
                     <tbody>
 
                         @foreach ($users as $key => $user)
-                            <tr class="even:bg-green-100 hover:cursor-pointer hover:bg-green-200">
+                            <tr class="even:bg-slate-100 hover:cursor-pointer">
                                 <td class="py-3 px-6 text-right">
                                     {{ $users->firstItem() + $key }}
                                 </td>
@@ -187,6 +187,7 @@
                                 </td>
                                 <td class="py-3 px-6 text-center">{{ $user->address }}</td>
                                 <td class="py-3 px-6 text-center">{{ $user->rule->rule }}</td>
+
                                 <td class="py-3 px-6 text-center">
                                     @unless ($user->gender)
                                         مێ
@@ -198,8 +199,8 @@
                                 <td class="py-3 px-6 text-center font-sans md:truncate">
                                     {{ $user->created_at->format('Y-m-d H:i:s A') }}</td>
                                 <td class="relative py-3 px-6 text-center">
-                                    <div class="item-center flex justify-center space-x-3 space-x-reverse">
-                                        <a href="{{ route('editUser', $user->id) }}"
+                                    <div class="flex items-end justify-end space-x-3 space-x-reverse">
+                                        <a title="گۆرینی بەکارهێنەر" href="{{ route('editUser', $user->id) }}"
                                             class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -209,42 +210,35 @@
                                             </svg>
 
                                         </a>
-                                        <a href="{{ route('editPassword', $user->id) }}"
-                                            class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border-2 border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-offset-2">
+                                        <a title="گۆرینی وشەی نهێنی" href="{{ route('editPassword1', $user->id) }}"
+                                            class="focus:ring-btn-ring flex h-10 w-10 items-center justify-center rounded border-2 border-yellow-200 text-xl hover:border-yellow-300 focus:ring-1 focus:ring-yellow-500 focus:ring-offset-2">
+
 
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
                                             </svg>
 
-
                                         </a>
-                                        {{-- 
-                                        <form action="{{ route('users') }}">
-                                            <button type="button" wire:click="changeActivityUser('{{ $user->id }}')"
-                                                title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
-                                                class="focus:ring-{{ $user->isActive ? 'green' : 'red' }}-500 flex h-10 w-10 items-center justify-center rounded border border-emerald-200 text-xl hover:border-slate-300 focus:ring-1 focus:ring-offset-2">
-                                                @unless ($user->isActive)
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        fill="currentColor" class="h-6 w-6 text-red-500 hover:text-red-600">
-                                                        <path fill-rule="evenodd"
-                                                            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                @else
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-6 h-6 text-emerald-500 hover:text-emerald-600">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M4.5 12.75l6 6 9-13.5" />
-                                                    </svg>
-                                                @endunless
-                                            </button>
-                                        </form> --}}
+                                        <span title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
+                                            class="{{ $user->isActive ? 'border-emerald-200' : 'border-red-200' }} flex h-10 w-10 items-center justify-center rounded border-2">
 
+                                            @unless ($user->isActive)
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                </svg>
+                                            @else
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor"
+                                                    class="h-6 w-6 text-emerald-500">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M4.5 12.75l6 6 9-13.5" />
+                                                </svg>
+                                            @endunless
+                                        </span>
                                     </div>
                                 </td>
                             </tr>

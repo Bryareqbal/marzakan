@@ -13,4 +13,8 @@ class Sarparshtyar extends Model
     {
         return $this->belongsTo(Marzakan::class, 'marz_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

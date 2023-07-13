@@ -49,4 +49,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(rule::class, 'rule_id');
     }
+    public function karmand()
+    {
+        return $this->belongsTo(Karmand::class, 'user_id');
+    }
 }

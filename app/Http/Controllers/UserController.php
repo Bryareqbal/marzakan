@@ -18,7 +18,7 @@ class UserController extends Controller
             $query->where('name', 'like', "%{$request->name}%");
         })->when($request->phone_no, function (Builder $query) use ($request) {
             $query->where('phone_no', 'like', "%{$request->phone_no}%");
-        })->latest()->simplePaginate(12);
+        })->latest()->simplePaginate(25);
         $Roles = Rule::whereNotIn('id', [1])->get();
         return view('Admin.users.users', ['Roles'=>$Roles,'users'=>$users]);
     }
@@ -74,6 +74,7 @@ class UserController extends Controller
           'name'=> ['required', 'string', 'max:255'],
           'username'=> ['required', 'alpha_dash', 'max:255', ValidationRule::unique('users', 'username')->ignore($editUser->id)],
           'gender'=> ['required', 'boolean'],
+          'isActive'=> ['required', 'boolean'],
           'address'=> ['required', 'string', 'max:255'],
           'phone_no'=> ['required', 'string', 'digits:11'],
           'role_id'=> ['required', 'integer', 'exists:rules,id'],
@@ -82,19 +83,22 @@ class UserController extends Controller
           'name'=>'(ناو)',
           'username'=>'(ناوی بەکارهێنەر)',
           'gender'=>'(ڕەگەز)',
+          'isActive'=>'(باری بەکارهێنەر)',
           'address'=>'(ناونیشان)',
           'phone_no'=>'(ژ.مۆبایل)',
           'role_id'=>'(ئەرک)',
         ])->validate();
+
         $editUser->name = $request->name;
         $editUser->username = $request->username;
-        $editUser->password = Hash::make($request->password);
+        $editUser->password = bcrypt($request->password);
         $editUser->gender = $request->gender;
+        $editUser->isActive = $request->isActive;
         $editUser->address = $request->address;
         $editUser->phone_no = $request->phone_no;
         $editUser->rule_id = $request->role_id;
         if($editUser->save()) {
-            return redirect()->route('users')->with('success', 'بەسەرکەتووی گۆردرا .');
+            return redirect()->route('users')->with('success', 'بەسەرکەتووی نوێکرایەوە .');
 
         };
 
@@ -119,7 +123,7 @@ class UserController extends Controller
             $editPassword->password = bcrypt($request->password);
         }
         if($editPassword->save()) {
-            return redirect()->route('users')->with('success', 'بەسەرکەتووی گۆردرا .');
+            return redirect()->route('users')->with('success', 'بەسەرکەتووی نوێکرایەوە .');
         }
     }
 }
