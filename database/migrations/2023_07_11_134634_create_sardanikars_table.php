@@ -15,7 +15,7 @@ return new class() extends Migration
             $table->id();
             $table->string('name');
             $table->string('nickname');
-            $table->string('password_number');
+            $table->string('passport_number');
             $table->date('birth_date');
             $table->boolean('gender');
             $table->string('nation');
@@ -26,7 +26,7 @@ return new class() extends Migration
             $table->enum('status', ['coming', 'leaving']);
             $table->double('mount_of_money')->default(5000);
             $table->string('targeted_person');
-            $table->integer('no_of_visitors');
+            $table->string('no_of_visitors');
             $table->date('passport_expire_date');
             $table->string('issuing_authority');
             $table->foreignId('user_id')->constrained('users');

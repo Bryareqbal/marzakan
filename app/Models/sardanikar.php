@@ -14,10 +14,10 @@ class sardanikar extends Model
         'mount_of_money' => 'float'
     ];
 
-    // protected function img(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn (mixed $value, array $attributes) => 'storage/' . $value
-    //     );
-    // }
+    protected function img(): Attribute
+    {
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => $attributes['img']
+        );
+    }
 }

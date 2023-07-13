@@ -68,6 +68,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
         Route::get('/', 'index')->name('sardanikar');
         Route::post('/add', 'addSardanikar')->name('add-sardanikar');
+        Route::get('/{id}/edit', 'editSardanikar')->name('edit-sardanikar')->whereNumber('id');
+        Route::patch('/{id}/update', 'updateSardanikar')->name('update-sardanikar')->whereNumber('id');
     });
 
     Route::controller(PrintController::class)->prefix('/print')->group(function () {
