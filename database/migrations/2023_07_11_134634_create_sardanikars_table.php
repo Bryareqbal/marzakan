@@ -28,7 +28,8 @@ return new class () extends Migration {
             $table->string('no_of_visitors');
             $table->date('passport_expire_date');
             $table->string('issuing_authority');
-            $table->foreignId('karmand_id')->constrained('karmands');
+            $table->foreignId('karmand_id')->constrained('users');
+            $table->foreignId('sarparshtyar_id')->constrained('sarparshtyars');
             $table->timestamps();
         });
     }

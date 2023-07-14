@@ -63,7 +63,7 @@
                             <x-select name="sarparshtyar_id">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($sarprshtyarkan as $key => $sarparshtyar)
-                                    <option @selected(old('sarparshtyar_id') == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                    <option @selected(old('sarparshtyar_id') == $sarparshtyar->user_id) value="{{ $sarparshtyar->user_id }}">
                                         {{ $sarparshtyar->user->name }}
                                     </option>
                                 @endforeach
@@ -78,7 +78,7 @@
                             <x-select name="karmand_id">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($karmandkan as $key => $karmand)
-                                    <option @selected(old('karmand_id') == $karmand->id) value="{{ $karmand->id }}">
+                                    <option @selected(old('karmand_id') == $karmand->user_id) value="{{ $karmand->user_id }}">
                                         {{ $karmand->user->name }}
                                     </option>
                                 @endforeach
@@ -154,7 +154,6 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach ($reports as $key => $report)
                             <tr class="even:bg-slate-100 hover:cursor-pointer">
                                 <td class="py-3 px-6 text-right">
@@ -162,27 +161,21 @@
                                 </td>
                                 <td class="py-3 px-6 text-right capitalize">{{ $report->name }}</td>
                                 <td class="py-3 px-6 text-right capitalize">
-                                    {{ $report->karmand->sarparshtyar->user->name }}</td>
+                                    @if ($report->sarparshtyar !== null)
+                                        {{ $report->sarparshtyar->user->name }}
+                                    @endif
+                                </td>
                                 <td class="py-3 px-6 text-right capitalize">
-                                    {{ $report->karmand->user->name }}</td>
-                                <td class="py-3 px-6 text-center">{{ $report->password_number }}</td>
+                                    {{ $report->karmand->name }}
+                                </td>
+                                <td class="py-3 px-6 text-center">{{ $report->passport_number }}</td>
                                 <td class="py-3 px-6 text-center">{{ $report->nation }}</td>
                                 <td class="py-3 px-6 text-center">{{ $report->phone }}</td>
                                 <td class="py-3 px-6 text-center">
-
                                     {{ number_format($report->mount_of_money, 0, '.', ',') }}
                                 </td>
                                 <td class="py-3 px-6 text-center">
                                     @unless ($report->status === 'coming')
-                                        <div class="flex items-center space-x-1 space-x-reverse">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-emerald-500">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <span>هاتن</span>
-                                        </div>
-                                    @else
                                         <div class="flex items-center space-x-1 space-x-reverse">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                 stroke-width="1.5" stroke="currentColor"
@@ -191,6 +184,15 @@
                                                     d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
                                             <span>رۆشتن</span>
+                                        </div>
+                                    @else
+                                        <div class="flex items-center space-x-1 space-x-reverse">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-emerald-500">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span>هاتن</span>
                                         </div>
                                     @endunless
                                 </td>

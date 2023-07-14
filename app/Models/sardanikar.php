@@ -16,7 +16,12 @@ class sardanikar extends Model
 
     public function karmand()
     {
-        return $this->belongsTo(karmand::class, 'karmand_id');
+        return $this->belongsTo(User::class, 'karmand_id');
+    }
+    public function sarparshtyar()
+    {
+        return $this->belongsTo(Sarparshtyar::class, 'sarparshtyar_id');
+
     }
 
     // protected function img(): Attribute

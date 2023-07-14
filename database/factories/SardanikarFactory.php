@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Karmand;
+use App\Models\Sarparshtyar;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +22,7 @@ class SardanikarFactory extends Factory
         return [
              'name'=>fake()->name(),
              'nickname'=>fake()->name(),
-             'password_number'=>fake()->numberBetween(100000, 10000000),
+             'passport_number'=>fake()->numberBetween(100000, 10000000),
              'birth_date'=>fake()->date(),
              'gender'=>fake()->boolean(),
              'nation'=>fake()->name(),
@@ -35,7 +36,8 @@ class SardanikarFactory extends Factory
              'no_of_visitors'=>fake()->numberBetween(1000, 10000),
              'passport_expire_date'=>fake()->date(),
              'issuing_authority'=>fake()->name(),
-             'karmand_id'=>Karmand::factory()->create(),
+             'karmand_id'=>User::factory()->create(),
+             'sarparshtyar_id'=>Sarparshtyar::factory()->create(),
         ];
     }
 }

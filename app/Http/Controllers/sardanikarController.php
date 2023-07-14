@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Karmand;
 use App\Models\sardanikar;
+use App\Models\Sarparshtyar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -23,6 +25,8 @@ class sardanikarController extends Controller
 
     public function addSardanikar(Request $request)
     {
+        // dd("slaw");
+
         Validator::make($request->all(), [
             "name" => ['required', 'string', 'max:255'],
             "nickname" => ['required', 'string', 'max:255'],
@@ -58,7 +62,7 @@ class sardanikarController extends Controller
             "passport_expire_date" => '(بەرواری بەسەرچوونی پاسپۆرت)',
             "issuing_authority" => '(دەسەڵاتی دەرکردن)',
         ])->validate();
-
+        $sarparshtyar = Karmand::with(['user','sarparshtyar.user'])->where('user_id', Auth::id())->first();
         $newSardanikar = new sardanikar();
         $newSardanikar->name = $request->name;
         $newSardanikar->nickname = $request->nickname;
@@ -78,6 +82,7 @@ class sardanikarController extends Controller
         $newSardanikar->issuing_authority = $request->issuing_authority;
         $newSardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
         $newSardanikar->karmand_id = Auth::id();
+        $newSardanikar->sarparshtyar_id = $sarparshtyar->sarparshtyar_id;
 
         if($newSardanikar->save()) {
             return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardanikar->id);

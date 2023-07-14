@@ -17,10 +17,12 @@ class ReportController extends Controller
         $sarprshtyarkan = Sarparshtyar::all();
         $marzakan = Marzakan::all();
 
-        $query = sardanikar::with(['karmand'])->when(!empty($request->search), function (Builder $query) use ($request) {
+
+
+        $query = sardanikar::with(['karmand','sarparshtyar.user'])->when(!empty($request->search), function (Builder $query) use ($request) {
             $query->where(function (Builder $query) use ($request) {
                 $query->orWhere('name', 'like', "%{$request->search}%")
-                       ->orWhere('password_number', 'like', "%{$request->search}%")
+                       ->orWhere('passport_number', 'like', "%{$request->search}%")
                        ->orWhere('phone', 'like', "%{$request->search}%");
             });
 
@@ -30,15 +32,14 @@ class ReportController extends Controller
             });
 
         })->when(!empty($request->sarparshtyar_id), function (Builder $query) use ($request) {
-            $query->whereHas('karmand', function (Builder $query) use ($request) {
-                $query->where('sarparshtyar_id', 'like', "%{$request->sarparshtyar_id}%");
+            $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
+                $query->where('user_id', 'like', "%{$request->sarparshtyar_id}%");
+
             });
 
         })->when(!empty($request->marz_id), function (Builder $query) use ($request) {
-            $query->whereHas('karmand', function (Builder $query) use ($request) {
-                $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
-                    $query->where('marz_id', 'like', "%{$request->marz_id}%");
-                });
+            $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
+                $query->where('marz_id', 'like', "%{$request->marz_id}%");
             });
 
         })->when(!empty($request->created_at), function (Builder $query) use ($request) {
