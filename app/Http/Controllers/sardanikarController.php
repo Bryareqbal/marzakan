@@ -118,7 +118,7 @@ class sardanikarController extends Controller
             "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
             "targeted_person" => ['nullable', 'string', 'max:255'],
             "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
-            "passport_expire_date" => ['required', 'date'],
+            "passport_expire_date" => ['nullable', 'date'],
             "issuing_authority" => ['nullable', 'string', 'max:255'],
         ], [], [
             "name" => '(ناو)',
