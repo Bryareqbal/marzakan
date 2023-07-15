@@ -127,6 +127,7 @@
     </div>
     <div class="mt-2 flex justify-center">
         {{ $marzakan->links() }}
+
     </div>
     </div>
 @endsection

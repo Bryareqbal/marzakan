@@ -148,7 +148,7 @@
                             <th class="py-3 px-1 text-center font-medium">بڕی پارە</th>
                             <th class="py-3 px-1 text-center font-medium">حاڵات</th>
                             <th class="py-3 px-1 text-center font-medium">بەرواری زیادکردن</th>
-                            @canany(['superadmin', 'sarparshtyar'])
+                            @canany(['superadmin'])
                                 <th class="py-3 px-1 text-center font-medium">چالاکی</th>
                             @endcanany
                         </tr>
@@ -198,7 +198,7 @@
                                 </td>
                                 <td class="py-3 px-6 text-center font-sans">
                                     {{ $report->created_at->format('Y-m-d H:i:s A') }}</td>
-                                @canany(['superadmin', 'sarparshtyar'])
+                                @canany(['superadmin'])
                                     <td class="py-3 px-6 text-center font-sans">
                                         <a href="{{ route('edit-sardanikar', $report->id) }}" title="گۆرانکاری"
                                             class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
@@ -219,7 +219,7 @@
         @endif
     </div>
     <div class="mt-2 flex justify-center">
-        {{ $reports->links() }}
+        {{ $reports->onEachSide(0)->links() }}
     </div>
 
 @endsection
