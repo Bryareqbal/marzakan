@@ -19,7 +19,7 @@
 <body class="mx-auto">
 
     <header class="flex justify-between border-b border-gray-300 p-3">
-        <span>{!! DNS2D::getBarcodeSVG("$sardanikar->id", 'QRCODE', 7, 7) !!}</span>
+        <span>{!! DNS2D::getBarcodeSVG("$sardanikar->id".",$sardanikar->name".",$sardanikar->passport_number", 'QRCODE', 7, 7) !!}</span>
         <img class="aspect-square w-[10rem] rounded-md object-cover object-center"
             src="{{ Storage::url($sardanikar->img) }}" alt="">
     </header>
@@ -140,7 +140,7 @@
 
     <script>
         window.print()
-        window.close()
+        // window.close()
     </script>
 </body>
 

@@ -33,6 +33,23 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'rule_id'=>1,
         ]);
+        User::factory()->create([
+            'name' => 'halo',
+            'username' => 'halo',
+            'rule_id'=>2,
+        ]);
+        User::factory()->create([
+            'name' => 'shad',
+            'username' => 'shad',
+            'rule_id'=>3,
+        ]);
+        User::factory()->create([
+            'name' => 'k zmnako',
+            'username' => 'summary',
+            'rule_id'=>4,
+        ]);
+
+
         // User::factory(20)->create();
 
         // Marzakan::factory(10)->create();

@@ -16,7 +16,7 @@
         </div>
         <form class="mx-auto mt-6 max-w-7xl space-y-5" action="{{ route('add-sardanikar') }}" method="POST"
             enctype="multipart/form-data">
-            <div class="mx-auto w-[15rem]">
+            <div class="mx-auto w-[15rem] hidden">
                 <label for="img">
                     <img src="{{ asset('assets/img/default-image.png') }}"
                         class="aspect-square w-full rounded object-cover object-center shadow" id="image" />
@@ -263,7 +263,7 @@
                             <legend class="px-2">ژ.مۆبایلی ئەو کەسەی سەردانی دەکات</legend>
                             <x-input name="no_of_visitors" id="no_of_visitors" type="text"
                                 class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                value="{{ old('no_of_visitors') }}" />
+                                value="{{ old('no_of_visitors') ?? '07' }}" />
                             <x-error message="no_of_visitors" />
                         </fieldset>
                     </div>
