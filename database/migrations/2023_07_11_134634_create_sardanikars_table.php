@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -13,15 +14,15 @@ return new class () extends Migration {
         Schema::create('sardanikars', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('nickname');
+            $table->string('nickname')->nullable();
             $table->string('passport_number');
             $table->date('birth_date');
             $table->boolean('gender');
-            $table->string('nation');
+            $table->string('nation')->default('IRAN');
             $table->string('phone');
             $table->text('purpose_of_coming');
             $table->string('address');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->enum('status', ['coming', 'leaving']);
             $table->double('mount_of_money')->default(5000);
             $table->string('targeted_person');
