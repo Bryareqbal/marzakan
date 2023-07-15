@@ -2,7 +2,7 @@
 @section('title', 'ڕاپۆرت')
 
 @section('content')
-    <div class="container mx-auto pt-10">
+    <div class="container mx-auto px-5 pt-10">
         <section class="flex justify-center">
             <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
@@ -110,31 +110,33 @@
 
 
 
-        <div class="flex justify-between">
-            <div class="border-opacity-15 w-1/3 rounded-xl border p-5 shadow-xl">
-                <ul class="flex items-center justify-between">
-                    <li>کۆی پارە</li>
-                    @if ($sumPrice)
-                        <li class="font-medium">{{ number_format($sumPrice, 0, '.', ',') }} دینار</li>
-                    @else
-                        <li class="font-medium">{{ number_format(0, 0, '.', ',') }} دینار</li>
-                    @endif
-                </ul>
+        <div class="flex flex-col space-y-5 md:flex-row md:space-y-0 md:space-x-3 md:space-x-reverse">
+            <div class="border-opacity-15 w-full rounded-xl border p-5 shadow-xl md:w-auto">
+                <div class="flex items-center justify-between">
+                    <span>کۆی پارە
+                        @if ($sumPrice)
+                            <span class="font-medium">{{ number_format($sumPrice, 0, '.', ',') }} دینار</span>
+                        @else
+                            <span class="font-medium">{{ number_format(0, 0, '.', ',') }} دینار</span>
+                        @endif
+                    </span>
+                </div>
             </div>
-            <div class="border-opacity-15 w-1/3 rounded-xl border p-5 shadow-xl hover:drop-shadow-xl">
-                <ul class="flex items-center justify-between">
-                    <li>کۆی سەردانیکەر</li>
-                    @if ($reports->total() !== 0)
-                        <li class="font-medium">{{ number_format($reports->total(), 0, '.', ',') }}</li>
-                    @else
-                        <li class="font-medium">{{ number_format(0, 0, '.', ',') }}</li>
-                    @endif
-                </ul>
+            <div class="border-opacity-15 w-full rounded-xl border p-5 shadow-xl hover:drop-shadow-xl md:w-auto">
+                <div class="flex items-center justify-between">
+                    <span>کۆی سەردانیکەر:
+                        @if ($reports->total() !== 0)
+                            <span class="font-medium">{{ number_format($reports->total(), 0, '.', ',') }}</span>
+                        @else
+                            <span class="font-medium">{{ number_format(0, 0, '.', ',') }}</span>
+                        @endif
+                    </span>
+                </div>
             </div>
         </div>
 
         @if ($reports->isNotEmpty())
-            <div class="w-full">
+            <div class="w-full overflow-auto">
                 <table class="mt-6 w-full">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                         <tr>

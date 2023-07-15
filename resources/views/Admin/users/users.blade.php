@@ -134,8 +134,10 @@
             </form>
 
         </section>
-        <div class="mt-6 max-w-6xl">
-            <form action="{{ route('users') }}" method="GET" class="flex items-center">
+
+        <form action="{{ route('users') }}" method="GET"
+            class="mt-6 flex flex-col space-y-3 px-3 md:flex-row md:space-y-0">
+            <div class="flex md:space-x-5">
                 <button type="submit" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
@@ -143,22 +145,23 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input class="w-full" name="name" value="{{ old('name') }}" type="search" class="w-3/12 pr-3"
-                    placeholder="ناو" />
+                <x-input class="w-full" name="name" value="{{ old('name') }}" type="search" placeholder="ناو" />
+            </div>
+            <div class="flex">
                 <button type="submit" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor"
-                        class="mr-3 h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
+                        stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
                 <x-input class="w-full" name="phone_no" type="search" value="{{ old('phone_no') }}"
-                    class="w-3/12 pr-3" placeholder="ژمارە تەلەفون" />
-            </form>
-        </div>
+                    placeholder="ژمارە تەلەفون" />
+            </div>
+        </form>
 
-        <div class="w-full">
+
+        <div class="w-full overflow-auto">
             @if ($users->isNotEmpty())
                 <table class="mt-6 w-full">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
@@ -258,7 +261,7 @@
             @endif
         </div>
         <div class="mt-2 flex justify-center">
-            {{ $users->onEachSide(5)->links('tailwind') }}
+            {{ $users->onEachSide(5)->links() }}
         </div>
     </div>
 

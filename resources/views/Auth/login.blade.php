@@ -2,7 +2,7 @@
 @section('title', 'چوونەژوورەوە')
 @section('content')
 
-    <section class="w-1/3 rounded-xl bg-white shadow-2xl md:w-2/3 xl:w-1/4 lg:w-1/3">
+    <section class="w-full rounded-xl px-5 sm:w-1/2 lg:w-[30rem]">
         <div class="w-full rounded-xl bg-emerald-500 shadow-xl">
             <div class="relative h-48">
                 <svg class="absolute -bottom-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -15,7 +15,7 @@
         <div class="rounded-xl bg-white px-10 pt-6 pb-8">
             <h1 class="text-2xl font-semibold text-slate-900">چوونەژوورەوە</h1>
             @if (session('message'))
-                <small class="block text-center text-sm text-red-500 p-1 rounded-lg">
+                <small class="block rounded-lg p-1 text-center text-sm text-red-500">
                     {{ session('message') }}
                 </small>
             @endif
@@ -24,7 +24,7 @@
                 <div class="mt-12 space-y-6">
                     <div class="relative flex flex-col">
                         <input type="text" id="username" name="username"
-                            class="peer w-full pr-2 placeholder:font-sans border-b-2 border-slate-300 py-2 placeholder-transparent focus:border-emerald-500 focus:outline-none"
+                            class="peer w-full border-b-2 border-slate-300 py-2 pr-2 placeholder-transparent placeholder:font-sans focus:border-emerald-500 focus:outline-none"
                             placeholder="ناوی بەکارهێنەر" value="{{ old('username') }}">
                         <label for="username"
                             class="absolute right-0 -top-3.5 capitalize text-slate-700 transition-all duration-200 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:-top-3.5 peer-focus:text-slate-600">ناوی
@@ -33,7 +33,7 @@
                     </div>
                     <div class="relative flex flex-col">
                         <input type="password" id="password" name="password"
-                            class="peer w-full pr-2 border-b-2 border-slate-300 py-2 placeholder-transparent focus:border-emerald-500 focus:outline-none"
+                            class="peer w-full border-b-2 border-slate-300 py-2 pr-2 placeholder-transparent focus:border-emerald-500 focus:outline-none"
                             placeholder="وشەی نهێنی">
                         <label for="password"
                             class="absolute -top-2.5 right-0 capitalize transition-all duration-200 peer-placeholder-shown:top-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:-top-2.5 peer-focus:text-slate-600">وشەی
@@ -43,7 +43,7 @@
                 </div>
                 <div class="mt-10 mb-6 flex justify-center">
                     <button type="submit"
-                        class="w-2/3 rounded-xl focus:outline-none bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 py-2 text-white shadow-sm focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">چوونەژوورەوە</button>
+                        class="w-2/3 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">چوونەژوورەوە</button>
                 </div>
             </form>
         </div>
