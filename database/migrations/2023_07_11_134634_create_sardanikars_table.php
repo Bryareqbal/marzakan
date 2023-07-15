@@ -25,10 +25,10 @@ return new class() extends Migration
             $table->string('img')->nullable();
             $table->enum('status', ['coming', 'leaving']);
             $table->double('mount_of_money')->default(5000);
-            $table->string('targeted_person');
+            $table->string('targeted_person')->nullable();
             $table->string('no_of_visitors');
-            $table->date('passport_expire_date');
-            $table->string('issuing_authority');
+            $table->date('passport_expire_date')->nullable();
+            $table->string('issuing_authority')->nullable();
             $table->foreignId('karmand_id')->constrained('users');
             $table->foreignId('sarparshtyar_id')->constrained('sarparshtyars');
             $table->timestamps();

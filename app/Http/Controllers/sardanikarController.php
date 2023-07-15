@@ -41,10 +41,10 @@ class sardanikarController extends Controller
             "img" => ['nullable', 'file', 'image'],
             "status" => ['required', Rule::in(['coming', 'leaving'])],
             "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
-            // "targeted_person" => ['required', 'string', 'max:255'],
+            "targeted_person" => ['nullable', 'string', 'max:255'],
             "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
-            // "passport_expire_date" => ['required', 'date'],
-            // "issuing_authority" => ['required', 'string','max:255'],
+            "passport_expire_date" => ['nullable', 'date'],
+            "issuing_authority" => ['nullable', 'string', 'max:255'],
         ], [], [
             "name" => '(ناو)',
             "nickname" => '(نازناو)',
@@ -103,24 +103,23 @@ class sardanikarController extends Controller
 
     public function updateSardanikar($id, Request $request)
     {
-
         Validator::make($request->all(), [
             "name" => ['required', 'string', 'max:255'],
-            "nickname" => ['required', 'string', 'max:255'],
-            "passport_number" => ['required', 'string','max:255'],
+            "nickname" => ['nullable', 'string', 'max:255'],
+            "passport_number" => ['required', 'string', 'max:255'],
             "birth_date" => ['required', 'date'],
             "gender" => ['required', 'boolean'],
             "nation" => ['required', 'string', 'max:255'],
             "phone" => ['required', 'min:11', 'max:11'],
-            "purpose_of_coming" => ['required', 'string','max:255'],
+            "purpose_of_coming" => ['required', 'string', 'max:255'],
             "address" => ['required', 'string'],
             "img" => ['nullable', 'file', 'image'],
             "status" => ['required', Rule::in(['coming', 'leaving'])],
             "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
-            "targeted_person" => ['required', 'string', 'max:255'],
-            "no_of_visitors" => ['required', 'numeric', 'min:0'],
+            "targeted_person" => ['nullable', 'string', 'max:255'],
+            "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
             "passport_expire_date" => ['required', 'date'],
-            "issuing_authority" => ['required', 'string','max:255'],
+            "issuing_authority" => ['nullable', 'string', 'max:255'],
         ], [], [
             "name" => '(ناو)',
             "nickname" => '(نازناو)',
