@@ -204,8 +204,8 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژ.پەیوەندی</legend>
                             <x-input name="phone" id="phone" type="text"
-                                class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                value="{{ old('phone') }}" />
+                                class="w-full rounded-lg border border-slate-300 py-2 pr-3" value="{{ old('phone') }}"
+                                maxLength="11" />
                             <x-error message="phone" />
                         </fieldset>
                     </div>

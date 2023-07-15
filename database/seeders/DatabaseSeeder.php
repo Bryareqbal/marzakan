@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $rules = ['superadmin', 'admin', 'user'];
+        $rules = ['superadmin', 'admin', 'user','summary'];
         foreach($rules as $rule) {
             Rule::factory()->create([
                 'rule' =>$rule,
@@ -33,15 +33,15 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin',
             'rule_id'=>1,
         ]);
-        User::factory(20)->create();
+        // User::factory(20)->create();
 
-        Marzakan::factory(10)->create();
+        // Marzakan::factory(10)->create();
 
-        Sarparshtyar::factory(10)->create();
+        // Sarparshtyar::factory(10)->create();
 
-        Karmand::factory(10)->create();
+        // Karmand::factory(10)->create();
 
-        sardanikar::factory(20)->create();
+        // sardanikar::factory(20)->create();
 
 
 

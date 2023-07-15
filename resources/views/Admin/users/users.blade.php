@@ -186,7 +186,17 @@
                                     <span class="font-sans">({{ $user->username }})</span>
                                 </td>
                                 <td class="py-3 px-6 text-center">{{ $user->address }}</td>
-                                <td class="py-3 px-6 text-center">{{ $user->rule->rule }}</td>
+                                <td class="py-3 px-6 text-center">
+                                    @if ($user->rule->rule === 'superadmin')
+                                        بەڕێوبەری باڵا
+                                    @elseif($user->rule->rule === 'admin')
+                                        سەرپەرشتیار
+                                    @elseif($user->rule->rule === 'summary')
+                                        بینینی پوختە
+                                    @else
+                                        کارمەند
+                                    @endif
+                                </td>
 
                                 <td class="py-3 px-6 text-center">
                                     @unless ($user->gender)
@@ -248,7 +258,7 @@
             @endif
         </div>
         <div class="mt-2 flex justify-center">
-            {{ $users->links() }}
+            {{ $users->onEachSide(5)->links('tailwind') }}
         </div>
     </div>
 

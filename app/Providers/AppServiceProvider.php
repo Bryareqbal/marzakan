@@ -6,6 +6,7 @@ use App\Models\Karmand;
 use App\Models\Sarparshtyar;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -41,6 +42,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->rule->rule === 'admin' && $user->rule_id === 2;
         });
 
+        Gate::define('summary', function (User $user) {
+            return $user->rule->rule === 'summary' && $user->rule_id === 4;
+        });
+
         Gate::define('user', function (User $user) {
             $karmandkan = Karmand::with('sarparshtyar', 'user')->whereHas('sarparshtyar', function (Builder $query) {
                 $query->whereIn('user_id', [ Auth::id()]);
@@ -48,6 +53,10 @@ class AppServiceProvider extends ServiceProvider
             return  $user->rule->rule === 'user' && in_array($user->id, $karmandkan);
         });
 
+
+
+
+        Paginator::defaultView('tailwind');
 
         App::setLocale('ku');
         //
