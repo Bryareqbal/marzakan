@@ -16,7 +16,7 @@
         </div>
         <form class="mx-auto mt-6 max-w-7xl space-y-5" action="{{ route('add-sardanikar') }}" method="POST"
             enctype="multipart/form-data">
-            <div class="mx-auto w-[15rem] hidden">
+            <div class="mx-auto hidden w-[15rem]">
                 <label for="img">
                     <img src="{{ asset('assets/img/default-image.png') }}"
                         class="aspect-square w-full rounded object-cover object-center shadow" id="image" />
@@ -71,7 +71,7 @@
                             <fieldset class="rounded-lg border-2 border-green-500 p-2">
                                 <legend class="px-2">ژمارەی پاسپۆرت</legend>
                                 <x-input name="passport_number" id="passport_number" type="text"
-                                    class="w-full rounded-lg border border-slate-300 py-2 pr-3"
+                                    class="w-full rounded-lg border border-slate-300 py-2 pr-3 uppercase"
                                     value="{{ old('passport_number') }}" />
                                 <x-error message="passport_number" />
                             </fieldset>
@@ -145,7 +145,7 @@
                             <fieldset class="rounded-lg border-2 border-green-500 p-2">
                                 <legend class="px-2">ژمارەی پاسپۆرت</legend>
                                 <x-input disabled name="passport_number" id="passport_number" type="text"
-                                    class="w-full rounded-lg border border-slate-300 py-2 pr-3"
+                                    class="w-full rounded-lg border border-slate-300 py-2 pr-3 uppercase"
                                     value="{{ old('passport_number') }}" />
                                 <x-error message="passport_number" />
                             </fieldset>
@@ -243,7 +243,7 @@
                             <x-select name="mount_of_money" id="mount_of_money">
                                 <option value="{{ 5000 }}" @selected(old('mount_of_money') == 5000) selected>5,000</option>
                                 <option value="{{ 10000 }}" @selected(old('mount_of_money') == 10000)>10,000</option>
-                                <option value="free" @selected(old('mount_of_money') == 0)>بێبەرامبەر
+                                <option value="free" @selected(!empty(old('mount_of_money')) && old('mount_of_money') == 'free')>بێبەرامبەر
                                 </option>
                             </x-select>
                             <x-error message="mount_of_money" />

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class sardanikarController extends Controller
 {
@@ -26,8 +27,6 @@ class sardanikarController extends Controller
 
     public function addSardanikar(Request $request)
     {
-        // dd("slaw");
-
         Validator::make($request->all(), [
             "name" => ['required', 'string', 'max:255'],
             "nickname" => ['nullable', 'string', 'max:255'],
@@ -68,7 +67,7 @@ class sardanikarController extends Controller
         $newSardanikar = new sardanikar();
         $newSardanikar->name = $request->name;
         $newSardanikar->nickname = $request->nickname;
-        $newSardanikar->passport_number = $request->passport_number;
+        $newSardanikar->passport_number = Str::upper($request->passport_number);
         $newSardanikar->birth_date = $request->birth_date;
         $newSardanikar->gender = $request->gender;
         $newSardanikar->nation = $request->nation;
@@ -168,7 +167,7 @@ class sardanikarController extends Controller
 
     public function showSardanikar(Request $request)
     {
-        $sardanikaran = sardanikar::when(!empty($request->search), function (Builder $query) use ($request) {
+        $sardanikaran = sardanikar::where('karmand_id', Auth::id())->when(!empty($request->search), function (Builder $query) use ($request) {
             $query->where('name', 'like', "%{$request->search}%")
                 ->orWhere('passport_number', 'like', "%{$request->search}%")
                 ->orWhere('phone', 'like', "%{$request->search}%")
