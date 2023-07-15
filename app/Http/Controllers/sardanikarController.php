@@ -82,7 +82,9 @@ class sardanikarController extends Controller
         $newSardanikar->no_of_visitors = $request->no_of_visitors;
         $newSardanikar->passport_expire_date = $request->passport_expire_date;
         $newSardanikar->issuing_authority = $request->issuing_authority;
-        $newSardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
+        if ($request->hasFile('img')) {
+            $newSardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
+        }
         $newSardanikar->karmand_id = Auth::id();
         $newSardanikar->sarparshtyar_id = $sarparshtyar->sarparshtyar_id;
 
