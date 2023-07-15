@@ -118,7 +118,7 @@
                                 <legend class="px-2">دەسەڵاتی دەرکردن</legend>
                                 <x-input name="issuing_authority" id="issuing_authority" type="text"
                                     class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                    value="{{ old('issuing_authority') }}" />
+                                    value="{{ old('issuing_authority') ?? 'IRAN' }}" />
                                 <x-error message="issuing_authority" />
                             </fieldset>
                         </div>

@@ -41,10 +41,10 @@ class sardanikarController extends Controller
             "img" => ['nullable', 'file', 'image'],
             "status" => ['required', Rule::in(['coming', 'leaving'])],
             "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
-            "targeted_person" => ['required', 'string', 'max:255'],
+            // "targeted_person" => ['required', 'string', 'max:255'],
             "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
-            "passport_expire_date" => ['required', 'date'],
-            "issuing_authority" => ['required', 'string','max:255'],
+            // "passport_expire_date" => ['required', 'date'],
+            // "issuing_authority" => ['required', 'string','max:255'],
         ], [], [
             "name" => '(ناو)',
             "nickname" => '(نازناو)',
