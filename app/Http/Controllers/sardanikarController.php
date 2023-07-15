@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Karmand;
 use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -29,7 +30,7 @@ class sardanikarController extends Controller
 
         Validator::make($request->all(), [
             "name" => ['required', 'string', 'max:255'],
-            "nickname" => ['required', 'string', 'max:255'],
+            "nickname" => ['nullable', 'string', 'max:255'],
             "passport_number" => ['required', 'string'],
             "birth_date" => ['required', 'date'],
             "gender" => ['required', 'boolean'],
@@ -37,11 +38,11 @@ class sardanikarController extends Controller
             "phone" => ['required', 'min:11', 'max:11'],
             "purpose_of_coming" => ['required', 'string'],
             "address" => ['required', 'string'],
-            "img" => ['required', 'file', 'image'],
+            "img" => ['nullable', 'file', 'image'],
             "status" => ['required', Rule::in(['coming', 'leaving'])],
             "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
             "targeted_person" => ['required', 'string', 'max:255'],
-            "no_of_visitors" => ['required', 'numeric', 'min:0'],
+            "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
             "passport_expire_date" => ['required', 'date'],
             "issuing_authority" => ['required', 'string'],
         ], [], [
@@ -62,7 +63,8 @@ class sardanikarController extends Controller
             "passport_expire_date" => '(بەرواری بەسەرچوونی پاسپۆرت)',
             "issuing_authority" => '(دەسەڵاتی دەرکردن)',
         ])->validate();
-        $sarparshtyar = Karmand::with(['user','sarparshtyar.user'])->where('user_id', Auth::id())->first();
+
+        $sarparshtyar = Karmand::with(['user', 'sarparshtyar.user'])->where('user_id', Auth::id())->first();
         $newSardanikar = new sardanikar();
         $newSardanikar->name = $request->name;
         $newSardanikar->nickname = $request->nickname;
@@ -84,7 +86,7 @@ class sardanikarController extends Controller
         $newSardanikar->karmand_id = Auth::id();
         $newSardanikar->sarparshtyar_id = $sarparshtyar->sarparshtyar_id;
 
-        if($newSardanikar->save()) {
+        if ($newSardanikar->save()) {
             return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardanikar->id);
         }
     }
@@ -163,5 +165,25 @@ class sardanikarController extends Controller
         $sardanikar->save();
 
         return redirect()->back()->with('success', 'بەسەرکەوتووی گۆڕدرا.')->with('id', $sardanikar->id);
+    }
+
+    public function showSardanikar(Request $request)
+    {
+        $sardanikaran = sardanikar::when(!empty($request->search), function (Builder $query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%")
+                ->orWhere('passport_number', 'like', "%{$request->search}%")
+                ->orWhere('phone', 'like', "%{$request->search}%")
+                ->orWhereHas('karmand', function (Builder $query) use ($request) {
+                    $query->where('name', 'like', "%{$request->search}%");
+                })
+                ->orWhereHas('sarparshtyar.user', function (Builder $query) use ($request) {
+                    $query->where('name', 'like', "%{$request->search}%");
+                })
+                ->orWhere('nickname', 'like', "%{$request->search}%");
+        })->paginate(25);
+
+        return view('sardanikar.showSardanikar', [
+            'sardanikaran' => $sardanikaran,
+        ]);
     }
 }

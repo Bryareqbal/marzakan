@@ -34,7 +34,7 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
     });
 });
 
-Route::middleware(['auth','isActive'])->group(function () {
+Route::middleware(['auth', 'isActive'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::middleware('hasRole:superadmin')->controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
@@ -70,7 +70,6 @@ Route::middleware(['auth','isActive'])->group(function () {
         Route::get('/', 'index')->name('profile');
         Route::post('/{id}/editProfile', 'editProfile')->name('editProfile');
         Route::post('/{id}/profileEditPassword', 'editPassword')->name('editPassword');
-
     });
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
@@ -78,12 +77,13 @@ Route::middleware(['auth','isActive'])->group(function () {
         Route::post('/add', 'addSardanikar')->name('add-sardanikar');
         Route::get('/{id}/edit', 'editSardanikar')->name('edit-sardanikar')->whereNumber('id');
         Route::patch('/{id}/update', 'updateSardanikar')->name('update-sardanikar')->whereNumber('id');
+        Route::get('/showSardanikar', 'showSardanikar')->name('show-sardanikar');
     });
     Route::controller(ReportController::class)->prefix('/reports')->group(function () {
         Route::get('/', 'index')->name('reports');
     });
 
-    
+
 
     Route::controller(PrintController::class)->prefix('/print')->group(function () {
         Route::get('/invoice/{sardanikar}', 'invoice')->whereNumber('sardanikar');

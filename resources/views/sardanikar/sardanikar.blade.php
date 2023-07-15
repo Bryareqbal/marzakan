@@ -8,10 +8,11 @@
 
                 <span>{{ number_format($totalMoney, 0, '.', ',') }}</span>
             </h1>
-            <h1 class="inline rounded-md bg-green-500 p-2 text-white shadow">ژمارەی سەردانیکەران:
+            <a href="{{ route('show-sardanikar') }}" class="inline-block rounded-md bg-green-500 p-2 text-white shadow">ژمارەی
+                سەردانیکەران:
 
                 <span>{{ number_format($counter, 0, '.', ',') }}</span>
-            </h1>
+            </a>
         </div>
         <form class="mx-auto mt-6 max-w-7xl space-y-5" action="{{ route('add-sardanikar') }}" method="POST"
             enctype="multipart/form-data">
@@ -99,7 +100,7 @@
                                 <legend class="px-2">نەتەوە</legend>
                                 <x-input name="nation" id="nation" type="text"
                                     class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                    value="{{ old('nation') }}" />
+                                    value="{{ old('nation') ?? 'IRAN' }}" />
                                 <x-error message="nation" />
                             </fieldset>
                         </div>
@@ -213,7 +214,7 @@
                             <legend class="px-2">هۆکاری هاتن</legend>
                             <x-input name="purpose_of_coming" id="purpose_of_coming" type="text"
                                 class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                value="{{ old('purpose_of_coming') }}" />
+                                value="{{ old('purpose_of_coming') ?? 'سەردانیکردن' }}" />
                             <x-error message="purpose_of_coming" />
                         </fieldset>
                     </div>
@@ -222,7 +223,7 @@
                             <legend class="px-2">ناونیشانی شوێنی مانەوە</legend>
                             <x-input name="address" id="address" type="text"
                                 class="w-full rounded-lg border border-slate-300 py-2 pr-3"
-                                value="{{ old('address') }}" />
+                                value="{{ old('address') ?? 'سلێمانی' }}" />
                             <x-error message="address" />
                         </fieldset>
                     </div>

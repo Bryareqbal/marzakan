@@ -216,6 +216,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
         @endif
     </div>
     <div class="mt-2 flex justify-center">
