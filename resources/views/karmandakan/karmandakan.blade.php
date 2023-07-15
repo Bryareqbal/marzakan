@@ -2,7 +2,7 @@
 @section('title', 'کارمەندەکان')
 
 @section('content')
-    <div class="container mx-auto pt-10">
+    <div class="container mx-auto px-5 pt-10">
         <section class="flex justify-center">
             <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
@@ -83,32 +83,37 @@
 
         </section>
         <div class="mt-6 max-w-6xl">
-            <form action="{{ route('karmandakan') }}" method="GET" class="flex items-center">
-                <button type="submit" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </button>
-                <x-input name="sarparshtyar_name" value="{{ old('sarparshtyar_name') }}" type="search" class="w-3/12 pr-3"
-                    placeholder="ناوی سەرپەرشتیار" />
-                <button type="submit" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor"
-                        class="mr-3 h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </button>
-                <x-input name="karmand_name" type="search" value="{{ old('karmand_name') }}" class="w-3/12 pr-3"
-                    placeholder="ناوی کارمەند " />
+            <form action="{{ route('karmandakan') }}" method="GET"
+                class="flex flex-col space-y-5 md:flex-row md:space-y-0 md:space-x-3 md:space-x-reverse">
+                <div class="flex items-center">
+                    <button type="submit" class="focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                    <x-input name="sarparshtyar_name" value="{{ old('sarparshtyar_name') }}" type="search" class="w-full"
+                        placeholder="ناوی سەرپەرشتیار" />
+                </div>
+
+                <div class="flex items-center">
+                    <button type="submit" class="focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                    <x-input name="karmand_name" type="search" value="{{ old('karmand_name') }}" class="w-full"
+                        placeholder="ناوی کارمەند " />
+                </div>
             </form>
         </div>
 
-        <div class="w-full">
+        <div class="w-full overflow-auto">
             @if ($karmandakan->isNotEmpty())
-                <table class="mt-6 w-full">
+                <table class="mt-6 w-full min-w-max">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                         <tr>
                             <th class="px-3 py-2 text-right font-medium">#</th>

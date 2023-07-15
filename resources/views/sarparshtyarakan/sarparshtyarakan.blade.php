@@ -81,38 +81,31 @@
             </form>
         </section>
 
-        {{-- <form action="{{ route('') }}" method="GET" class="mt-10 flex items-center">
-            <button type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                </svg>
-            </button>
-            <x-input name="search" value="{{ Request::get('search') }}" type="search"
-                class="w-full pr-3 md:w-1/2 lg:w-3/12" placeholder="گەڕان" />
-        </form> --}}
         <div class="mt-6 max-w-6xl">
-            <form action="{{ route('sarparshtyarakan') }}" method="GET" class="flex items-center">
-                <button type="submit" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </button>
-                <x-input name="sarparshtyar_name" value="{{ old('sarparshtyar_name') }}" type="search" class="w-3/12 pr-3"
-                    placeholder="ناوی سەرپەرشتیار" />
-                <button type="submit" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor"
-                        class="mr-3 h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                    </svg>
-                </button>
-                <x-input name="marz_name" type="search" value="{{ old('marz_name') }}" class="w-3/12 pr-3"
-                    placeholder="ناوی مەرز " />
+            <form action="{{ route('sarparshtyarakan') }}" method="GET"
+                class="flex flex-col space-y-5 md:flex-row md:space-y-0 md:space-x-3 md:space-x-reverse">
+                <div class="flex items-center">
+                    <button type="submit" class="focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                    <x-input name="sarparshtyar_name" value="{{ old('sarparshtyar_name') }}" type="search" class="w-full"
+                        placeholder="ناوی سەرپەرشتیار" />
+                </div>
+                <div class="flex items-center">
+                    <button type="submit" class="focus:outline-none">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-10 w-10 rounded-br-md rounded-tr-md bg-green-600 p-1 text-white">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                        </svg>
+                    </button>
+                    <x-input name="marz_name" type="search" value="{{ old('marz_name') }}" class="w-full"
+                        placeholder="ناوی مەرز " />
+                </div>
             </form>
         </div>
 
