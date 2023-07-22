@@ -4,7 +4,7 @@
 @section('content')
     <div class="container mx-auto pt-10">
         <section class="flex justify-center">
-            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
+            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white px-2 py-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <span
                         class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
@@ -70,11 +70,12 @@
                                 <label for="type_position">
                                     <input type="radio"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                        id="type_position" value="{{ 1 }}" name="gender" />
+                                        id="type_position" value="{{ 1 }}" name="gender"
+                                        @checked(old('gender') == 1) />
                                     نێر
                                 </label>
                                 <label for="type_position2">
-                                    <input type="radio" value="{{ 0 }}"
+                                    <input type="radio" value="{{ 0 }}" @checked(old('gender') == 0)
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                         id="type_position2" name="gender" />
                                     مێ
@@ -104,16 +105,45 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ئەرک </legend>
-                            <x-select name="role_id">
+                            <x-select name="role_id" id="role">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($Roles as $key => $role)
-                                    <option @selected(old('rule_id') == $role->id) value="{{ $role->id }}">{{ $role->rule }}
+                                    <option @selected(old('role_id') == $role->id) value="{{ $role->id }}">{{ $role->rule }}
                                     </option>
                                 @endforeach
                             </x-select>
                             <x-error message="role_id" />
                         </fieldset>
                     </div>
+                    <div class="hi hidden flex-col space-y-3" id="sarparshtyar">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                            <legend class="px-2">سەرپەرشتیار </legend>
+                            <x-select name="sarparshtyar_id">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($sarparshtyarakan as $key => $sarparshtyar)
+                                    <option @selected(old('sarparshtyar_id') == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                        {{ $sarparshtyar->name }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="sarparshtyar_id" />
+                        </fieldset>
+                    </div>
+                    <div class="hidden flex-col space-y-3" id="marz">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                            <legend class="px-2">مەرز </legend>
+                            <x-select name="marz_id">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($marzakan as $key => $marz)
+                                    <option @selected(old('marz_id') == $marz->id) value="{{ $marz->id }}">
+                                        {{ $marz->name }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="marz_id" />
+                        </fieldset>
+                    </div>
+
                 </div>
                 <div class="mt-6 flex justify-end">
                     <button type="submit" class="flex items-center space-x-1 space-x-reverse focus:outline-none">
@@ -125,7 +155,7 @@
                             </svg>
                         </span>
                         <div
-                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 py-1 px-6 text-white">
+                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 px-6 py-1 text-white">
                             <span>زیادکردن</span>
                         </div>
                     </button>
@@ -163,55 +193,72 @@
 
         <div class="w-full overflow-auto">
             @if ($users->isNotEmpty())
-                <table class="mt-6 w-full">
+                <table class="mt-6 w-full min-w-max">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                         <tr class="">
 
-                            <th class="py-3 px-6 text-right font-medium">#</th>
-                            <th class="py-3 px-6 text-right font-medium">ناوی بەکارهێنەر</th>
-                            <th class="py-3 px-6 text-center font-medium">ناونیشان</th>
-                            <th class="py-3 px-6 text-center font-medium">ئەرک</th>
-                            <th class="py-3 px-6 text-center font-medium">ڕەگەز</th>
-                            <th class="py-3 px-6 text-center font-medium">ژمارە تەلەفون</th>
-                            <th class="py-3 px-6 text-center font-medium">بەروار</th>
-                            <th class="py-3 px-6 text-center font-medium">چالاکی</th>
+                            <th class="px-6 py-3 text-right font-medium">#</th>
+                            <th class="px-6 py-3 text-right font-medium">ناوی بەکارهێنەر</th>
+                            <th class="px-6 py-3 text-center font-medium">ناونیشان</th>
+                            <th class="px-6 py-3 text-center font-medium">ئەرک</th>
+                            <th class="px-6 py-3 text-center font-medium">ڕەگەز</th>
+                            <th class="px-6 py-3 text-center font-medium">سەرپەرشتیار</th>
+                            <th class="px-6 py-3 text-center font-medium">مەرز</th>
+                            <th class="px-6 py-3 text-center font-medium">ژمارە تەلەفون</th>
+                            <th class="px-6 py-3 text-center font-medium">بەروار</th>
+                            <th class="px-6 py-3 text-center font-medium">چالاکی</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         @foreach ($users as $key => $user)
                             <tr class="even:bg-slate-100 hover:cursor-pointer">
-                                <td class="py-3 px-6 text-right">
+                                <td class="px-6 py-3 text-right">
                                     {{ $users->firstItem() + $key }}
                                 </td>
-                                <td class="py-3 px-6 text-right">
+                                <td class="px-6 py-3 text-right">
                                     <h1 class="capitalize">{{ $user->name }}</h1>
                                     <span class="font-sans">({{ $user->username }})</span>
                                 </td>
-                                <td class="py-3 px-6 text-center">{{ $user->address }}</td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="px-6 py-3 text-center" title="{{ $user->address }}">
+                                    {{ Str::limit($user->address, 50, '...') }}</td>
+                                <td class="px-6 py-3 text-center">
                                     @if ($user->rule->rule === 'superadmin')
                                         بەڕێوبەری باڵا
-                                    @elseif($user->rule->rule === 'admin')
+                                    @elseif($user->rule->rule === 'sarparshtyar')
                                         سەرپەرشتیار
-                                    @elseif($user->rule->rule === 'summary')
+                                    @elseif($user->rule->rule === 'summery')
                                         بینینی پوختە
-                                    @else
+                                    @elseif($user->rule->rule === 'karmand')
                                         کارمەند
                                     @endif
                                 </td>
 
-                                <td class="py-3 px-6 text-center">
+                                <td class="px-6 py-3 text-center">
                                     @unless ($user->gender)
                                         مێ
                                     @else
                                         نێر
                                     @endunless
                                 </td>
-                                <td class="py-3 px-6 text-center font-sans">{{ $user->phone_no }}</td>
-                                <td class="py-3 px-6 text-center font-sans md:truncate">
+                                <td class="px-6 py-3 text-center font-sans">
+                                    @if ($user->sarparshtyar)
+                                        {{ $user->sarparshtyar->name }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td class="px-6 py-3 text-center font-sans">
+                                    @if ($user->marz)
+                                        {{ $user->marz->name }}
+                                    @else
+                                        -
+                                    @endif
+                                </td>
+                                <td class="px-6 py-3 text-center font-sans">{{ $user->phone_no }}</td>
+                                <td class="px-6 py-3 text-center font-sans md:truncate">
                                     {{ $user->created_at->format('Y-m-d H:i:s A') }}</td>
-                                <td class="relative py-3 px-6 text-center">
+                                <td class="relative px-6 py-3 text-center">
                                     <div class="flex items-end justify-end space-x-3 space-x-reverse">
                                         <a title="گۆرینی بەکارهێنەر" href="{{ route('editUser', $user->id) }}"
                                             class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
@@ -263,6 +310,10 @@
         <div class="mt-2 flex justify-center">
             {{ $users->onEachSide(5)->links() }}
         </div>
+
+        @push('scripts')
+            <script src="{{ asset('/js/users.js') }}"></script>
+        @endpush
     </div>
 
 @endsection

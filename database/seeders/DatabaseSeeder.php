@@ -21,38 +21,42 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        $rules = ['superadmin', 'admin', 'user','summary'];
-        foreach($rules as $rule) {
+        Marzakan::factory(10)->create();
+
+        $rules = ['superadmin', 'sarparshtyar', 'karmand', 'raport'];
+        foreach ($rules as $rule) {
             Rule::factory()->create([
-                'rule' =>$rule,
+                'rule' => $rule,
             ]);
         }
 
         User::factory()->create([
             'name' => 'superadmin',
             'username' => 'admin',
-            'rule_id'=>1,
+            'rule_id' => 1,
+            'marz_id' => 1,
         ]);
         User::factory()->create([
             'name' => 'halo',
             'username' => 'halo',
-            'rule_id'=>2,
+            'rule_id' => 2,
+            'marz_id' => 2,
         ]);
         User::factory()->create([
             'name' => 'shad',
             'username' => 'shad',
-            'rule_id'=>3,
+            'rule_id' => 3,
+            'marz_id' => 3,
         ]);
         User::factory()->create([
             'name' => 'k zmnako',
             'username' => 'summary',
-            'rule_id'=>4,
+            'marz_id' => 4,
         ]);
 
 
         // User::factory(20)->create();
 
-        // Marzakan::factory(10)->create();
 
         // Sarparshtyar::factory(10)->create();
 

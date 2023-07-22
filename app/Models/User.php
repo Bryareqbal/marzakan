@@ -53,4 +53,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Karmand::class, 'user_id');
     }
+
+    public function marz()
+    {
+        return $this->belongsTo(Marzakan::class, 'marz_id');
+    }
+
+    public function sarparshtyar()
+    {
+        return $this->belongsTo(User::class, 'sarparshtyar_id');
+    }
 }
