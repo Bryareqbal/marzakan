@@ -227,7 +227,7 @@
                                         بەڕێوبەری باڵا
                                     @elseif($user->rule->rule === 'sarparshtyar')
                                         سەرپەرشتیار
-                                    @elseif($user->rule->rule === 'summery')
+                                    @elseif($user->rule->rule === 'raport')
                                         بینینی پوختە
                                     @elseif($user->rule->rule === 'karmand')
                                         کارمەند

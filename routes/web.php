@@ -43,21 +43,6 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::get('/{id}/edit', 'editMarzakan')->name('editMarzakan')->whereNumber('id');
         Route::post('/{id}', 'saveMarzakan')->name('saveMarzakan');
     });
-
-    Route::middleware('hasRole:superadmin')->controller(SarparshtyarController::class)->prefix('/sarparshtyarakan')->group(function () {
-        Route::get('/', 'index')->name('sarparshtyarakan');
-        Route::post('/add', 'addSarparshtyar')->name('add-sarparshtyar');
-        Route::get('{id}/edit', 'editSarparshtyar')->name('edit-sarparshtyar');
-        Route::patch('{id}/update', 'updateSarparshtyar')->name('update-sarparshtyar');
-    });
-
-
-    Route::middleware('hasRole:superadmin,admin')->controller(KarmandController::class)->prefix('/karmand')->group(function () {
-        Route::get('/', 'index')->name('karmandakan');
-        Route::post('/add', 'addNewKarmand')->name('addNewKarmand');
-        Route::get('/{id}/edit', 'editKarmand')->name('editKarmand')->whereNumber('id');
-        Route::post('/{id}', 'saveKarmand')->name('saveKarmand');
-    });
     Route::controller(UserController::class)->prefix('/users')->group(function () {
         Route::get('/', 'index')->name('users');
         Route::post('/add', 'userAdd')->name('userAdd');

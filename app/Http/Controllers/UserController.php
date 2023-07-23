@@ -83,12 +83,23 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'بەسەرکەتووی زیادکرا .');
         };
     }
+
     public function editUser(Request $request)
     {
         $user = User::with(['rule'])->where('id', $request->id)->firstOrFail();
         $Roles = Rule::whereNotIn('id', [1])->get();
-        return view('Admin.users.editUser', ['user' => $user, 'Roles' => $Roles]);
+
+        $sarparshtyarakan = User::where('rule_id', 2)->get();
+        $marzakan = Marzakan::all();
+        return view('Admin.users.editUser', [
+            'user' => $user,
+            'Roles' => $Roles,
+            'sarparshtyarakan' => $sarparshtyarakan,
+            'marzakan' => $marzakan,
+
+        ]);
     }
+
     public function saveUser(Request $request)
     {
 
@@ -101,7 +112,8 @@ class UserController extends Controller
             'address' => ['required', 'string', 'max:255'],
             'phone_no' => ['required', 'string', 'digits:11'],
             'role_id' => ['required', 'integer', 'exists:rules,id'],
-
+            'sarparshtyar_id' => [ValidationRule::requiredIf(fn () => (int)$request->role_id === 3), 'nullable', 'numeric', 'exists:users,id'],
+            'marz_id' => [ValidationRule::requiredIf(fn () => (int)$request->role_id === 2 || (int)$request->role_id === 4), 'nullable', 'numeric', 'exists:marzakans,id'],
         ], [], [
             'name' => '(ناو)',
             'username' => '(ناوی بەکارهێنەر)',
@@ -110,6 +122,8 @@ class UserController extends Controller
             'address' => '(ناونیشان)',
             'phone_no' => '(ژ.مۆبایل)',
             'role_id' => '(ئەرک)',
+            'sarparshtyar_id' => '(سەرپەرشتیار)',
+            'marz_id' => '(مەرز)',
         ])->validate();
 
         $editUser->name = $request->name;

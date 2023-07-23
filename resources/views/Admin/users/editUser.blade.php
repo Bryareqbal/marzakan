@@ -4,7 +4,7 @@
 @section('content')
     <div class="container mx-auto pt-10">
         <section class="flex justify-center">
-            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
+            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white px-2 py-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <span
                         class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
@@ -57,14 +57,13 @@
                                     <input type="radio"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                         id="gender" value="{{ 1 }}" name="gender"
-                                        {{ old('gender', $user->gender) === 1 ? 'checked' : '' }} />
+                                        @checked(old('gender', $user->gender) === 1) />
                                     نێر
                                 </label>
                                 <label for="gender2">
                                     <input type="radio" value="{{ 0 }}"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                        id="gender2" name="gender"
-                                        {{ old('gender', $user->gender) === 0 ? 'checked' : '' }} />
+                                        id="gender2" name="gender" @checked(old('gender', $user->gender) === 0) />
                                     مێ
                                 </label>
 
@@ -94,16 +93,43 @@
                         <div class="flex flex-col space-y-3">
                             <fieldset class="rounded-lg border-2 border-green-500 p-2">
                                 <legend class="px-2">ئەرک </legend>
-                                <select
-                                    class="w-full rounded-lg border border-slate-300 bg-white py-2 pr-3 ring-green-500 focus:ring-2 disabled:bg-gray-100"
-                                    name="role_id">
+                                <x-select name="role_id" id="role">
                                     <option value="">هەڵبژێرە</option>
-                                    @foreach ($Roles as $key => $rule)
-                                        <option @selected($rule->id == $user->rule_id) value="{{ $rule->id }}">
-                                            {{ $rule->rule }}</option>
+                                    @foreach ($Roles as $key => $role)
+                                        <option @selected($user->rule_id == $role->id) value="{{ $role->id }}">
+                                            {{ $role->rule }}
+                                        </option>
                                     @endforeach
-                                </select>
+                                </x-select>
                                 <x-error message="role_id" />
+                            </fieldset>
+                        </div>
+                        <div class="hi hidden flex-col space-y-3" id="sarparshtyar">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">سەرپەرشتیار </legend>
+                                <x-select name="sarparshtyar_id">
+                                    <option value="">هەڵبژێرە</option>
+                                    @foreach ($sarparshtyarakan as $key => $sarparshtyar)
+                                        <option @selected($user->sarparshtyar_id == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                            {{ $sarparshtyar->name }}
+                                        </option>
+                                    @endforeach
+                                </x-select>
+                                <x-error message="sarparshtyar_id" />
+                            </fieldset>
+                        </div>
+                        <div class="hidden flex-col space-y-3" id="marz">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">مەرز </legend>
+                                <x-select name="marz_id">
+                                    <option value="">هەڵبژێرە</option>
+                                    @foreach ($marzakan as $key => $marz)
+                                        <option @selected($user->marz_id === $marz->id) value="{{ $marz->id }}">
+                                            {{ $marz->name }}
+                                        </option>
+                                    @endforeach
+                                </x-select>
+                                <x-error message="marz_id" />
                             </fieldset>
                         </div>
                         <div class="flex flex-col space-y-3">
@@ -129,7 +155,6 @@
                                 <x-error message="gender" />
                             </fieldset>
                         </div>
-                    @else
                     @endif
                 </div>
                 <div class="mt-6 flex justify-end">
@@ -142,13 +167,15 @@
                             </svg>
                         </span>
                         <div
-                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 py-1 px-6 text-white">
+                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 px-6 py-1 text-white">
                             <span>گۆرین</span>
                         </div>
                     </button>
                 </div>
                 <hr class="mt-4 max-w-4xl border border-dashed border-slate-500">
             </form>
-
+            @push('scripts')
+                <script src="{{ asset('js/users.js') }}"></script>
+            @endpush
         </section>
     @endsection
