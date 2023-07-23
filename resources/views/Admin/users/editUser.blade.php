@@ -35,7 +35,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناو </legend>
                             <x-input class="w-full" name="name" id="name" type="text"
-                                value="{{ $user->name }}" />
+                                value="{{ old('name', $user->name) }}" />
                             <x-error message="name" />
                         </fieldset>
                     </div>
@@ -43,7 +43,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی بەکارهێنەر</legend>
                             <x-input class="w-full" name="username" id="username" type="text"
-                                value="{{ $user->username }}" />
+                                value="{{ old('username', $user->username) }}" />
                             <x-error message="username" />
                         </fieldset>
                     </div>
@@ -76,7 +76,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناونیشان</legend>
                             <x-input class="w-full" name="address" id="address" type="text"
-                                value="{{ $user->address }}" />
+                                value="{{ old('address', $user->address) }}" />
                             <x-error message="address" />
                         </fieldset>
                     </div>
@@ -84,7 +84,7 @@
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ژمارە تەلەفون</legend>
                             <x-input class="w-full" name="phone_no" id="phone_no" maxLength="11" type="text"
-                                value="{{ $user->phone_no }}" />
+                                value="{{ old('phone_no', $user->phone_no) }}" />
                             <x-error message="phone_no" />
                         </fieldset>
                     </div>
@@ -96,7 +96,7 @@
                                 <x-select name="role_id" id="role">
                                     <option value="">هەڵبژێرە</option>
                                     @foreach ($Roles as $key => $role)
-                                        <option @selected($user->rule_id == $role->id) value="{{ $role->id }}">
+                                        <option @selected(old('role_id', $user->rule_id) == $role->id) value="{{ $role->id }}">
                                             {{ $role->rule }}
                                         </option>
                                     @endforeach
@@ -110,7 +110,7 @@
                                 <x-select name="sarparshtyar_id">
                                     <option value="">هەڵبژێرە</option>
                                     @foreach ($sarparshtyarakan as $key => $sarparshtyar)
-                                        <option @selected($user->sarparshtyar_id == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                        <option @selected(old('sarparshtyar_id', $user->sarparshtyar) == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
                                             {{ $sarparshtyar->name }}
                                         </option>
                                     @endforeach
@@ -124,7 +124,7 @@
                                 <x-select name="marz_id">
                                     <option value="">هەڵبژێرە</option>
                                     @foreach ($marzakan as $key => $marz)
-                                        <option @selected($user->marz_id === $marz->id) value="{{ $marz->id }}">
+                                        <option @selected(old('marz_id', $user->marz_id) === $marz->id) value="{{ $marz->id }}">
                                             {{ $marz->name }}
                                         </option>
                                     @endforeach

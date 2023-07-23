@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        $rolesPermission = ['superadmin','admin','user'];
+        $rolesPermission = ['superadmin', 'admin', 'user'];
         // foreach ($rolesPermission as $permission) {
         //     Gate::define($permission, function (User $user) use ($permission) {
         //         return dd($user->rule->rule === $permission);
@@ -39,7 +39,7 @@ class AppServiceProvider extends ServiceProvider
             return $user->rule->rule === 'superadmin' && $user->rule_id === 1;
         });
         Gate::define('sarparshtyar', function (User $user) {
-            return $user->rule->rule === 'admin' && $user->rule_id === 2;
+            return $user->rule->rule === 'sarparshtyar' && $user->rule_id === 2;
         });
 
         Gate::define('summary', function (User $user) {
@@ -47,10 +47,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('user', function (User $user) {
-            $karmandkan = Karmand::with('sarparshtyar', 'user')->whereHas('sarparshtyar', function (Builder $query) {
-                $query->whereIn('user_id', [ Auth::id()]);
-            })->orWhere('user_id', Auth::id())->pluck('user_id')->toArray();
-            return  $user->rule->rule === 'user' && in_array($user->id, $karmandkan);
+            return $user->rule->rule === 'karmand';
         });
 
 
