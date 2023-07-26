@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Karmand;
 use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,7 +64,7 @@ class sardanikarController extends Controller
             "issuing_authority" => '(دەسەڵاتی دەرکردن)',
         ])->validate();
 
-        $sarparshtyar = Karmand::with(['user', 'sarparshtyar.user'])->where('user_id', Auth::id())->first();
+        $sarparshtyar = User::with(['sarparshtyar'])->find(Auth::id());
         $newSardanikar = new sardanikar();
         $newSardanikar->name = $request->name;
         $newSardanikar->nickname = $request->nickname;
@@ -85,7 +86,6 @@ class sardanikarController extends Controller
             $newSardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
         }
         $newSardanikar->karmand_id = Auth::id();
-        $newSardanikar->sarparshtyar_id = $sarparshtyar->sarparshtyar_id;
 
         if ($newSardanikar->save()) {
             return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardanikar->id);

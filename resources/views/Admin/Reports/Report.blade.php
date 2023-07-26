@@ -4,7 +4,7 @@
 @section('content')
     <div class="container mx-auto px-5 pt-10">
         <section class="flex justify-center">
-            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white py-2 px-2">
+            <span class="flex items-center space-x-3 space-x-reverse rounded-lg bg-white px-2 py-2">
                 <div class="flex items-center space-x-3 space-x-reverse">
                     <span
                         class="flex h-12 w-12 items-center justify-center rounded-xl border border-white bg-emerald-100 text-white">
@@ -27,7 +27,7 @@
                 </h1>
             </div>
             <form method="GET" action="{{ route('reports') }}" class="mt-6 max-w-7xl">
-                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
 
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
@@ -37,10 +37,21 @@
                         </fieldset>
                     </div>
                     <div class="col-start-1 flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                        <fieldset
+                            class="flex flex-col gap-3 rounded-lg border-2 border-green-500 p-2 md:flex-row md:items-center">
                             <legend class="px-2">بەراور</legend>
-                            <x-input class="w-full" name="created_at" id="created_at" type="date"
-                                value="{{ old('created_at') }}" />
+                            <label for="from"
+                                class="flex items-center space-x-2 space-x-reverse md:flex-col md:items-start md:space-x-0 md:space-y-2 lg:flex-row lg:items-center lg:space-x-3 lg:space-x-reverse">
+                                <span>لە</span>
+                                <x-input class="w-full" name="from" id="from" type="date"
+                                    value="{{ old('from') }}" />
+                            </label>
+                            <label for="to"
+                                class="flex items-center space-x-2 space-x-reverse md:flex-col md:items-start md:space-x-0 md:space-y-2 lg:flex-row lg:items-center lg:space-x-3 lg:space-x-reverse">
+                                <span>بۆ</span>
+                                <x-input class="w-full" name="to" id="to" type="date"
+                                    value="{{ old('to') }}" />
+                            </label>
                         </fieldset>
                     </div>
 
@@ -98,7 +109,7 @@
 
                         </span>
                         <div
-                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-yellow-500 to-yellow-600 py-1 px-6 text-white">
+                            class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-yellow-500 to-yellow-600 px-6 py-1 text-white">
                             <span>وەرگرتنی راپۆرت</span>
                         </div>
                     </button>
@@ -108,9 +119,7 @@
 
         </section>
 
-
-
-        <div class="flex flex-col space-y-5 md:flex-row md:space-y-0 md:space-x-3 md:space-x-reverse">
+        <div class="flex flex-col space-y-5 md:flex-row md:space-x-3 md:space-y-0 md:space-x-reverse">
             <div class="border-opacity-15 w-full rounded-xl border p-5 shadow-xl md:w-auto">
                 <div class="flex items-center justify-between">
                     <span>کۆی پارە
@@ -140,43 +149,43 @@
                 <table class="mt-6 w-full">
                     <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                         <tr>
-                            <th class="py-3 px-1 text-right font-medium">#</th>
-                            <th class="py-3 px-1 text-right font-medium">ناو</th>
-                            <th class="py-3 px-1 text-right font-medium">ناوی سەرپەرشتیار</th>
-                            <th class="py-3 px-1 text-right font-medium">ناوی کارمەند</th>
-                            <th class="py-3 px-1 text-center font-medium">ژمارەی پاسۆرت</th>
-                            <th class="py-3 px-1 text-center font-medium">نەتەوە</th>
-                            <th class="py-3 px-1 text-center font-medium">ژمارە تەلەفون</th>
-                            <th class="py-3 px-1 text-center font-medium">بڕی پارە</th>
-                            <th class="py-3 px-1 text-center font-medium">حاڵات</th>
-                            <th class="py-3 px-1 text-center font-medium">بەرواری زیادکردن</th>
+                            <th class="px-1 py-3 text-right font-medium">#</th>
+                            <th class="px-1 py-3 text-right font-medium">ناو</th>
+                            <th class="px-1 py-3 text-right font-medium">ناوی سەرپەرشتیار</th>
+                            <th class="px-1 py-3 text-right font-medium">ناوی کارمەند</th>
+                            <th class="px-1 py-3 text-center font-medium">ژمارەی پاسۆرت</th>
+                            <th class="px-1 py-3 text-center font-medium">نەتەوە</th>
+                            <th class="px-1 py-3 text-center font-medium">ژمارە تەلەفون</th>
+                            <th class="px-1 py-3 text-center font-medium">بڕی پارە</th>
+                            <th class="px-1 py-3 text-center font-medium">حاڵات</th>
+                            <th class="px-1 py-3 text-center font-medium">بەرواری زیادکردن</th>
                             @canany(['superadmin'])
-                                <th class="py-3 px-1 text-center font-medium">چالاکی</th>
+                                <th class="px-1 py-3 text-center font-medium">چالاکی</th>
                             @endcanany
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($reports as $key => $report)
                             <tr class="even:bg-slate-100 hover:cursor-pointer">
-                                <td class="py-3 px-6 text-right">
+                                <td class="px-6 py-3 text-right">
                                     {{ $reports->firstItem() + $key }}
                                 </td>
-                                <td class="py-3 px-6 text-right capitalize">{{ $report->name }}</td>
-                                <td class="py-3 px-6 text-right capitalize">
+                                <td class="px-6 py-3 text-right capitalize">{{ $report->name }}</td>
+                                <td class="px-6 py-3 text-right capitalize">
                                     @if ($report->sarparshtyar !== null)
                                         {{ $report->sarparshtyar->user->name }}
                                     @endif
                                 </td>
-                                <td class="py-3 px-6 text-right capitalize">
+                                <td class="px-6 py-3 text-right capitalize">
                                     {{ $report->karmand->name }}
                                 </td>
-                                <td class="py-3 px-6 text-center">{{ $report->passport_number }}</td>
-                                <td class="py-3 px-6 text-center">{{ $report->nation }}</td>
-                                <td class="py-3 px-6 text-center">{{ $report->phone }}</td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="px-6 py-3 text-center">{{ $report->passport_number }}</td>
+                                <td class="px-6 py-3 text-center">{{ $report->nation }}</td>
+                                <td class="px-6 py-3 text-center">{{ $report->phone }}</td>
+                                <td class="px-6 py-3 text-center">
                                     {{ number_format($report->mount_of_money, 0, '.', ',') }}
                                 </td>
-                                <td class="py-3 px-6 text-center">
+                                <td class="px-6 py-3 text-center">
                                     @unless ($report->status === 'coming')
                                         <div class="flex items-center space-x-1 space-x-reverse">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -198,10 +207,10 @@
                                         </div>
                                     @endunless
                                 </td>
-                                <td class="py-3 px-6 text-center font-sans">
+                                <td class="px-6 py-3 text-center font-sans">
                                     {{ $report->created_at->format('Y-m-d H:i:s A') }}</td>
                                 @canany(['superadmin'])
-                                    <td class="py-3 px-6 text-center font-sans">
+                                    <td class="px-6 py-3 text-center font-sans">
                                         <a href="{{ route('edit-sardanikar', $report->id) }}" title="گۆرانکاری"
                                             class="flex h-10 w-10 items-center justify-center rounded border-2 border-blue-200 text-xl hover:border-blue-300 focus:ring-1 focus:ring-blue-500 focus:ring-offset-2">
 

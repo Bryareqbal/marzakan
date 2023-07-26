@@ -30,7 +30,6 @@ return new class() extends Migration
             $table->date('passport_expire_date')->nullable();
             $table->string('issuing_authority')->nullable();
             $table->foreignId('karmand_id')->constrained('users');
-            $table->foreignId('sarparshtyar_id')->constrained('sarparshtyars');
             $table->timestamps();
         });
     }

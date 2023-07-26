@@ -26,10 +26,10 @@
             </div>
             @csrf
             <div
-                class="flex w-full flex-col items-center space-x-reverse divide-y-2 md:flex-row md:divide-y-0 md:divide-x-2 md:divide-x-reverse">
+                class="flex w-full flex-col items-center space-x-reverse divide-y-2 md:flex-row md:divide-x-2 md:divide-y-0 md:divide-x-reverse">
 
                 <div class="flex basis-full flex-col space-y-5">
-                    <div class="flex justify-center">
+                    {{-- <div class="flex justify-center">
                         <div class="flex flex-col space-y-3">
                             <fieldset class="space-x-re space-x-5 rounded-lg border-2 border-green-500 p-4">
                                 <legend class="px-2">جۆری تۆمارکردنی زانیاری</legend>
@@ -46,6 +46,16 @@
                                         name="type_entering" />
                                     ئۆتۆماتیکی
                                 </label>
+                            </fieldset>
+                        </div>
+                    </div> --}}
+                    <div class="flex justify-center">
+                        <div class="flex flex-col space-y-3">
+                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                                <legend class="px-2">ئۆتۆماتیکی</legend>
+                                <input name="information" id="information" type="file" class="w-full"
+                                    value="{{ old('name') }}" />
+                                <x-error message="name" />
                             </fieldset>
                         </div>
                     </div>
@@ -123,7 +133,7 @@
                             </fieldset>
                         </div>
                     </div>
-                    <div id="auto_div" class="hidden grid-cols-1 gap-4 p-5 lg:grid-cols-2">
+                    {{-- <div id="auto_div" class="hidden grid-cols-1 gap-4 p-5 lg:grid-cols-2">
                         <div class="flex flex-col space-y-3">
                             <fieldset class="rounded-lg border-2 border-green-500 p-2">
                                 <legend class="px-2">ناوی چواری</legend>
@@ -196,7 +206,7 @@
                                 <x-error message="issuing_authority" />
                             </fieldset>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="grid basis-full grid-cols-1 gap-4 p-5 lg:grid-cols-2">
@@ -272,7 +282,7 @@
             <div class="mt-20 flex justify-center">
                 <button type="submit" class="flex items-center space-x-1 space-x-reverse">
                     <div
-                        class="flex items-center space-x-3 space-x-reverse rounded-md bg-gradient-to-br from-green-500 to-green-600 py-1 px-6 text-white">
+                        class="flex items-center space-x-3 space-x-reverse rounded-md bg-gradient-to-br from-green-500 to-green-600 px-6 py-1 text-white">
                         <span>زیادکردن</span>
                     </div>
                 </button>

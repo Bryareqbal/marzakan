@@ -57,13 +57,13 @@
                                     <input type="radio"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                         id="gender" value="{{ 1 }}" name="gender"
-                                        @checked(old('gender', $user->gender) === 1) />
+                                        @checked(old('gender', $user->gender) == 1) />
                                     نێر
                                 </label>
                                 <label for="gender2">
                                     <input type="radio" value="{{ 0 }}"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                        id="gender2" name="gender" @checked(old('gender', $user->gender) === 0) />
+                                        id="gender2" name="gender" @checked(old('gender', $user->gender) == 0) />
                                     مێ
                                 </label>
 
@@ -140,19 +140,19 @@
                                         <input type="radio"
                                             class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                             id="isActive" value="{{ 1 }}" name="isActive"
-                                            {{ old('isActive', $user->isActive) === 1 ? 'checked' : '' }} />
+                                            {{ old('isActive', $user->isActive) == 1 ? 'checked' : '' }} />
                                         چالاک
                                     </label>
                                     <label for="isActive2">
                                         <input type="radio" value="{{ 0 }}"
                                             class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                             id="isActive2" name="isActive"
-                                            {{ old('isActive', $user->isActive) === 0 ? 'checked' : '' }} />
+                                            {{ old('isActive', $user->isActive) == 0 ? 'checked' : '' }} />
                                         ناچالاک
                                     </label>
 
                                 </div>
-                                <x-error message="gender" />
+                                <x-error message="isActive" />
                             </fieldset>
                         </div>
                     @endif

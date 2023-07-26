@@ -74,3 +74,32 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::get('/invoice/{sardanikar}', 'invoice')->whereNumber('sardanikar');
     });
 });
+
+
+Route::get('/test', function () {
+    $slaw = file_get_contents('../public/slaw.txt');
+
+    $lines = explode("\r", $slaw);
+
+    // Regular expressions to extract the necessary fields
+    $namePattern = '/^P<([^<]+)<<([^<]+)<([^<]+)<([^<]+)<</';
+    $passportNumberPattern = '/^A([0-9]{9})[A-Z0-9]{3}[0-9]{1}([0-9]{1})/';
+
+    $result = array();
+
+    foreach ($lines as $line) {
+        if (preg_match($namePattern, $line, $nameMatches)) {
+            $result['lastName'] = $nameMatches[1];
+            $result['firstName'] = $nameMatches[2];
+            $result['middleName'] = $nameMatches[3];
+            $result['suffix'] = $nameMatches[4];
+        }
+        if (preg_match($passportNumberPattern, $line, $passportNumberMatches)) {
+            $result['passportNumber'] = $passportNumberMatches[1];
+            $result['birthDate'] = substr($passportNumberMatches[1], 1, 6); // Extract birthdate from passport number
+            $result['gender'] = intval($passportNumberMatches[2]) % 2 === 0 ? 'Female' : 'Male';
+        }
+    }
+
+    return $result;
+});
