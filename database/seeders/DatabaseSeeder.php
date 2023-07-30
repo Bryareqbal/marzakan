@@ -36,23 +36,23 @@ class DatabaseSeeder extends Seeder
             'rule_id' => 1,
             'marz_id' => 1,
         ]);
-        User::factory()->create([
-            'name' => 'halo',
-            'username' => 'halo',
-            'rule_id' => 2,
-            'marz_id' => 2,
-        ]);
-        User::factory()->create([
-            'name' => 'shad',
-            'username' => 'shad',
-            'rule_id' => 3,
-            'marz_id' => 3,
-        ]);
-        User::factory()->create([
-            'name' => 'k zmnako',
-            'username' => 'summary',
-            'marz_id' => 4,
-        ]);
+        // User::factory()->create([
+        //     'name' => 'halo',
+        //     'username' => 'halo',
+        //     'rule_id' => 2,
+        //     'marz_id' => 2,
+        // ]);
+        // User::factory()->create([
+        //     'name' => 'shad',
+        //     'username' => 'shad',
+        //     'rule_id' => 3,
+        //     'marz_id' => 3,
+        // ]);
+        // User::factory()->create([
+        //     'name' => 'k zmnako',
+        //     'username' => 'summary',
+        //     'marz_id' => 4,
+        // ]);
 
 
         // User::factory(20)->create();

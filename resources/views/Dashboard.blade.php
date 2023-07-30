@@ -38,7 +38,7 @@
                 </x-card>
             @endcan
             @canany(['user'])
-                <x-card route="sardanikar" label="سەردانیکەر" :count="$countSardanikar">
+                <x-card route="sardanikaran" label="سەردانیکەر" :count="$countSardanikar">
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#10b981">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

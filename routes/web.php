@@ -2,15 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\KarmandController;
 use App\Http\Controllers\MarzakanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PrintController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SardaniakanController;
 use App\Http\Controllers\sardanikarController;
-use App\Http\Controllers\SarparshtyarController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +62,12 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::patch('/{id}/update', 'updateSardanikar')->name('update-sardanikar')->whereNumber('id');
         Route::get('/showSardanikar', 'showSardanikar')->name('show-sardanikar');
     });
+
+    Route::controller(SardaniakanController::class)->prefix('/sardanikaran')->group(function () {
+        Route::get('/', 'index')->name('sardanikaran');
+        Route::post('/add', 'addSardanikaran')->name('add-sardanikaran');
+    });
+
     Route::controller(ReportController::class)->prefix('/reports')->group(function () {
         Route::get('/', 'index')->name('reports');
     });

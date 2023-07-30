@@ -15,21 +15,14 @@ return new class() extends Migration
             $table->id();
             $table->string('name');
             $table->string('nickname')->nullable();
-            $table->string('passport_number');
+            $table->string('passport_number')->unique();
             $table->date('birth_date');
             $table->boolean('gender');
             $table->string('nation')->default('IRAN');
             $table->string('phone');
-            $table->text('purpose_of_coming');
-            $table->string('address');
             $table->string('img')->nullable();
-            $table->enum('status', ['coming', 'leaving']);
-            $table->double('mount_of_money')->default(5000);
-            $table->string('targeted_person')->nullable();
-            $table->string('no_of_visitors');
             $table->date('passport_expire_date')->nullable();
             $table->string('issuing_authority')->nullable();
-            $table->foreignId('karmand_id')->constrained('users');
             $table->timestamps();
         });
     }

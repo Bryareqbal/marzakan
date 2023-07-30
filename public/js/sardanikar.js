@@ -111,3 +111,43 @@ function formatDate(dateString, isBirthDate) {
         : 2000 + year;
     return `${fullYear}-${month}-${day}`;
 }
+
+let camera_button = document.querySelector("#start-camera");
+let video = document.querySelector("#video");
+let click_button = document.querySelector("#click-photo");
+let canvas = document.querySelector("#canvas");
+let img = document.querySelector("#img");
+
+camera_button.addEventListener("click", async function () {
+    let stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false,
+    });
+    video.srcObject = stream;
+    video.classList.remove("hidden");
+    canvas.classList.add("hidden");
+});
+
+click_button.addEventListener(
+    "click",
+    function () {
+        canvas
+            .getContext("2d")
+            .drawImage(video, 0, 0, canvas.width, canvas.height);
+        let image_data_url = canvas.toDataURL("image/jpeg");
+
+        video.srcObject = null;
+        video.classList.add("hidden");
+        canvas.classList.remove("hidden");
+
+        canvas.toBlob(function (blob) {
+            let file = new File([blob], "captured_image.png", {
+                type: "image/png",
+            });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            img.files = dataTransfer.files;
+        });
+    },
+    "image/*"
+);

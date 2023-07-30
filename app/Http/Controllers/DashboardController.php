@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Karmand;
 use App\Models\Marzakan;
+use App\Models\sardaniakan;
 use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
 use App\Models\User;
@@ -18,15 +19,15 @@ class DashboardController extends Controller
         $countMarzakan = Marzakan::count();
         $countSarparshtyar = Sarparshtyar::count();
         $countKarmandkan = Karmand::count();
-        $countSardanikar = sardanikar::where('karmand_id', Auth::id())->count();
+        $countSardanikar = sardaniakan::where('karmand_id', Auth::id())->count();
         return view(
             'dashboard',
-            ['countusers' => $countusers,'countMarzakan' => $countMarzakan,
-                  'countSarparshtyar' => $countSarparshtyar,
-                  'countKarmandkan' => $countKarmandkan,
-                  'countSardanikar' => $countSardanikar]
+            [
+                'countusers' => $countusers, 'countMarzakan' => $countMarzakan,
+                'countSarparshtyar' => $countSarparshtyar,
+                'countKarmandkan' => $countKarmandkan,
+                'countSardanikar' => $countSardanikar
+            ]
         );
     }
-
-
 }
