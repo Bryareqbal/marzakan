@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\sardaniakan;
 use App\Models\sardanikar;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -65,5 +66,21 @@ class SardaniakanController extends Controller
         if ($newSardany->save()) {
             return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.')->with('id', $newSardany->id);
         }
+    }
+
+    public function showSardaniakan(Request $request)
+    {
+        $sardanikaran = sardaniakan::with('sardanikar')->when(!empty($request->search), function (Builder $query) use ($request) {
+            $query->whereHas('sardanikar', function (Builder $query) use ($request) {
+                $query->where('name', 'like', "%{$request->search}%")
+                    ->orWhere('passport_number', 'like', "%{$request->search}%")
+                    ->orWhere('phone', 'like', "%{$request->search}%")
+                    ->orWhere('nickname', 'like', "%{$request->search}%");
+            });
+        })->paginate(25);
+
+        return view('sardanikar.showSardanikar', [
+            'sardanikaran' => $sardanikaran,
+        ]);
     }
 }

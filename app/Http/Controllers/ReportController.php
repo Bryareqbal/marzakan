@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Karmand;
 use App\Models\Marzakan;
+use App\Models\sardaniakan;
 use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,23 +20,25 @@ class ReportController extends Controller
 
 
 
-        $query = sardanikar::with(['karmand', 'sarparshtyar.user'])->when(!empty($request->search), function (Builder $query) use ($request) {
+        $report = sardaniakan::with(['sardanikar'])->when(!empty($request->search), function (Builder $query) use ($request) {
             $query->where(function (Builder $query) use ($request) {
-                $query->orWhere('name', 'like', "%{$request->search}%")
+                $query->where('name', 'like', "%{$request->search}%")
                     ->orWhere('passport_number', 'like', "%{$request->search}%")
                     ->orWhere('phone', 'like', "%{$request->search}%");
             });
         })->when(!empty($request->karmand_id), function (Builder $query) use ($request) {
             $query->whereHas('karmand', function (Builder $query) use ($request) {
-                $query->where('id', 'like', "%{$request->karmand_id}%");
+                $query->where('id', $request->karmand_id);
             });
         })->when(!empty($request->sarparshtyar_id), function (Builder $query) use ($request) {
-            $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
-                $query->where('user_id', 'like', "%{$request->sarparshtyar_id}%");
+            $query->whereHas('karmand', function (Builder $query) use ($request) {
+                $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
+                    $query->where('id', $request->sarparshtyar_id);
+                });
             });
         })->when(!empty($request->marz_id), function (Builder $query) use ($request) {
-            $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
-                $query->where('marz_id', 'like', "%{$request->marz_id}%");
+            $query->whereHas('karmand.sarparshtyar.marz', function (Builder $query) use ($request) {
+                $query->where('id', $request->marz_id);
             });
         })->when(!empty($request->from) && !empty($request->to), function (Builder $query) use ($request) {
             $query->whereDate('created_at', '>=', $request->from)->whereDate('created_at', '<=', $request->to);
@@ -44,11 +47,11 @@ class ReportController extends Controller
         $request->flash('*');
 
         return view('Admin.Reports.Report', [
-            'reports' => $query->latest()->paginate(25),
+            'reports' => $report->latest()->paginate(25),
             'karmandkan' => $karmandkan,
             'sarprshtyarkan' => $sarprshtyarkan,
             'marzakan' => $marzakan,
-            'sumPrice' => $query->sum('mount_of_money'),
+            'sumPrice' => $report->sum('mount_of_money'),
         ]);
     }
 }

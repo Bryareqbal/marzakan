@@ -9,7 +9,8 @@
 
                 <span>{{ number_format($totalMoney, 0, '.', ',') }}</span>
             </h1>
-            <a href="{{ route('show-sardanikar') }}" class="inline-block rounded-md bg-green-500 p-2 text-white shadow">ژمارەی
+            <a href="{{ route('show-sardaniakan') }}"
+                class="inline-block rounded-md bg-green-500 p-2 text-white shadow">ژمارەی
                 سەردانیکەران:
 
                 <span>{{ number_format($counter, 0, '.', ',') }}</span>
@@ -36,7 +37,7 @@
                         <div>
                             <div class="mx-auto w-[15rem]">
                                 <label for="img">
-                                    <img src="{{ Storage::url('sardanikar/1rp5SMOGNWuOf5quCwdGnxHZGnYnY7A5t4bs5lIy.png') }}"
+                                    <img src="{{ Storage::url($sardanikar->img) }}"
                                         class="aspect-square w-full rounded object-cover object-center shadow"
                                         id="image" />
                                     <input type="file" onchange="uploadImage()" name="img" class="hidden"

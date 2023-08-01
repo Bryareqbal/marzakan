@@ -13,4 +13,9 @@ class sardaniakan extends Model
     {
         return $this->belongsTo(sardanikar::class);
     }
+
+    public function karmand()
+    {
+        return $this->belongsTo(User::class, 'karmand_id');
+    }
 }

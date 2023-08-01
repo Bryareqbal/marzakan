@@ -21,8 +21,9 @@ class sardanikar extends Model
     public function sarparshtyar()
     {
         return $this->belongsTo(Sarparshtyar::class, 'sarparshtyar_id');
-
     }
+
+
 
     // protected function img(): Attribute
     // {

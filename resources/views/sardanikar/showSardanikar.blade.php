@@ -6,7 +6,7 @@
         <h1 class="text-2xl">سەردانیکەران</h1>
         <div class="mx-auto w-full lg:w-[50rem]">
             <div class="w-full">
-                <form method="get" action="{{ route('show-sardanikar') }}" class="flex items-center">
+                <form method="get" action="{{ route('show-sardaniakan') }}" class="flex items-center">
                     <button type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor"
@@ -23,24 +23,37 @@
                     <table class="mt-6 w-full">
                         <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
                             <tr>
-                                <th class="py-3 px-2 text-right font-medium">#</th>
-                                <th class="py-3 px-1 text-right font-medium">ناو</th>
-                                @canany(['superadmin', 'sarparshtyar'])
-                                    <th class="py-3 px-1 text-center font-medium">چالاکی</th>
+                                <th class="px-2 py-3 text-right font-medium">#</th>
+                                <th class="px-1 py-3 text-right font-medium">ناو</th>
+                                <th class="px-1 py-3 font-medium">حاڵەت</th>
+                                <th class="px-1 py-3 font-medium">بڕی پارە</th>
+                                <th class="px-1 py-3 font-medium">بەروار</th>
+                                @canany(['user', 'sarparshtyar'])
+                                    <th class="px-1 py-3 text-center font-medium">چالاکی</th>
                                 @endcanany
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sardanikaran as $key => $sardanikar)
-                                <tr class="odd:bg-slate-100">
-                                    <td class="py-3 px-6 text-right">
+                            @foreach ($sardanikaran as $key => $sardani)
+                                <tr class="text-center odd:bg-slate-100">
+                                    <td class="px-6 py-3 text-right">
                                         {{ $sardanikaran->firstItem() + $key }}
                                     </td>
-                                    <td class="py-3 px-6 text-right capitalize">{{ $sardanikar->name }}</td>
-                                    <td class="py-3 px-6 text-right capitalize">
-                                        <button onclick="print({{ $sardanikar->id }})"
-                                            class="rounded-md bg-gradient-to-br from-green-500 to-green-600 px-3 py-2 text-white shadow">چاپکردن</button>
-                                    </td>
+                                    <td class="px-6 py-3 text-right capitalize">{{ $sardani->sardanikar->name }}</td>
+                                    <td class="px-6 py-3 capitalize">
+                                        {{ $sardani->status === 'coming' ? 'هاتن' : 'ڕۆشتن' }}</td>
+                                    <td class="px-6 py-3 capitalize">
+                                        {{ number_format($sardani->mount_of_money, 0, '.', ',') }}</td>
+                                    <td class="px-6 py-3 capitalize">
+                                        {{ $sardani->created_at->format('Y-m-d H:m:s') }}</td>
+                                    @canany(['user', 'sarparshtyar'])
+                                        <td class="flex justify-center px-6 py-3 capitalize">
+                                            <button onclick="print({{ $sardani->id }})"
+                                                class="rounded-md bg-gradient-to-br from-green-500 to-green-600 px-3 py-2 text-white shadow">چاپکردن</button>
+                                            {{-- <a href="{{ route('edit-sardanikar') }}"
+                                                class="inline-block rounded-md bg-gradient-to-br from-green-500 to-green-600 px-3 py-2 text-white shadow">گۆڕانکاری</a> --}}
+                                        </td>
+                                    @endcanany
                                 </tr>
                             @endforeach
                         </tbody>

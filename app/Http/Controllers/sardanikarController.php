@@ -22,8 +22,6 @@ class sardanikarController extends Controller
 
     public function addSardanikar(Request $request)
     {
-
-
         Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'nickname' => ['required', 'string', 'max:255'],
@@ -65,6 +63,8 @@ class sardanikarController extends Controller
             $newSardanikar->img = Storage::disk('public')->put('sardanikar', $request->img);
         }
         $newSardanikar->save();
+
+        return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمار کرا');
     }
 
     public function editSardanikar($id)
@@ -138,28 +138,5 @@ class sardanikarController extends Controller
         }
         $sardanikar->save();
         return redirect()->back()->with('success', 'بەسەرکەوتووی گۆڕدرا.')->with('id', $sardanikar->id);
-    }
-
-    public function showSardanikar(Request $request)
-    {
-        $sardanikaran = sardaniakan::where('karmand_id', Auth::id())->when(!empty($request->search), function (Builder $query) use ($request) {
-            $query->wherehas('sardanikar', function (Builder $query) use ($request) {
-
-                $query->where('name', 'like', "%{$request->search}%")
-                    ->orWhere('passport_number', 'like', "%{$request->search}%")
-                    ->orWhere('phone', 'like', "%{$request->search}%")
-                    ->orWhere('nickname', 'like', "%{$request->search}%");
-                // ->orWhereHas('karmand', function (Builder $query) use ($request) {
-                //     $query->where('name', 'like', "%{$request->search}%");
-                // })
-                // ->orWhereHas('sarparshtyar.user', function (Builder $query) use ($request) {
-                //     $query->where('name', 'like', "%{$request->search}%");
-                // })
-            });
-        })->paginate(25);
-
-        return view('sardanikar.showSardanikar', [
-            'sardanikaran' => $sardanikaran,
-        ]);
     }
 }

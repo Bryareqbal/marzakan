@@ -170,18 +170,21 @@
                                 <td class="px-6 py-3 text-right">
                                     {{ $reports->firstItem() + $key }}
                                 </td>
-                                <td class="px-6 py-3 text-right capitalize">{{ $report->name }}</td>
+                                <td class="px-6 py-3 text-right capitalize">{{ $report->sardanikar->name }}</td>
                                 <td class="px-6 py-3 text-right capitalize">
                                     @if ($report->sarparshtyar !== null)
-                                        {{ $report->sarparshtyar->user->name }}
+                                        {{ $report->sarparshtyar->name }}
+                                    @else
+                                        -
                                     @endif
                                 </td>
                                 <td class="px-6 py-3 text-right capitalize">
                                     {{ $report->karmand->name }}
+
                                 </td>
-                                <td class="px-6 py-3 text-center">{{ $report->passport_number }}</td>
-                                <td class="px-6 py-3 text-center">{{ $report->nation }}</td>
-                                <td class="px-6 py-3 text-center">{{ $report->phone }}</td>
+                                <td class="px-6 py-3 text-center">{{ $report->sardanikar->passport_number }}</td>
+                                <td class="px-6 py-3 text-center">{{ $report->sardanikar->nation }}</td>
+                                <td class="px-6 py-3 text-center">{{ $report->sardanikar->phone }}</td>
                                 <td class="px-6 py-3 text-center">
                                     {{ number_format($report->mount_of_money, 0, '.', ',') }}
                                 </td>
