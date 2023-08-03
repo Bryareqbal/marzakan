@@ -62,12 +62,15 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::post('/add', 'addSardanikar')->name('add-sardanikar');
         Route::get('/{id}/edit', 'editSardanikar')->name('edit-sardanikar')->whereNumber('id');
         Route::patch('/{id}/update', 'updateSardanikar')->name('update-sardanikar')->whereNumber('id');
+        Route::get('/show', 'showSardanikaran')->name('show-sardanikaran');
     });
 
-    Route::controller(SardaniakanController::class)->prefix('/sardanikaran')->group(function () {
-        Route::get('/', 'index')->name('sardanikaran');
+    Route::controller(SardaniakanController::class)->prefix('/sardaniakan')->group(function () {
+        Route::get('/', 'index')->name('sardaniakan');
         Route::post('/add', 'addSardanikaran')->name('add-sardanikaran');
         Route::get('/showSardaniakan', 'showSardaniakan')->name('show-sardaniakan');
+        Route::get('/{sardani}/edit', 'editSardani')->name('edit-sardani')->whereNumber('sardani');
+        Route::patch('/{sardani}/update', 'updateSardani')->name('update-sardani')->whereNumber('sardani');
     });
 
     Route::controller(ReportController::class)->prefix('/reports')->group(function () {

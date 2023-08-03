@@ -1,9 +1,9 @@
 @extends('layouts.Auth')
 
-@section('title', 'سەردانیکەران')
+@section('title', 'سەردانییەکان')
 @section('content')
     <div class="container mx-auto mt-10 space-y-5 px-3">
-        <h1 class="text-2xl">سەردانیکەران</h1>
+        <h1 class="text-2xl">سەردانییەکان</h1>
         <div class="mx-auto w-full lg:w-[50rem]">
             <div class="w-full">
                 <form method="get" action="{{ route('show-sardaniakan') }}" class="flex items-center">
@@ -18,7 +18,7 @@
                     <x-input name="search" type="search" class="w-[20] pr-3" placeholder="گەڕان" />
                 </form>
             </div>
-            @if ($sardanikaran->isNotEmpty())
+            @if ($sardaniakan->isNotEmpty())
                 <div class="">
                     <table class="mt-6 w-full">
                         <thead class="rounded-lg bg-gradient-to-br from-green-500 to-green-600 text-white">
@@ -34,10 +34,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($sardanikaran as $key => $sardani)
+                            @foreach ($sardaniakan as $key => $sardani)
                                 <tr class="text-center odd:bg-slate-100">
                                     <td class="px-6 py-3 text-right">
-                                        {{ $sardanikaran->firstItem() + $key }}
+                                        {{ $sardaniakan->firstItem() + $key }}
                                     </td>
                                     <td class="px-6 py-3 text-right capitalize">{{ $sardani->sardanikar->name }}</td>
                                     <td class="px-6 py-3 capitalize">
@@ -47,11 +47,11 @@
                                     <td class="px-6 py-3 capitalize">
                                         {{ $sardani->created_at->format('Y-m-d H:m:s') }}</td>
                                     @canany(['user', 'sarparshtyar'])
-                                        <td class="flex justify-center px-6 py-3 capitalize">
+                                        <td class="flex justify-center space-x-3 space-x-reverse px-6 py-3 capitalize">
                                             <button onclick="print({{ $sardani->id }})"
                                                 class="rounded-md bg-gradient-to-br from-green-500 to-green-600 px-3 py-2 text-white shadow">چاپکردن</button>
-                                            {{-- <a href="{{ route('edit-sardanikar') }}"
-                                                class="inline-block rounded-md bg-gradient-to-br from-green-500 to-green-600 px-3 py-2 text-white shadow">گۆڕانکاری</a> --}}
+                                            <a href="{{ route('edit-sardani', ['sardani' => $sardani->id]) }}"
+                                                class="inline-block rounded-md border bg-white px-3 py-2 text-slate-700 shadow">گۆڕانکاری</a>
                                         </td>
                                     @endcanany
                                 </tr>
@@ -60,7 +60,7 @@
                     </table>
                 </div>
                 <div>
-                    {{ $sardanikaran->links() }}
+                    {{ $sardaniakan->links() }}
                 </div>
             @else
                 <x-notFound />

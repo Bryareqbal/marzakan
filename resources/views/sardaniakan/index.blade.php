@@ -1,6 +1,6 @@
 @extends('layouts.Auth')
 
-@section('title', 'سەردانیکەر')
+@section('title', 'سەردانییەکان')
 
 @section('content')
     <div class="container mx-auto px-3">
@@ -22,7 +22,7 @@
 
 
                 <div class="flex basis-full flex-col space-y-5 self-start">
-                    <form action="{{ route('sardanikaran') }}" method="get" enctype="multipart/form-data">
+                    <form action="{{ route('sardaniakan') }}" method="get" enctype="multipart/form-data">
                         <div class="flex flex-col items-start">
                             <div>
                                 <x-input placeholder="گەڕان...(ژمارەی پاسپۆرت)" name="search" class="min-w-[20rem]"
@@ -40,8 +40,6 @@
                                     <img src="{{ Storage::url($sardanikar->img) }}"
                                         class="aspect-square w-full rounded object-cover object-center shadow"
                                         id="image" />
-                                    <input type="file" onchange="uploadImage()" name="img" class="hidden"
-                                        id="img" />
                                 </label>
                                 <x-error message="img" />
                             </div>
@@ -115,8 +113,8 @@
                                     <div class="flex flex-col space-y-3">
                                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                                             <legend class="px-2">دەسەڵاتی دەرکردن</legend>
-                                            <x-input disabled name="issuing_authority" id="issuing_authority"
-                                                type="text" class="w-full rounded-lg border border-slate-300 py-2 pr-3"
+                                            <x-input disabled name="issuing_authority" id="issuing_authority" type="text"
+                                                class="w-full rounded-lg border border-slate-300 py-2 pr-3"
                                                 value="{{ $sardanikar->issuing_authority ?? 'IRAN' }}" />
                                             <x-error message="issuing_authority" />
                                         </fieldset>

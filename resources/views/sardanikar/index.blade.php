@@ -4,24 +4,24 @@
     <div class="mx-auto mt-5 max-w-5xl">
         <form action="{{ route('add-sardanikar') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="mx-auto w-[15rem] space-y-3">
-                <div>
+            <div class="mx-auto flex flex-col items-center space-y-3">
+                <div class="w-[15rem]">
                     <video id="video" width="320" height="240"
                         class="aspect-square w-full rounded object-cover object-center shadow" autoplay></video>
                     <canvas id="canvas" class="hidden aspect-square w-full rounded object-cover object-center shadow"
                         width="320" height="240"></canvas>
+                    <img src="" id="image"
+                        class="hidden aspect-square w-full rounded object-cover object-center shadow" alt="">
                 </div>
                 <div class="space-x-3 space-x-reverse">
                     <button type="button" class="rounded-md bg-green-500 px-3 py-2 text-white shadow"
                         id="start-camera">کردنەوەی کامێرا</button>
                     <button type="button" class="rounded-md bg-green-500 px-3 py-2 text-white shadow" id="click-photo">
                         وێنە گرتن</button>
+                    <label class="inline rounded-md bg-green-500 px-3 py-2 text-white shadow" for="img">زیادکردنی
+                        وێنە</label>
                 </div>
-                <input type="file" name="img" class="sr-only" id="img" />
-                {{-- <label for="img">
-                    <img src="{{ Storage::url('sardanikar/1rp5SMOGNWuOf5quCwdGnxHZGnYnY7A5t4bs5lIy.png') }}"
-                        class="aspect-square w-full rounded object-cover object-center shadow" id="image" />
-                </label> --}}
+                <input type="file" name="img" onchange="uploadImage()" class="sr-only" id="img" />
                 <x-error message="img" />
             </div>
             <div class="mt-10 flex basis-full flex-col space-y-5">
@@ -141,7 +141,6 @@
                 <button class="rounded-md bg-green-500 px-3 py-2 text-white shadow-md">تۆمارکردن</button>
             </div>
         </form>
-        {{ $errors }}
     </div>
 
     @push('scripts')

@@ -19,7 +19,9 @@ const uploadImage = (e) => {
     const url = URL.createObjectURL(file);
     const img = document.getElementById("image");
     img.setAttribute("src", url);
-    console.log(img);
+    img.classList.remove("hidden");
+    video.classList.add("hidden");
+    canvas.classList.add("hidden");
 };
 
 const information = document.getElementById("information");
@@ -54,7 +56,6 @@ information.addEventListener("change", (e) => {
 
             //2
 
-            console.log(lines);
             const match2 = lines[1].match(
                 /^([A-Z0-9]{9})(.)([A-Z]{3})(\d{6})(.)([MF])(\d{6})/
             );
@@ -117,6 +118,7 @@ let video = document.querySelector("#video");
 let click_button = document.querySelector("#click-photo");
 let canvas = document.querySelector("#canvas");
 let img = document.querySelector("#img");
+let image = document.querySelector("#image");
 
 camera_button.addEventListener("click", async function () {
     let stream = await navigator.mediaDevices.getUserMedia({
@@ -126,6 +128,7 @@ camera_button.addEventListener("click", async function () {
     video.srcObject = stream;
     video.classList.remove("hidden");
     canvas.classList.add("hidden");
+    image.classList.add("hidden");
 });
 
 click_button.addEventListener(

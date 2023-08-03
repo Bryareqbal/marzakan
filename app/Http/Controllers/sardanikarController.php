@@ -85,13 +85,7 @@ class sardanikarController extends Controller
             "gender" => ['required', 'boolean'],
             "nation" => ['required', 'string', 'max:255'],
             "phone" => ['required', 'min:11', 'max:11'],
-            "purpose_of_coming" => ['required', 'string', 'max:255'],
-            "address" => ['required', 'string'],
-            "img" => ['nullable', 'file', 'image'],
-            "status" => ['required', Rule::in(['coming', 'leaving'])],
-            "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
-            "targeted_person" => ['nullable', 'string', 'max:255'],
-            "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
+            "image" => ['nullable', 'file', 'image'],
             "passport_expire_date" => ['nullable', 'date'],
             "issuing_authority" => ['nullable', 'string', 'max:255'],
         ], [], [
@@ -102,13 +96,7 @@ class sardanikarController extends Controller
             "gender" => '(ڕەگەز)',
             "nation" => '(نەتەوە)',
             "phone" => '(ژ.مۆبایل)',
-            "purpose_of_coming" => '(هۆکاری هاتن)',
-            "address" => '(ناونیشانی شوێنی مانەوە)',
-            "img" => '(وێنە)',
-            "status" => '(حاڵەت)',
-            "mount_of_money" => '(بری پارە)',
-            "targeted_person" => '(ناوی ئەو کەسەی دەچێتە لای)',
-            "no_of_visitors" => '(ژمارەی سەردانیکەران)',
+            "image" => '(وێنە)',
             "passport_expire_date" => '(بەرواری بەسەرچوونی پاسپۆرت)',
             "issuing_authority" => '(دەسەڵاتی دەرکردن)',
         ])->validate();
@@ -121,22 +109,25 @@ class sardanikarController extends Controller
         $sardanikar->gender = $request->gender;
         $sardanikar->nation = $request->nation;
         $sardanikar->phone = $request->phone;
-        $sardanikar->purpose_of_coming = $request->purpose_of_coming;
-        $sardanikar->address = $request->address;
-        $sardanikar->status = $request->status;
-        $sardanikar->mount_of_money = $request->mount_of_money === 'free' ? 0 : $request->mount_of_money;
-        $sardanikar->targeted_person = $request->targeted_person;
-        $sardanikar->no_of_visitors = $request->no_of_visitors;
         $sardanikar->passport_expire_date = $request->passport_expire_date;
         $sardanikar->issuing_authority = $request->issuing_authority;
-        if ($request->hasFile('img')) {
+
+        if ($request->hasFile('image')) {
 
             if (Storage::fileExists($sardanikar->img)) {
                 Storage::delete($sardanikar->img);
             }
-            $sardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('img'));
+            $sardanikar->img = Storage::disk('public')->put('sardanikar/', $request->file('image'));
         }
         $sardanikar->save();
         return redirect()->back()->with('success', 'بەسەرکەوتووی گۆڕدرا.')->with('id', $sardanikar->id);
+    }
+
+    public function showSardanikaran()
+    {
+        $sardanikaran = sardanikar::paginate(25);
+        return view('sardanikar.showSardanikaran', [
+            'sardanikaran' => $sardanikaran,
+        ]);
     }
 }

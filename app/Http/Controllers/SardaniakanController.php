@@ -24,7 +24,7 @@ class SardaniakanController extends Controller
 
         $totalMoney = sardaniakan::where('karmand_id', Auth::id())->sum('mount_of_money');
         $counter = sardaniakan::where('karmand_id', Auth::id())->count();
-        return view('sardanikaran.index', [
+        return view('sardaniakan.index', [
             'totalMoney' => $totalMoney,
             'counter' => $counter,
             'sardanikar' => $sardanikar ?? null,
@@ -70,7 +70,7 @@ class SardaniakanController extends Controller
 
     public function showSardaniakan(Request $request)
     {
-        $sardanikaran = sardaniakan::with('sardanikar')->when(!empty($request->search), function (Builder $query) use ($request) {
+        $sardaniakan = sardaniakan::with('sardanikar')->when(!empty($request->search), function (Builder $query) use ($request) {
             $query->whereHas('sardanikar', function (Builder $query) use ($request) {
                 $query->where('name', 'like', "%{$request->search}%")
                     ->orWhere('passport_number', 'like', "%{$request->search}%")
@@ -79,8 +79,37 @@ class SardaniakanController extends Controller
             });
         })->paginate(25);
 
-        return view('sardanikar.showSardanikar', [
-            'sardanikaran' => $sardanikaran,
+        return view('sardaniakan.showSardaniakan', [
+            'sardaniakan' => $sardaniakan,
         ]);
+    }
+
+    public function editSardani(sardaniakan $sardani)
+    {
+        $sardani->load('sardanikar');
+        return view('sardaniakan.editSardani', ['sardani' => $sardani]);
+    }
+
+    public function updateSardani($sardani, Request $request)
+    {
+        Validator::validate($request->all(), [
+            "purpose_of_coming" => ['required', 'string'],
+            "address" => ['required', 'string'],
+            "status" => ['required', Rule::in(['coming', 'leaving'])],
+            "mount_of_money" => ['required', Rule::in(['free', 5000, 10000])],
+            "targeted_person" => ['nullable', 'string', 'max:255'],
+            "no_of_visitors" => ['nullable', 'numeric', 'min:0'],
+            // "sardanikar_id" => ['required', 'numeric', 'exists:sardanikars,id'],
+        ]);
+        $sardani = sardaniakan::find($sardani);
+        $sardani->purpose_of_coming = $request->purpose_of_coming;
+        $sardani->address = $request->address;
+        $sardani->status = $request->status;
+        $sardani->mount_of_money = $request->mount_of_money;
+        $sardani->targeted_person = $request->targeted_person;
+        $sardani->no_of_visitors = $request->no_of_visitors;
+        $sardani->save();
+
+        return redirect()->back()->with('success', 'بەسەرکەوتووی تۆمارکرا.');
     }
 }
