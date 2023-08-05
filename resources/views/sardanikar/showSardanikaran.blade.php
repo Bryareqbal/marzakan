@@ -6,7 +6,7 @@
     <div class="container mx-auto mt-10 px-5">
         <h1 class="text-2xl">سەردانیکەران</h1>
         <div class="w-full">
-            <form method="get" action="{{ route('show-sardaniakan') }}" class="flex items-center">
+            <form method="get" action="{{ route('show-sardanikaran') }}" class="flex items-center">
                 <button type="submit">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor"
@@ -15,7 +15,8 @@
                             d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
                 </button>
-                <x-input name="search" type="search" class="w-[20] pr-3" placeholder="گەڕان" />
+                <x-input name="search" type="search" class="w-[20] pr-3" placeholder="گەڕان"
+                    value="{{ old('search') }}" />
             </form>
         </div>
         @if ($sardanikaran->isNotEmpty())

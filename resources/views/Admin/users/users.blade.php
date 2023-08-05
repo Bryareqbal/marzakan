@@ -206,6 +206,7 @@
                             <th class="px-6 py-3 text-center font-medium">مەرز</th>
                             <th class="px-6 py-3 text-center font-medium">ژمارە تەلەفون</th>
                             <th class="px-6 py-3 text-center font-medium">بەروار</th>
+                            <th class="px-6 py-3 text-center font-medium">حاڵەت</th>
                             <th class="px-6 py-3 text-center font-medium">چالاکی</th>
                         </tr>
                     </thead>
@@ -258,6 +259,8 @@
                                 <td class="px-6 py-3 text-center font-sans">{{ $user->phone_no }}</td>
                                 <td class="px-6 py-3 text-center font-sans md:truncate">
                                     {{ $user->created_at->format('Y-m-d H:i:s A') }}</td>
+                                <td class="px-6 py-3 text-center font-sans md:truncate">
+                                    {{ $user->isActive }}</td>
                                 <td class="relative px-6 py-3 text-center">
                                     <div class="flex items-end justify-end space-x-3 space-x-reverse">
                                         @if ($user->rule->rule !== 'superadmin')
@@ -284,24 +287,31 @@
                                             </svg>
 
                                         </a>
-                                        <span title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
-                                            class="{{ $user->isActive ? 'border-emerald-200' : 'border-red-200' }} flex h-10 w-10 items-center justify-center rounded border-2">
-
-                                            @unless ($user->isActive)
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                                                </svg>
-                                            @else
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor"
-                                                    class="h-6 w-6 text-emerald-500">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M4.5 12.75l6 6 9-13.5" />
-                                                </svg>
-                                            @endunless
-                                        </span>
+                                        @if ($user->rule->rule !== 'superadmin')
+                                            <form action="{{ route('changeStatus', ['id' => $user->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="patch" />
+                                                <button title="{{ $user->isActive ? 'چالاک' : 'ناچالاک' }}"
+                                                    class="{{ $user->isActive ? 'border-emerald-200' : 'border-red-200' }} flex h-10 w-10 items-center justify-center rounded border-2">
+                                                    @unless ($user->isActive)
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="h-6 w-6 text-red-500">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                                                        </svg>
+                                                    @else
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="h-6 w-6 text-emerald-500">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M4.5 12.75l6 6 9-13.5" />
+                                                        </svg>
+                                                    @endunless
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>

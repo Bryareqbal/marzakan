@@ -161,4 +161,14 @@ class UserController extends Controller
             return redirect()->route('users')->with('success', 'بەسەرکەتووی نوێکرایەوە .');
         }
     }
+
+    public function changeStatus($id)
+    {
+        $user = User::find($id);
+
+        $user->isActive = !$user->isActive;
+        $user->save();
+
+        return redirect()->back()->with('success', 'بەسەرکەوتووی گۆڕدرا');
+    }
 }

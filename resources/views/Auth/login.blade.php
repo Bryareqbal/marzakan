@@ -12,7 +12,7 @@
                 </svg>
             </div>
         </div>
-        <div class="rounded-xl bg-white px-10 pt-6 pb-8">
+        <div class="rounded-xl bg-white px-10 pb-8 pt-6">
             <h1 class="text-2xl font-semibold text-slate-900">چوونەژوورەوە</h1>
             @if (session('message'))
                 <small class="block rounded-lg p-1 text-center text-sm text-red-500">
@@ -27,7 +27,7 @@
                             class="peer w-full border-b-2 border-slate-300 py-2 pr-2 placeholder-transparent placeholder:font-sans focus:border-emerald-500 focus:outline-none"
                             placeholder="ناوی بەکارهێنەر" value="{{ old('username') }}">
                         <label for="username"
-                            class="absolute right-0 -top-3.5 capitalize text-slate-700 transition-all duration-200 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:-top-3.5 peer-focus:text-slate-600">ناوی
+                            class="absolute -top-3.5 right-0 capitalize text-slate-700 transition-all duration-200 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-400 peer-focus:-top-3.5 peer-focus:text-slate-600">ناوی
                             بەکارهێنەر</label>
                         <x-error message="username" />
                     </div>
@@ -41,7 +41,7 @@
                         <x-error message="password" />
                     </div>
                 </div>
-                <div class="mt-10 mb-6 flex justify-center">
+                <div class="mb-6 mt-10 flex justify-center">
                     <button type="submit"
                         class="w-2/3 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 py-2 text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">چوونەژوورەوە</button>
                 </div>

@@ -115,10 +115,11 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ئەرک </legend>
+
                             <x-select name="role_id" id="role">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($Roles as $key => $role)
-                                    <option @selected(old('role_id', $user->rule_id) === $role->id) value="{{ $role->id }}">
+                                    <option @selected(old('role_id', $user->rule_id) == $role->id) value="{{ $role->id }}">
                                         {{ $role->rule }}
                                     </option>
                                 @endforeach
@@ -133,7 +134,7 @@
                             <x-select name="sarparshtyar_id">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($sarparshtyarakan as $key => $sarparshtyar)
-                                    <option @selected(old('sarparshtyar_id', $user->sarparshtyar) == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                    <option @selected(old('sarparshtyar_id', $user->sarparshtyar_id) == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
                                         {{ $sarparshtyar->name }}
                                     </option>
                                 @endforeach

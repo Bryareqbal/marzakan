@@ -62,7 +62,7 @@
                 <fieldset class="rounded-lg border-2 border-green-500 p-2">
                     <legend class="px-2">ژمارە تەلەفون</legend>
                     <x-input class="w-full" name="phone_no" id="phone_no" maxLength="11" type="text"
-                        value="{{ $user->phone_no }}" />
+                        value="{{ old('phone_no', $user->phone_no) }}" />
                     <x-error message="phone_no" />
                 </fieldset>
             </div>
@@ -77,7 +77,7 @@
                     </svg>
                 </span>
                 <div
-                    class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 py-1 px-6 text-white">
+                    class="flex items-center space-x-3 space-x-reverse rounded-bl-md rounded-tl-md bg-gradient-to-br from-green-500 to-green-600 px-6 py-1 text-white">
                     <span>نوێکردنەوە</span>
                 </div>
             </button>

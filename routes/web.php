@@ -35,26 +35,43 @@ Route::middleware(['guest'])->prefix('/login')->group(function () {
 Route::middleware(['auth', 'isActive'])->group(function () {
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::middleware('hasRole:superadmin')->controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
-        Route::get('/', 'index')->name('marzakan');
-        Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
-        Route::get('/{id}/edit', 'editMarzakan')->name('editMarzakan')->whereNumber('id');
-        Route::post('/{id}', 'saveMarzakan')->name('saveMarzakan');
+    Route::middleware('hasRole:superadmin')->group(function () {
+        Route::controller(MarzakanController::class)->prefix('/marzakan')->group(function () {
+            Route::get('/', 'index')->name('marzakan');
+            Route::post('/add', 'addNewMarzakan')->name('addNewMarzakan');
+            Route::get('/{id}/edit', 'editMarzakan')->name('editMarzakan')->whereNumber('id');
+            Route::post('/{id}', 'saveMarzakan')->name('saveMarzakan');
+        });
+        Route::controller(UserController::class)->prefix('/users')->group(function () {
+            Route::get('/', 'index')->name('users');
+            Route::post('/add', 'userAdd')->name('userAdd');
+            Route::prefix('/{id}')->group(function () {
+                Route::get('/editUser', 'editUser')->name('editUser');
+                Route::post('/saveUser', 'saveUser')->name('saveUser');
+                Route::get('/editPassword', 'editPassword')->name('editPassword1');
+                Route::post('/savePassword', 'savePassword')->name('savePassword');
+                Route::patch('/changeStatus', 'changeStatus')->name('changeStatus');
+            });
+        });
     });
 
-    Route::controller(UserController::class)->prefix('/users')->group(function () {
-        Route::get('/', 'index')->name('users');
-        Route::post('/add', 'userAdd')->name('userAdd');
-        Route::get('/{id}/editUser', 'editUser')->name('editUser');
-        Route::post('/{id}/saveUser', 'saveUser')->name('saveUser');
-        Route::get('/{id}/editPassword', 'editPassword')->name('editPassword1');
-        Route::post('/{id}/savePassword', 'savePassword')->name('savePassword');
-    });
 
     Route::controller(ProfileController::class)->prefix('/profile')->group(function () {
         Route::get('/', 'index')->name('profile');
         Route::post('/{id}/editProfile', 'editProfile')->name('editProfile');
         Route::post('/{id}/profileEditPassword', 'editPassword')->name('editPassword');
+    });
+
+    Route::middleware('hasRole:karmand')->group(function () {
+
+
+        Route::controller(SardaniakanController::class)->prefix('/sardaniakan')->group(function () {
+            Route::get('/', 'index')->name('sardaniakan');
+            Route::post('/add', 'addSardanikaran')->name('add-sardanikaran');
+            Route::get('/showSardaniakan', 'showSardaniakan')->name('show-sardaniakan');
+            Route::get('/{sardani}/edit', 'editSardani')->name('edit-sardani')->whereNumber('sardani');
+            Route::patch('/{sardani}/update', 'updateSardani')->name('update-sardani')->whereNumber('sardani');
+        });
     });
 
     Route::controller(sardanikarController::class)->prefix('/sardanikar')->group(function () {
@@ -65,15 +82,7 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::get('/show', 'showSardanikaran')->name('show-sardanikaran');
     });
 
-    Route::controller(SardaniakanController::class)->prefix('/sardaniakan')->group(function () {
-        Route::get('/', 'index')->name('sardaniakan');
-        Route::post('/add', 'addSardanikaran')->name('add-sardanikaran');
-        Route::get('/showSardaniakan', 'showSardaniakan')->name('show-sardaniakan');
-        Route::get('/{sardani}/edit', 'editSardani')->name('edit-sardani')->whereNumber('sardani');
-        Route::patch('/{sardani}/update', 'updateSardani')->name('update-sardani')->whereNumber('sardani');
-    });
-
-    Route::controller(ReportController::class)->prefix('/reports')->group(function () {
+    Route::middleware('hasRole:superadmin')->controller(ReportController::class)->prefix('/reports')->group(function () {
         Route::get('/', 'index')->name('reports');
     });
 

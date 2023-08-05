@@ -123,9 +123,14 @@ class sardanikarController extends Controller
         return redirect()->back()->with('success', 'بەسەرکەوتووی گۆڕدرا.')->with('id', $sardanikar->id);
     }
 
-    public function showSardanikaran()
+    public function showSardanikaran(Request $request)
     {
-        $sardanikaran = sardanikar::paginate(25);
+
+        $sardanikaran = sardanikar::when(!empty($request->search), function (Builder $query) use ($request) {
+            $query->where('name', 'like', "%{$request->search}%");
+        })->paginate(25);
+
+        $request->flash();
         return view('sardanikar.showSardanikaran', [
             'sardanikaran' => $sardanikaran,
         ]);
