@@ -104,7 +104,7 @@ class UserController extends Controller
     {
 
         $editUser = User::with(['rule'])->where('id', $request->id)->firstOrFail();
-        $validated = Validator::make($request->all(), [
+        $validated = Validator::validate($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'username' => ['required', 'alpha_dash', 'max:255', ValidationRule::unique('users', 'username')->ignore($editUser->id)],
             'gender' => ['required', 'boolean'],
@@ -124,7 +124,7 @@ class UserController extends Controller
             'role_id' => '(ئەرک)',
             'sarparshtyar_id' => '(سەرپەرشتیار)',
             'marz_id' => '(مەرز)',
-        ])->validate();
+        ]);
 
         $editUser->name = $request->name;
         $editUser->username = $request->username;

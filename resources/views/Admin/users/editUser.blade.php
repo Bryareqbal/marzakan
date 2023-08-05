@@ -89,74 +89,75 @@
                         </fieldset>
                     </div>
 
-                    @if ($user->rule_id !== 1 && Auth::user()->rule->rule === 'superadmin')
-                        <div class="flex flex-col space-y-3">
-                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                                <legend class="px-2">ئەرک </legend>
-                                <x-select name="role_id" id="role">
-                                    <option value="">هەڵبژێرە</option>
-                                    @foreach ($Roles as $key => $role)
-                                        <option @selected(old('role_id', $user->rule_id) == $role->id) value="{{ $role->id }}">
-                                            {{ $role->rule }}
-                                        </option>
-                                    @endforeach
-                                </x-select>
-                                <x-error message="role_id" />
-                            </fieldset>
-                        </div>
-                        <div class="hi hidden flex-col space-y-3" id="sarparshtyar">
-                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                                <legend class="px-2">سەرپەرشتیار </legend>
-                                <x-select name="sarparshtyar_id">
-                                    <option value="">هەڵبژێرە</option>
-                                    @foreach ($sarparshtyarakan as $key => $sarparshtyar)
-                                        <option @selected(old('sarparshtyar_id', $user->sarparshtyar) == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
-                                            {{ $sarparshtyar->name }}
-                                        </option>
-                                    @endforeach
-                                </x-select>
-                                <x-error message="sarparshtyar_id" />
-                            </fieldset>
-                        </div>
-                        <div class="hidden flex-col space-y-3" id="marz">
-                            <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                                <legend class="px-2">مەرز </legend>
-                                <x-select name="marz_id">
-                                    <option value="">هەڵبژێرە</option>
-                                    @foreach ($marzakan as $key => $marz)
-                                        <option @selected(old('marz_id', $user->marz_id) === $marz->id) value="{{ $marz->id }}">
-                                            {{ $marz->name }}
-                                        </option>
-                                    @endforeach
-                                </x-select>
-                                <x-error message="marz_id" />
-                            </fieldset>
-                        </div>
-                        <div class="flex flex-col space-y-3">
-                            <fieldset class="rounded-lg border-2 border-green-500 p-3">
-                                <legend class="px-2">باری بەکارهێنەر</legend>
-                                <div class="flex space-x-3 space-x-reverse p-1">
-                                    <label for="isActive">
-                                        <input type="radio"
-                                            class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                            id="isActive" value="{{ 1 }}" name="isActive"
-                                            {{ old('isActive', $user->isActive) == 1 ? 'checked' : '' }} />
-                                        چالاک
-                                    </label>
-                                    <label for="isActive2">
-                                        <input type="radio" value="{{ 0 }}"
-                                            class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                            id="isActive2" name="isActive"
-                                            {{ old('isActive', $user->isActive) == 0 ? 'checked' : '' }} />
-                                        ناچالاک
-                                    </label>
+                    <div class="flex flex-col space-y-3">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-3">
+                            <legend class="px-2">باری بەکارهێنەر</legend>
+                            <div class="flex space-x-3 space-x-reverse p-1">
+                                <label for="isActive">
+                                    <input type="radio"
+                                        class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                        id="isActive" value="{{ 1 }}" name="isActive"
+                                        {{ old('isActive', $user->isActive) == 1 ? 'checked' : '' }} />
+                                    چالاک
+                                </label>
+                                <label for="isActive2">
+                                    <input type="radio" value="{{ 0 }}"
+                                        class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
+                                        id="isActive2" name="isActive"
+                                        {{ old('isActive', $user->isActive) == 0 ? 'checked' : '' }} />
+                                    ناچالاک
+                                </label>
 
-                                </div>
-                                <x-error message="isActive" />
-                            </fieldset>
-                        </div>
-                    @endif
+                            </div>
+                            <x-error message="isActive" />
+                        </fieldset>
+                    </div>
+                    <div class="flex flex-col space-y-3">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                            <legend class="px-2">ئەرک </legend>
+                            <x-select name="role_id" id="role">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($Roles as $key => $role)
+                                    <option @selected(old('role_id', $user->rule_id) === $role->id) value="{{ $role->id }}">
+                                        {{ $role->rule }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="role_id" />
+                        </fieldset>
+                    </div>
+
+                    <div class="hidden flex-col space-y-3" id="sarparshtyar">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                            <legend class="px-2">سەرپەرشتیار </legend>
+                            <x-select name="sarparshtyar_id">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($sarparshtyarakan as $key => $sarparshtyar)
+                                    <option @selected(old('sarparshtyar_id', $user->sarparshtyar) == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                        {{ $sarparshtyar->name }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="sarparshtyar_id" />
+                        </fieldset>
+                    </div>
+                    <div class="hidden flex-col space-y-3" id="marz">
+                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                            <legend class="px-2">مەرز </legend>
+                            <x-select name="marz_id">
+                                <option value="">هەڵبژێرە</option>
+                                @foreach ($marzakan as $key => $marz)
+                                    <option @selected(old('marz_id', $user->marz_id) === $marz->id) value="{{ $marz->id }}">
+                                        {{ $marz->name }}
+                                    </option>
+                                @endforeach
+                            </x-select>
+                            <x-error message="marz_id" />
+                        </fieldset>
+                    </div>
+
                 </div>
+                {{ $errors }}
                 <div class="mt-6 flex justify-end">
                     <button type="submit" class="flex items-center space-x-1 space-x-reverse focus:outline-none">
                         <span
