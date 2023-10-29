@@ -58,27 +58,36 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی مەرز</legend>
-                            <x-select name="marz_id">
-                                <option value="">هەڵبژێرە</option>
-                                @foreach ($marzakan as $key => $marz)
-                                    <option @selected(old('marz_id') == $marz->id) value="{{ $marz->id }}">
-                                        {{ $marz->name }}
-                                    </option>
-                                @endforeach
-                            </x-select>
+                            @if (Gate::allows('superadmin'))
+                                <x-select name="marz_id" id="marz">
+                                    <option value="">هەڵبژێرە</option>
+                                    @foreach ($marzakan as $key => $marz)
+                                        <option @selected(old('marz_id') == $marz->id) value="{{ $marz->id }}">
+                                            {{ $marz->name }}
+                                        </option>
+                                    @endforeach
+                                </x-select>
+                            @elseif (Gate::allows('sarparshtyar'))
+                                <span class="px-3 py-2">{{ $marz->name }}</span>
+                            @endif
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی سەرپەرشتیار </legend>
-                            <x-select name="sarparshtyar_id">
-                                <option value="">هەڵبژێرە</option>
-                                @foreach ($sarprshtyarkan as $key => $sarparshtyar)
-                                    <option @selected(old('sarparshtyar_id') == $sarparshtyar->user_id) value="{{ $sarparshtyar->user_id }}">
-                                        {{ $sarparshtyar->user->name }}
-                                    </option>
-                                @endforeach
-                            </x-select>
+                            @if (Gate::allows('superadmin'))
+
+                                <x-select name="sarparshtyar_id" id="sarparshtyar">
+                                    <option value="">هەڵبژێرە</option>
+                                    @foreach ($sarprshtyarkan as $key => $sarparshtyar)
+                                        <option @selected(old('sarparshtyar_id') == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
+                                            {{ $sarparshtyar->name }}
+                                        </option>
+                                    @endforeach
+                                </x-select>
+                            @elseif (Gate::allows('sarparshtyar'))
+                                <span class="px-3 py-2">{{ Auth::user()->name }}</span>
+                            @endif
                         </fieldset>
                     </div>
 
@@ -86,11 +95,11 @@
                     <div class="flex flex-col space-y-3">
                         <fieldset class="rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی کارمەند </legend>
-                            <x-select name="karmand_id">
+                            <x-select name="karmand_id" id="karmand">
                                 <option value="">هەڵبژێرە</option>
                                 @foreach ($karmandkan as $key => $karmand)
-                                    <option @selected(old('karmand_id') == $karmand->user_id) value="{{ $karmand->user_id }}">
-                                        {{ $karmand->user->name }}
+                                    <option @selected(old('karmand_id') == $karmand->id) value="{{ $karmand->id }}">
+                                        {{ $karmand->name }}
                                     </option>
                                 @endforeach
                             </x-select>
@@ -237,4 +246,8 @@
         {{ $reports->onEachSide(0)->links() }}
     </div>
 
+    @push('scripts')
+        <script src="{{ asset('/js/report.js') }}"></script>
+        {{-- <script src="{{ asset('js/users.js') }}"></script> --}}
+    @endpush
 @endsection

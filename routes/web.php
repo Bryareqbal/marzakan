@@ -82,7 +82,7 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::get('/show', 'showSardanikaran')->name('show-sardanikaran');
     });
 
-    Route::middleware('hasRole:superadmin')->controller(ReportController::class)->prefix('/reports')->group(function () {
+    Route::middleware('hasRole:superadmin,sarparshtyar')->controller(ReportController::class)->prefix('/reports')->group(function () {
         Route::get('/', 'index')->name('reports');
     });
 

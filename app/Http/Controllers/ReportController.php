@@ -7,50 +7,52 @@ use App\Models\Marzakan;
 use App\Models\sardaniakan;
 use App\Models\sardanikar;
 use App\Models\Sarparshtyar;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $karmandkan = Karmand::all();
-        $sarprshtyarkan = Sarparshtyar::all();
-        $marzakan = Marzakan::all();
 
+        if (Gate::allows('superadmin')) {
 
+            $marzakan = Marzakan::all();
+            $sarprshtyarkan =  User::with('rule')
+                ->whereHas('rule', fn ($query) => $query->where('rule', 'sarparshtyar'))
+                ->where('marz_id', $request->marz_id)->get();
 
-        $report = sardaniakan::with(['sardanikar'])->when(!empty($request->search), function (Builder $query) use ($request) {
-            $query->where(function (Builder $query) use ($request) {
-                $query->where('name', 'like', "%{$request->search}%")
-                    ->orWhere('passport_number', 'like', "%{$request->search}%")
-                    ->orWhere('phone', 'like', "%{$request->search}%");
-            });
-        })->when(!empty($request->karmand_id), function (Builder $query) use ($request) {
-            $query->whereHas('karmand', function (Builder $query) use ($request) {
-                $query->where('id', $request->karmand_id);
-            });
-        })->when(!empty($request->sarparshtyar_id), function (Builder $query) use ($request) {
-            $query->whereHas('karmand', function (Builder $query) use ($request) {
-                $query->whereHas('sarparshtyar', function (Builder $query) use ($request) {
-                    $query->where('id', $request->sarparshtyar_id);
-                });
-            });
-        })->when(!empty($request->marz_id), function (Builder $query) use ($request) {
-            $query->whereHas('karmand.sarparshtyar.marz', function (Builder $query) use ($request) {
-                $query->where('id', $request->marz_id);
-            });
-        })->when(!empty($request->from) && !empty($request->to), function (Builder $query) use ($request) {
-            $query->whereDate('created_at', '>=', $request->from)->whereDate('created_at', '<=', $request->to);
-        });
+            $karmandkan = User::with('rule')
+                ->whereHas('rule', fn ($query) => $query->where('rule', 'karmand'))
+                ->where('sarparshtyar_id', $request->sarparshtyar_id)->get();
+            $report = sardaniakan::with(['sardanikar', 'karmand'])->filter($request->only('karmand_id', 'search', 'sarparshtyar_id', 'marz_id', 'from', 'to'));
+        } else if (Gate::allows('sarparshtyar')) {
+
+            $marz = Marzakan::where('id', Auth::user()->marz_id)->first();
+            $karmandkan = User::with('rule')
+                ->whereHas('rule', fn ($query) => $query->where('rule', 'karmand'))
+                ->where('sarparshtyar_id', Auth::id())->get();
+
+            $filters = $request->only('karmand_id', 'search', 'from', 'to');
+            $report = sardaniakan::with(['sardanikar', 'karmand'])->filter([
+                ...$filters,
+                'sarparshtyar_id' => Auth::id(),
+                'marz_id' => $marz->id,
+            ]);
+        }
+
 
         $request->flash('*');
 
         return view('Admin.Reports.Report', [
             'reports' => $report->latest()->paginate(25),
             'karmandkan' => $karmandkan,
-            'sarprshtyarkan' => $sarprshtyarkan,
-            'marzakan' => $marzakan,
+            'sarprshtyarkan' => $sarprshtyarkan ?? null,
+            'marzakan' => $marzakan ?? null,
+            'marz' => $marz ?? null,
             'sumPrice' => $report->sum('mount_of_money'),
         ]);
     }
