@@ -20,7 +20,6 @@ class sardaniakan extends Model
         return $this->belongsTo(User::class, 'karmand_id');
     }
 
-
     // ---------------------- scopes
 
     public function scopeFilter(Builder $query, $filters)
@@ -31,19 +30,19 @@ class sardaniakan extends Model
                     ->orWhere('passport_number', 'like', "%{$filters['search']}%")
                     ->orWhere('phone', 'like', "%{$filters['search']}%");
             });
-        })->when(!empty($filters['karmand_id']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['karmand']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand', function (Builder $query) use ($filters) {
-                $query->where('id', $filters['karmand_id']);
+                $query->whereIn('id', $filters['karmand'] ?? null);
             });
-        })->when(!empty($filters['sarparshtyar_id']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['sarparshtyar']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand', function (Builder $query) use ($filters) {
                 $query->whereHas('sarparshtyar', function (Builder $query) use ($filters) {
-                    $query->where('id', $filters['sarparshtyar_id']);
+                    $query->whereIn('id', $filters['sarparshtyar'] ?? null);
                 });
             });
-        })->when(!empty($filters['marz_id']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['marz']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand.sarparshtyar.marz', function (Builder $query) use ($filters) {
-                $query->where('id', $filters['marz_id']);
+                $query->whereIn('id', $filters['marz']);
             });
         })->when(!empty($filters['from']) && !empty($filters['to']), function (Builder $query) use ($filters) {
             $query->whereDate('created_at', '>=', $filters['from'])->whereDate('created_at', '<=', $filters['to']);

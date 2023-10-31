@@ -26,7 +26,7 @@
                     بەشی ڕاپۆرت
                 </h1>
             </div>
-            <form method="GET" action="{{ route('reports') }}" class="mt-6 max-w-7xl">
+            <form method="GET" action="{{ route('reports') }}" id="form" class="mt-6 max-w-7xl">
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
 
                     <div class="flex flex-col space-y-3">
@@ -56,35 +56,49 @@
                     </div>
 
                     <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                        <fieldset class="flex flex-wrap gap-x-5 gap-y-2 rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی مەرز</legend>
                             @if (Gate::allows('superadmin'))
-                                <x-select name="marz_id" id="marz">
+                                {{-- <x-select name="marz_id" id="marz">
                                     <option value="">هەڵبژێرە</option>
                                     @foreach ($marzakan as $key => $marz)
                                         <option @selected(old('marz_id') == $marz->id) value="{{ $marz->id }}">
                                             {{ $marz->name }}
                                         </option>
                                     @endforeach
-                                </x-select>
+                                </x-select> --}}
+
+                                @foreach ($marzakan as $key => $marz)
+                                    <label class="flex space-x-2 space-x-reverse">
+                                        <input type="checkbox" name="marz[]" id="marz"
+                                            class="h-5 w-5 accent-green-600" value="{{ $marz->id }}"
+                                            @checked(old("marz.{$key}") == $marz->id) />
+                                        <span>{{ $marz->name }}</span>
+                                    </label>
+                                @endforeach
+                                @if ($marzakan->isEmpty())
+                                    <p>هیچ مەرزێک نەدۆزرایەوە</p>
+                                @endif
                             @elseif (Gate::allows('sarparshtyar'))
                                 <span class="px-3 py-2">{{ $marz->name }}</span>
                             @endif
                         </fieldset>
                     </div>
                     <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
+                        <fieldset class="flex flex-wrap gap-x-5 gap-y-2 rounded-lg border-2 border-green-500 p-2">
                             <legend class="px-2">ناوی سەرپەرشتیار </legend>
                             @if (Gate::allows('superadmin'))
-
-                                <x-select name="sarparshtyar_id" id="sarparshtyar">
-                                    <option value="">هەڵبژێرە</option>
-                                    @foreach ($sarprshtyarkan as $key => $sarparshtyar)
-                                        <option @selected(old('sarparshtyar_id') == $sarparshtyar->id) value="{{ $sarparshtyar->id }}">
-                                            {{ $sarparshtyar->name }}
-                                        </option>
-                                    @endforeach
-                                </x-select>
+                                @foreach ($sarprshtyarkan as $key => $sarparshtyar)
+                                    <label class="flex space-x-2 space-x-reverse">
+                                        <input type="checkbox" name="sarparshtyarakan[]" id="sarparshtyar"
+                                            class="h-5 w-5 accent-green-600" value="{{ $sarparshtyar->id }}"
+                                            @checked(old("sarparshtyarakan.{$key}") == $sarparshtyar->id) />
+                                        <span>{{ $sarparshtyar->name }}</span>
+                                    </label>
+                                @endforeach
+                                @if ($sarprshtyarkan->isEmpty())
+                                    <p>هیچ سەرپەرشتیارێک نەدۆزرایەوە</p>
+                                @endif
                             @elseif (Gate::allows('sarparshtyar'))
                                 <span class="px-3 py-2">{{ Auth::user()->name }}</span>
                             @endif
@@ -93,16 +107,19 @@
 
 
                     <div class="flex flex-col space-y-3">
-                        <fieldset class="rounded-lg border-2 border-green-500 p-2">
-                            <legend class="px-2">ناوی کارمەند </legend>
-                            <x-select name="karmand_id" id="karmand">
-                                <option value="">هەڵبژێرە</option>
-                                @foreach ($karmandkan as $key => $karmand)
-                                    <option @selected(old('karmand_id') == $karmand->id) value="{{ $karmand->id }}">
-                                        {{ $karmand->name }}
-                                    </option>
-                                @endforeach
-                            </x-select>
+                        <fieldset class="flex flex-wrap gap-x-5 gap-y-2 rounded-lg border-2 border-green-500 p-2">
+                            @foreach ($karmandkan as $key => $karmand)
+                                <label class="flex space-x-2 space-x-reverse">
+                                    <input type="checkbox" name="karmandakan[]" id="karmand"
+                                        class="h-5 w-5 accent-green-600" value="{{ $karmand->id }}"
+                                        @checked(old("karmand.{$key}") == $karmand->id) />
+                                    <span>{{ $karmand->name }}</span>
+                                </label>
+                            @endforeach
+                            @if ($karmandkan->isEmpty())
+                                <p>هیچ کارمەندێک نەدۆزرایەوە</p>
+                            @endif
+                            <legend class="px-2">ناوی کارمەند</legend>
                         </fieldset>
                     </div>
                 </div>
@@ -247,7 +264,6 @@
     </div>
 
     @push('scripts')
-        <script src="{{ asset('/js/report.js') }}"></script>
-        {{-- <script src="{{ asset('js/users.js') }}"></script> --}}
+        <script type="module" src="{{ asset('/js/report.js') }}"></script>
     @endpush
 @endsection
