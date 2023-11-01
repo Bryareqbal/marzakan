@@ -104,7 +104,6 @@
                                     <span>{{ $karmand->name }}</span>
                                 </label>
                             @endforeach
-                            @dump($filters['karmandakan'])
                             @if ($this->karmandakan->isEmpty())
                                 <p>هیچ کارمەندێک نەدۆزرایەوە</p>
                             @endif
@@ -112,7 +111,7 @@
                         </fieldset>
                     </div>
                 </div>
-                <div class="mt-6 flex justify-end">
+                {{-- <div class="mt-6 flex justify-end">
                     <button type="submit" class="flex items-center space-x-1 space-x-reverse focus:outline-none">
                         <span
                             class="flex h-8 w-8 items-center justify-center rounded rounded-br-md rounded-tr-md border shadow-md">
@@ -128,7 +127,7 @@
                             <span>وەرگرتنی راپۆرت</span>
                         </div>
                     </button>
-                </div>
+                </div> --}}
                 <hr class="mt-4 max-w-4xl border border-dashed border-slate-500">
             </form>
 
