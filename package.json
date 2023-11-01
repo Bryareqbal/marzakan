@@ -14,7 +14,10 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
+        "@ryangjchandler/alpine-clipboard": "^2.3.0",
+        "alpine": "^0.2.1",
         "alpinejs": "^3.12.3",
+        "livewire": "^0.6.1",
         "lodash": "^4.17.21"
     }
 }

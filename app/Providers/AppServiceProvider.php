@@ -2,13 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Karmand;
-use App\Models\Sarparshtyar;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -56,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         Paginator::defaultView('tailwind');
 
         App::setLocale('ku');
+
         //
     }
 }

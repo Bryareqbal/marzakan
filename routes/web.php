@@ -9,6 +9,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SardaniakanController;
 use App\Http\Controllers\sardanikarController;
 use App\Http\Controllers\UserController;
+use App\Livewire\Reports\Report;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -82,9 +83,13 @@ Route::middleware(['auth', 'isActive'])->group(function () {
         Route::get('/show', 'showSardanikaran')->name('show-sardanikaran');
     });
 
-    Route::middleware('hasRole:superadmin,sarparshtyar')->controller(ReportController::class)->prefix('/reports')->group(function () {
-        Route::get('/', 'index')->name('reports');
+
+    Route::middleware('hasRole:superadmin,sarparshtyar')->prefix('/reports')->group(function () {
+        Route::get('/', Report::class)->name('reports');
     });
+    // Route::middleware('hasRole:superadmin,sarparshtyar')->controller(ReportController::class)->prefix('/reports')->group(function () {
+    //     Route::get('/', 'index')->name('reports');
+    // });
 
     Route::controller(PrintController::class)->prefix('/print')->group(function () {
         Route::get('/invoice/{sardani}', 'invoice')->whereNumber('sardani');

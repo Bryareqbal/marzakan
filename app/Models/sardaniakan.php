@@ -30,19 +30,19 @@ class sardaniakan extends Model
                     ->orWhere('passport_number', 'like', "%{$filters['search']}%")
                     ->orWhere('phone', 'like', "%{$filters['search']}%");
             });
-        })->when(!empty($filters['karmand']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['karmandakan']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand', function (Builder $query) use ($filters) {
-                $query->whereIn('id', $filters['karmand'] ?? null);
+                $query->whereIn('id', $filters['karmandakan'] ?? null);
             });
-        })->when(!empty($filters['sarparshtyar']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['sarparshtyarakan']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand', function (Builder $query) use ($filters) {
                 $query->whereHas('sarparshtyar', function (Builder $query) use ($filters) {
-                    $query->whereIn('id', $filters['sarparshtyar'] ?? null);
+                    $query->whereIn('id', $filters['sarparshtyarakan'] ?? null);
                 });
             });
-        })->when(!empty($filters['marz']), function (Builder $query) use ($filters) {
+        })->when(!empty($filters['marzakan']), function (Builder $query) use ($filters) {
             $query->whereHas('karmand.sarparshtyar.marz', function (Builder $query) use ($filters) {
-                $query->whereIn('id', $filters['marz']);
+                $query->whereIn('id', $filters['marzakan']);
             });
         })->when(!empty($filters['from']) && !empty($filters['to']), function (Builder $query) use ($filters) {
             $query->whereDate('created_at', '>=', $filters['from'])->whereDate('created_at', '<=', $filters['to']);
