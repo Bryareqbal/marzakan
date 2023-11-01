@@ -26,7 +26,7 @@
                         <div class="flex flex-col items-start">
                             <div>
                                 <x-input placeholder="گەڕان...(ژمارەی پاسپۆرت)" name="search" class="min-w-[20rem]"
-                                    value="{{ old('search') }}" />
+                                    value="{{ old('search') }}" autocomplete="off" />
                                 <button class="rounded-md bg-green-500 px-3 py-2 text-white shadow">گەڕان</button>
                             </div>
                             <a href="{{ route('sardanikar') }}"

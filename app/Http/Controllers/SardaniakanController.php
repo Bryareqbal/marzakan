@@ -70,7 +70,7 @@ class SardaniakanController extends Controller
 
     public function showSardaniakan(Request $request)
     {
-        $sardaniakan = sardaniakan::with('sardanikar')->when(!empty($request->search), function (Builder $query) use ($request) {
+        $sardaniakan = sardaniakan::with('sardanikar')->where('karmand_id', Auth::id())->when(!empty($request->search), function (Builder $query) use ($request) {
             $query->whereHas('sardanikar', function (Builder $query) use ($request) {
                 $query->where('name', 'like', "%{$request->search}%")
                     ->orWhere('passport_number', 'like', "%{$request->search}%")

@@ -70,12 +70,11 @@
                                 <label for="type_position">
                                     <input type="radio"
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
-                                        id="type_position" value="{{ 1 }}" name="gender"
-                                        @checked(old('gender') == 1) />
+                                        id="type_position" value="1" name="gender" @checked(old('gender', null) === '1') />
                                     نێر
                                 </label>
                                 <label for="type_position2">
-                                    <input type="radio" value="{{ 0 }}" @checked(old('gender') == 0)
+                                    <input type="radio" value="0" @checked(old('gender', null) === '0')
                                         class="h-4 w-4 accent-green-600 focus:ring-1 focus:ring-green-600 focus:ring-offset-1"
                                         id="type_position2" name="gender" />
                                     مێ
